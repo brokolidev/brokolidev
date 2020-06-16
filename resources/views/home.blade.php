@@ -6,6 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Dashboard</div>
+                <h1>{{ $data->title }}</h1>
 
                 <div class="card-body">
                     @if (session('status'))
