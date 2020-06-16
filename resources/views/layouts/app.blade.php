@@ -19,11 +19,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="font-sans bg-black text-white">
     <div id="app">
         
         @yield('content')
-        
+
     </div>
 </body>
 </html>
