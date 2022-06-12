@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000000"/>
-    <link rel="shortcut icon" href="./img/favicon.ico"/>
+    <link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -15,7 +15,7 @@
     <link
         rel="apple-touch-icon"
         sizes="76x76"
-        href="./assets/img/apple-icon.png"
+        href="{{ asset('/img/apple-icon.png') }}"
     />
     <link
         rel="stylesheet"
@@ -46,7 +46,7 @@
     <section class="relative block" style="height: 500px;">
         <div
             class="absolute top-0 w-full h-full bg-center bg-cover"
-            style='background-image: url("../img/background.jpg");'
+            style='background-image: url("{{ asset('/img/background.jpg') }}");'
         >
           <span
               id="blackOverlay"
@@ -86,7 +86,7 @@
                             <div class="relative">
                                 <img
                                     alt="..."
-                                    src="./img/profile.jpg"
+                                    src="{{ asset('/img/profile.jpg') }}"
                                     class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16"
                                     style="max-width: 150px;"
                                 />
