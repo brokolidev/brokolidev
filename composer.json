@@ -13,20 +13,20 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^9.0",
         "laravel/jetstream": "^1.6",
-        "laravel/sanctum": "^2.6",
+        "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/vapor-cli": "^1.39",
         "laravel/vapor-core": "^2.22",
         "laravel/vapor-ui": "^1.5",
-        "livewire/livewire": "^2.0"
+        "livewire/livewire": "^2.8"
     },
     "require-dev": {
-        "spatie/laravel-ignition": "^1.0",
         "fakerphp/faker": "^1.9.1",
-        "laravel/sail": "^0.0.5",
-        "mockery/mockery": "^1.4.2",
+        "laravel/sail": "^1.15",
+        "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.3.3"
+        "phpunit/phpunit": "^9.5.10",
+        "spatie/laravel-ignition": "^1.0"
     },
     "config": {
         "optimize-autoloader": true,
