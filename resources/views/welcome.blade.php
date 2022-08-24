@@ -28,10 +28,10 @@
     />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    @vite('resources/css/app.css')
 
     <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    @vite('resources/js/app.js')
 </head>
 <body class="text-gray-800 antialiased">
 <nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
