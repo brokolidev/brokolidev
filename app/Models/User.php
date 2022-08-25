@@ -64,4 +64,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->email === 'bocalist@gmail.com';
     }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->profile_photo_path;
+    }
 }
