@@ -29,7 +29,7 @@ class SlackController extends Controller
             "text" => "점심시간이 다가옵니다! 콜리봇이 추천하는 오늘의 메뉴는 >>> {$pickedMenu}",
         ];
 
-        Http::withToken('xoxb-15117715716-4072352797910-PISd1yJ5inEmj4MbrMmSTjfG')
+        Http::withToken(env('SLACK_BOT_TOKEN'))
             ->withBody(json_encode($responseMessage), 'application/json')
             ->post("https://slack.com/api/chat.postMessage");
     }

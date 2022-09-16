@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function(){
             (new SlackController)->sendLunchMenuMessage('C042G9KRKFY'); // 콜리봇 테스트 채널
-        })->dailyAt('15:15')
+        })->dailyAt('15:30')
           ->timezone('Asia/Seoul')
           ->weekdays();
 
