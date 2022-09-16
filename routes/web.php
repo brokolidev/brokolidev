@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/slack/recommend-menu/{chatId}', [SlackController::class => 'sendLunchMenuMessage']);
+Route::get('/slack/recommend-menu/{chatId}', [SlackController::class, 'sendLunchMenuMessage']);
 
 Route::get('/memory-game', function () {
     return view('samples.memory-game');
