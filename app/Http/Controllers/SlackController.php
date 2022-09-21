@@ -26,12 +26,12 @@ class SlackController extends Controller
 
         $responseMessage = [
             'channel' => $chatId, // 식봄개발팀
-            "text" => "점심시간이 다가옵니다! 콜리봇이 추천하는 오늘의 메뉴는 >>> {$pickedMenu}",
+            'text' => "점심시간이 다가옵니다! 콜리봇이 추천하는 오늘의 메뉴는 >>> {$pickedMenu}",
         ];
 
         Http::withToken(env('SLACK_BOT_TOKEN'))
             ->withBody(json_encode($responseMessage), 'application/json')
-            ->post("https://slack.com/api/chat.postMessage");
+            ->post('https://slack.com/api/chat.postMessage');
     }
 
     public function respondWithMenu(Request $request): void
@@ -42,7 +42,7 @@ class SlackController extends Controller
         $pickedMenu = $this->recommendMenu();
 
         $responseMessage = [
-            "text" => "안녕하세요! {$requester}님, 오늘은 {$pickedMenu} 어때요?",
+            'text' => "안녕하세요! {$requester}님, 오늘은 {$pickedMenu} 어때요?",
         ];
 
         Http::withBody(json_encode($responseMessage), 'application/json')
@@ -55,6 +55,4 @@ class SlackController extends Controller
 
         return $this->menus[$pickedKey];
     }
-
-
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\SlackController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,10 @@ Route::get('/memory-game', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+/**
+ * Articles
+ */
+Route::controller(ArticleController::class)->group(function () {
+    Route::get('/articles', 'index');
+});
