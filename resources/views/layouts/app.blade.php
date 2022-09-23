@@ -68,12 +68,14 @@
                                         <li>
                                             <a @class([
                                                 'text-teal-500' => url()->current() === url('/'),
+                                                'dark:text-teal-400' => url()->current() === url('/'),
                                                 'relative', 'block px-3', 'py-2 transition',
                                                 'hover:text-teal-500', 'dark:hover:text-teal-400'])
                                                href="/" >About</a></li>
                                         <li>
                                             <a @class([
                                                 'text-teal-500' => url()->current() === url('/articles'),
+                                                'dark:text-teal-400' => url()->current() === url('/articles'),
                                                 'relative', 'block px-3', 'py-2 transition',
                                                 'hover:text-teal-500', 'dark:hover:text-teal-400'])
                                                href="/articles">Articles</a></li>
