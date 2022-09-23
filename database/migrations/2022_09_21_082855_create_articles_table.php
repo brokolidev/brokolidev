@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('title');
             $table->text('content');
+            $table->integer('hit')->default(1)->nullable();
             $table->timestamps();
         });
     }
