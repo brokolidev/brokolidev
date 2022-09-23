@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c37fa58-239b-41ba-bb6d-42ebfb057d76" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/database/seeders/UserSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/article/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2022_09_21_082855_create_articles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_09_21_082855_create_articles_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/article/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/article/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -257,7 +251,7 @@
       <workItem from="1663295659698" duration="355000" />
       <workItem from="1663296361976" duration="8330000" />
       <workItem from="1663738074497" duration="4750000" />
-      <workItem from="1663746072100" duration="12956000" />
+      <workItem from="1663746072100" duration="14142000" />
     </task>
     <task id="LOCAL-00001" summary="create article model and its resources">
       <created>1663750529572</created>
@@ -266,16 +260,39 @@
       <option name="project" value="LOCAL" />
       <updated>1663750529572</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added darkmode css to navigation">
+      <created>1663910122013</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1663910122013</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added article show page">
+      <created>1663910158280</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1663910158280</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added hit count for article migration and default seeder for user/article">
+      <created>1663910194557</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1663910194557</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="create article model and its resources" />
-    <option name="LAST_COMMIT_MESSAGE" value="create article model and its resources" />
+    <MESSAGE value="added darkmode css to navigation" />
+    <MESSAGE value="added article show page" />
+    <MESSAGE value="added hit count for article migration and default seeder for user/article" />
+    <option name="LAST_COMMIT_MESSAGE" value="added hit count for article migration and default seeder for user/article" />
   </component>
 </project>
