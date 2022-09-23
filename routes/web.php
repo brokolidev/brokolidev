@@ -34,4 +34,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
  */
 Route::controller(ArticleController::class)->group(function () {
     Route::get('/articles', 'index');
+    Route::get('/articles/{article_id}', 'show')->name('article.show');
 });

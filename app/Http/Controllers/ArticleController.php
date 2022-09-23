@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -13,7 +14,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('article.index');
+        $articles = Article::latest()->take(4)->get();
+
+        return view('article.index', ['articles' => $articles]);
     }
 
     /**
@@ -45,7 +48,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
+        dd($id);
     }
 
     /**

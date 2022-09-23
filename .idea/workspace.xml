@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c37fa58-239b-41ba-bb6d-42ebfb057d76" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Filament/Resources/ArticleResource.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Filament/Resources/ArticleResource/Pages/CreateArticle.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Filament/Resources/ArticleResource/Pages/EditArticle.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Filament/Resources/ArticleResource/Pages/ListArticles.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Article.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/ArticleFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2022_09_21_082855_create_articles_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/ArticleSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/article/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/article/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,14 +253,25 @@
       <workItem from="1663295659698" duration="355000" />
       <workItem from="1663296361976" duration="8330000" />
       <workItem from="1663738074497" duration="4750000" />
-      <workItem from="1663746072100" duration="4321000" />
+      <workItem from="1663746072100" duration="8115000" />
     </task>
+    <task id="LOCAL-00001" summary="create article model and its resources">
+      <created>1663750529572</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1663750529572</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="create article model and its resources" />
+    <option name="LAST_COMMIT_MESSAGE" value="create article model and its resources" />
   </component>
 </project>
