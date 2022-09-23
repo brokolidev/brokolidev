@@ -3,6 +3,9 @@
 return [
 
     'title' => ':label 생성',
+    'article' => [
+        'title' => '제목',
+    ],
 
     'breadcrumb' => '생성',
 

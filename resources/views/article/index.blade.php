@@ -14,11 +14,13 @@
                     @foreach ($articles as $article)
                         <div>
                             <p class="text-sm text-gray-500">
-                                <time datetime="2020-03-16">{{ $article->created_at->format('m/d, Y') }}</time>
+                                <time datetime="2020-03-16">{{ $article->created_at->format('F d, Y') }}</time>
                             </p>
                             <a href="{{ route('article.show', ['article' => $article->id]) }}" class="mt-2 block">
                                 <p class="text-xl font-semibold text-gray-900">{{ Str::title($article->title) }}</p>
-                                <p class="mt-3 text-base text-gray-500">{{ Str::limit($article->content, 300) }}</p>
+                                <p class="mt-3 text-base text-gray-500">
+                                    {!! Str::words(strip_tags(Str::of($article->content)->markdown()), 80) !!}
+                                </p>
                             </a>
                             <div class="mt-3">
                                 <a href="{{ route('article.show', ['article' => $article->id]) }}" class="text-base font-semibold text-indigo-600 hover:text-indigo-500">Read full story</a>

@@ -28,7 +28,7 @@
                                             class="ml-3">{{ $article->created_at->format('F d, Y') }}</span></time>
                                 </header>
                                 <div class="mt-8 prose dark:prose-invert">
-                                    {{ $article->content }}
+                                    {!! Str::of($article->content)->markdown(['html_input' => 'escape']) !!}
                                 </div>
                             </article>
                         </div>
