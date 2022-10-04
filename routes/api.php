@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/slack/response/recommend-menu', [SlackController::class, 'respondWithMenu']);
+Route::get('/test', [SlackController::class, 'recommendMenu']);

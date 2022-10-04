@@ -2,23 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class SlackController extends Controller
 {
-    public array $menus = [
-        '은희네 해장국',
-        '삼미 칼국수',
-        '우육면',
-        '봉피양 평양냉면',
-        '일미 감자탕',
-        '달맞이국밥',
-        '미쁜선순대',
-        '바스버거',
-        '서호돈까스',
-        '네코부루 일본식 돈까스',
-    ];
 
     public function sendLunchMenuMessage(string $chatId): void
     {
@@ -49,10 +38,19 @@ class SlackController extends Controller
             ->post($responseUrl);
     }
 
-    private function recommendMenu(): string
+    public function recommendMenu(): string
     {
-        $pickedKey = array_rand($this->menus);
+        if(date('N') === '1') {
+            return Menu::picked()->update(['is_picked' => false]);
+        }
 
-        return $this->menus[$pickedKey];
+        $pickedMenu = Menu::where('is_picked', false)->get()->random();
+
+        // picked count && weekly picked update
+        $pickedMenu->picked_count++;
+        $pickedMenu->is_picked = true;
+        $pickedMenu->save();
+
+        return $pickedMenu->name;
     }
 }
