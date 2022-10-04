@@ -10,6 +10,7 @@ class Menu extends Model
     use HasFactory;
 
     protected $hidden = ['created_at', 'updated_at', 'picked_count', 'is_picked'];
+    protected $fillable = ['name', 'is_picked', 'picked_count'];
 
     public function scopePicked($query)
     {

@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c37fa58-239b-41ba-bb6d-42ebfb057d76" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Menu.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/MenuFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2022_10_04_042113_create_menus_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeders/MenuSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Filament/Resources/MenuResource.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Filament/Resources/MenuResource/Pages/CreateMenu.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Filament/Resources/MenuResource/Pages/EditMenu.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Filament/Resources/MenuResource/Pages/ListMenus.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SlackController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SlackController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Menu.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
