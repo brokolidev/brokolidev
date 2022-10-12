@@ -20,6 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/slack/response/recommend-menu', [SlackController::class, 'respondWithMenu']);
+
 Route::post('/test', function(Request $request){
     return response()->json(['message' => 'error message'], 500);
+});
+
+Route::post('/400error', function(Request $request){
+    return response()->json(['message' => '400 Error'], 400);
 });
