@@ -46,11 +46,13 @@ class SlackController extends Controller
 
         $pickedMenu = Menu::where('is_picked', false)->get()->random();
 
+        $menuName = $pickedMenu->name;
+
         // picked count && weekly picked update
         $pickedMenu->picked_count++;
         $pickedMenu->is_picked = true;
         $pickedMenu->save();
 
-        return $pickedMenu->name;
+        return $menuName;
     }
 }
