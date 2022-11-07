@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c37fa58-239b-41ba-bb6d-42ebfb057d76" name="Default Changelist" comment="make markdown field for article and adjustment for displaying it">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SlackController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SlackController.php" afterDir="false" />
     </list>
@@ -265,7 +264,8 @@
       <workItem from="1663746072100" duration="21337000" />
       <workItem from="1664500744967" duration="4223000" />
       <workItem from="1664952899948" duration="1858000" />
-      <workItem from="1666596117832" duration="261000" />
+      <workItem from="1666596117832" duration="949000" />
+      <workItem from="1667789472203" duration="313000" />
     </task>
     <task id="LOCAL-00001" summary="create article model and its resources">
       <created>1663750529572</created>

@@ -40,8 +40,9 @@ class SlackController extends Controller
 
     public function recommendMenu(): string
     {
+        // 매주 월요일 골라줬던 메뉴 초기화
         if(date('N') === '1') {
-            return Menu::picked()->update(['is_picked' => false]);
+            Menu::picked()->update(['is_picked' => false]);
         }
 
         $pickedMenu = Menu::where('is_picked', false)->get()->random();
