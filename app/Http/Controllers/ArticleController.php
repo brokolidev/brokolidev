@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -10,9 +13,9 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
-    public function index()
+    public function index(): Application|Factory|View|\Illuminate\Foundation\Application
     {
         $articles = Article::latest()->take(4)->get();
 
@@ -20,9 +23,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function create()
     {
@@ -30,10 +31,9 @@ class ArticleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param Request $request
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function store(Request $request)
     {
@@ -41,21 +41,19 @@ class ArticleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @param Article $article
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
-    public function show(Article $article)
+    public function show(Article $article): \Illuminate\Foundation\Application|View|Factory|Application
     {
         return view('article.show', ['article' => $article]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * @param $id
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function edit($id)
     {
@@ -63,11 +61,10 @@ class ArticleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @param Request $request
+     * @param         $id
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function update(Request $request, $id)
     {
@@ -75,10 +72,9 @@ class ArticleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param $id
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function destroy($id)
     {
