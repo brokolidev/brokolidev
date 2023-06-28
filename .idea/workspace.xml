@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c37fa58-239b-41ba-bb6d-42ebfb057d76" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -274,7 +274,7 @@
       <workItem from="1679363842238" duration="279000" />
       <workItem from="1681796487545" duration="2603000" />
       <workItem from="1687912756383" duration="47000" />
-      <workItem from="1687933066832" duration="223000" />
+      <workItem from="1687933066832" duration="490000" />
     </task>
     <task id="LOCAL-00001" summary="create article model and its resources">
       <created>1663750529572</created>
@@ -332,7 +332,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687933183219</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add github deploy">
+      <created>1687933300076</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1687933300076</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,6 +366,7 @@
     <MESSAGE value="make markdown field for article and adjustment for displaying it" />
     <MESSAGE value="remove return after initiating picked menu count" />
     <MESSAGE value="remove kolibot scheduler" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove kolibot scheduler" />
+    <MESSAGE value="add github deploy" />
+    <option name="LAST_COMMIT_MESSAGE" value="add github deploy" />
   </component>
 </project>
