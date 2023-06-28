@@ -25,11 +25,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            (new SlackController)->sendLunchMenuMessage('C03UQ5MT6MU'); // 성범회 채널
-        })->dailyAt('11:50')
-          ->timezone('Asia/Seoul')
-          ->weekdays();
+        // $schedule->call(function () {
+        //     (new SlackController)->sendLunchMenuMessage('C03UQ5MT6MU'); // 성범회 채널
+        // })->dailyAt('11:50')
+        //   ->timezone('Asia/Seoul')
+        //   ->weekdays();
     }
 
     /**
