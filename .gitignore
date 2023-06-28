@@ -18,3 +18,5 @@ yarn-error.log
 .idea
 /storage/key
 /storage/key.pub
+.idea/*
+.idea/workspace.xml
