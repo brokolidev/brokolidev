@@ -178,11 +178,11 @@
                                 <i
                                     class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
                                 ></i>
-                                Seoul, South Korea
+                                Calgary, Alberta
                             </div>
                             <div class="mb-2 text-gray-700 mt-10">
                                 <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i
-                                >Full Stack Developer - in Marketboro .inc
+                                >Full Stack Developer
                             </div>
                         </div>
                         <div class="mt-10 py-10 border-t border-gray-300 text-center">
@@ -195,7 +195,7 @@
                                         jQuery, VueJS, MySQL and Linux. Strong professional with a Bachelor focused in
                                         Information Security and Web Development from Seoul Digital University. Recently
                                         I
-                                        am working on developing mobile apps on IOS platform with Swift and SwiftUI.
+                                        am working on developing mobile apps on IOS platform with Flutter and Dart.
                                     </p>
                                 </div>
                             </div>
@@ -262,7 +262,7 @@
         >
             <div class="w-full md:w-4/12 px-4 mx-auto text-center">
                 <div class="text-sm text-gray-600 font-semibold py-1">
-                    Copyright © 2022 brokolidev.com by
+                    Copyright © {{ date('Y') }} brokolidev.com by
                     <a
                         href="mailto:bocalist@gmail.com"
                         class="text-gray-600 hover:text-gray-900"
