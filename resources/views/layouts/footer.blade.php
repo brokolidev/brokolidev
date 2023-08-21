@@ -54,7 +54,7 @@
         >
             <div class="w-full md:w-4/12 px-4 mx-auto text-center">
                 <div class="text-sm text-gray-600 font-semibold py-1">
-                    Copyright © 2022 brokolidev.com by
+                    Copyright © 2023 brokolidev.com by
                     <a
                         href="mailto:bocalist@gmail.com"
                         class="text-gray-600 hover:text-gray-900"
