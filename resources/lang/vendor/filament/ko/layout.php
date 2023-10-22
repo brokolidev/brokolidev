@@ -7,15 +7,15 @@ return [
     'buttons' => [
 
         'dark_mode' => [
-            'label' => '다크모드',
+            'label' => 'Dark Mode',
         ],
 
         'light_mode' => [
-            'label' => '라이트모드',
+            'label' => 'Light Mode',
         ],
 
         'logout' => [
-            'label' => '로그아웃',
+            'label' => 'Logout',
         ],
 
     ],
