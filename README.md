@@ -1,7 +1,7 @@
 ## Brokolidev
 
 <h1 align="center">Hi 👋, I'm Hyunseung</h1>
-<h3 align="center">A full-stack develper</h3>
+<h3 align="center">A web develper</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=brokolidev&label=Profile%20views&color=0e75b6&style=flat" alt="brokolidev" /> </p>
 
@@ -11,7 +11,7 @@
 
 - 🌱 I’m currently learning **NestJS, C#, MAUI, Flutter**
 
-- 💬 Ask me about **PHP, Laravel**
+- 💬 Ask me about **PHP, Laravel, TALL stack**
 
 - 📫 How to reach me **bocalist@gmail.com**
 
