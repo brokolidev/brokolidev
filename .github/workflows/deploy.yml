@@ -27,7 +27,7 @@ jobs:
           port: 22
           username: brokoli
           key: ${{secrets.PRIVATE_KEY}}
-          script: "cd www; composer install;"
+          script: "cd www; composer install --no-dev;"
 
       - name: db migration
         uses: appleboy/ssh-action@v0.1.10
@@ -55,4 +55,3 @@ jobs:
           username: brokoli
           key: ${{secrets.PRIVATE_KEY}}
           script: "sudo service php8.2-fpm reload;"
-
