@@ -1,13 +1,13 @@
 ## Brokolidev
 
 <h1 align="center">Hi 👋, I'm Hyunseung</h1>
-<h3 align="center">A web develper</h3>
+<h3 align="center">Web Develper</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=brokolidev&label=Profile%20views&color=0e75b6&style=flat" alt="brokolidev" /> </p>
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=brokolidev" alt="brokolidev" /></a> </p>
 
-- 🔭 I’m currently working on [Artistry](https://www.instagram.com/artistry_community/)
+- 🔭 I’m currently working on [Artistry Project(Volunteer](https://www.instagram.com/artistry_community/)
 
 - 🌱 I’m currently learning **NestJS, C#, MAUI, Flutter**
 
