@@ -7,7 +7,7 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=brokolidev" alt="brokolidev" /></a> </p>
 
-- 🔭 I’m currently working on [Artistry Project(Volunteer](https://www.instagram.com/artistry_community/)
+- 🔭 I’m currently working on [Artistry Project(Volunteer)](https://www.instagram.com/artistry_community/)
 
 - 🌱 I’m currently learning **NestJS, C#, MAUI, Flutter**
 
