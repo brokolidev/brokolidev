@@ -45,7 +45,7 @@ jobs:
           port: 22
           username: brokoli
           key: ${{secrets.PRIVATE_KEY}}
-          script: "cd www; npm install --no-save && npm run build;"
+          script: "cd www; bun install --no-save && bun run build;"
 
       - name: php-fpm reload
         uses: appleboy/ssh-action@v0.1.10
