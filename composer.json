@@ -17,6 +17,8 @@
         "laravel/jetstream": "^5.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.5",
+        "livewire/flux": "^1.0",
+        "livewire/flux-pro": "^1.0",
         "livewire/livewire": "^3.4"
     },
     "require-dev": {
@@ -71,5 +73,11 @@
         "post-update-cmd": [
             "@php artisan filament:upgrade"
         ]
+    },
+    "repositories": {
+        "flux-pro": {
+            "type": "composer",
+            "url": "https://composer.fluxui.dev"
+        }
     }
 }
