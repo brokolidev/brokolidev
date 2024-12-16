@@ -10,7 +10,7 @@ class EditMenu extends EditRecord
 {
     protected static string $resource = MenuResource::class;
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make(),
