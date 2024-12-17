@@ -3,8 +3,9 @@
 namespace App\Filament\Resources\ArticleResource\Pages;
 
 use App\Filament\Resources\ArticleResource;
-use Filament\Pages\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Tables\Table;
 
 class ListArticles extends ListRecords
 {
@@ -13,7 +14,14 @@ class ListArticles extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
+    }
+
+
+
+    protected function getDefaultTableSortDirection(): string
+    {
+        return 'desc';
     }
 }

@@ -34,7 +34,8 @@ class ArticleResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('created_at'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->sortable('desc'),
                 Tables\Columns\TextColumn::make('updated_at'),
             ])
             ->filters([
@@ -45,7 +46,8 @@ class ArticleResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
