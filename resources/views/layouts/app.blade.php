@@ -32,7 +32,6 @@
     @php
     $isActive = true;
     @endphp
-
     <header class="pointer-events-none relative z-50 flex flex-col">
         <div class="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"></div>
         <div class="top-0 z-10 h-16 pt-6">
