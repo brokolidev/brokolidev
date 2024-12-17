@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index(): Application|Factory|View|\Illuminate\Foundation\Application
     {
-        $articles = Article::latest()->take(4)->get();
+        $articles = Article::latest()->simplePaginate(6);
 
         return view('article.index', ['articles' => $articles]);
     }
