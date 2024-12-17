@@ -20,7 +20,8 @@
         "livewire/flux": "^1.0",
         "livewire/flux-pro": "^1.0",
         "livewire/livewire": "^3.4",
-        "torchlight/torchlight-laravel": "^0.6.0"
+        "torchlight/torchlight-laravel": "^0.6.0",
+        "torchlight/torchlight-commonmark": "dev-main"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -77,6 +78,10 @@
         "flux-pro": {
             "type": "composer",
             "url": "https://composer.fluxui.dev"
+        },
+        "torchlight/torchlight-commonmark": {
+            "type": "vcs",
+            "url": "https://github.com/brokolidev/torchlight-commonmark-php"
         }
     }
 }

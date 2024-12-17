@@ -28,7 +28,7 @@
                                             class="ml-3">{{ $article->created_at->format('F d, Y') }}</span></time>
                                 </header>
                                 <div class="mt-8 prose dark:prose-invert">
-                                    {!! str($article->content)->markdown()->sanitizeHtml() !!}
+                                    {!! $article->markdown !!}
                                 </div>
                             </article>
                         </div>
