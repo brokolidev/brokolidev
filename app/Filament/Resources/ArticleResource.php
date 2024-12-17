@@ -6,19 +6,11 @@ use App\Filament\Resources\ArticleResource\Pages;
 use App\Filament\Resources\ArticleResource\RelationManagers;
 use App\Models\Article;
 use Filament\Forms;
-use Filament\Forms\Components\Builder;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Filters\Layout;
-
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ArticleResource extends Resource
 {
