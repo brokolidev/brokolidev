@@ -1,6 +1,6 @@
-## Brokolidev
+## brokolidev
 
-<h1 align="center">Hi 👋, I'm Hyunseung</h1>
+<h1 align="center">Hi 👋, I'm Ted</h1>
 <h3 align="center">Web Develper</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=brokolidev&label=Profile%20views&color=0e75b6&style=flat" alt="brokolidev" /> </p>
