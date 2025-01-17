@@ -91,7 +91,7 @@
                         </div>
                         <div class="text-center mt-32">
                             <h3 class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
-                                Hyunseung Choi
+                                Ted Choi
                             </h3>
                             <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
                                 <i class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>

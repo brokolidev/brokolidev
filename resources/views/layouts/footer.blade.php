@@ -58,7 +58,7 @@
                     <a
                         href="mailto:bocalist@gmail.com"
                         class="text-gray-600 hover:text-gray-900"
-                    >Hyunseung</a>.
+                    >Ted</a>.
                 </div>
             </div>
         </div>
