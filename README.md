@@ -7,13 +7,10 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=brokolidev" alt="brokolidev" /></a> </p>
 
-- 🔭 I’m currently working on [Artistry Project(Volunteer)](https://www.instagram.com/artistry_community/)
-
-- 🌱 I’m currently learning **NestJS, C#, MAUI, Flutter**
-
-- 💬 Ask me about **PHP, Laravel, TALL stack**
-
-- 📫 How to reach me **bocalist@gmail.com**
+ - 🔭 I’m currently working on the [Artistry Project (as a volunteer)](https://www.instagram.com/artistry_community/).
+ - 🌱  I’m currently learning **NestJS, ASP.NET, and Flutter**.
+ - 💬  Feel free to ask me about **PHP, Laravel, and the TALL stack**.
+ - 📫  You can reach me at **bocalist@gmail.com**.
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
