@@ -25,7 +25,7 @@
     "postcss-import": "^16.0.0",
     "resolve-url-loader": "^5.0.0",
     "tailwindcss": "^3.4.16",
-    "vite": "^5.4.8",
+    "vite": "^5.4.14",
     "vue-template-compiler": "^2.6.12"
   },
   "dependencies": {
