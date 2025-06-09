@@ -7,8 +7,7 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=brokolidev" alt="brokolidev" /></a> </p>
 
- - 🔭 I’m currently working on the [Artistry Project (as a volunteer)](https://www.instagram.com/artistry_community/).
- - 🌱  I’m currently learning **NestJS, ASP.NET, and Flutter**.
+ - 🌱  I’ve worked on web projects for a long time, and these days I mainly use **TypeScript, C#, and PHP**.
  - 💬  Feel free to ask me about **PHP, Laravel, and the TALL stack**.
  - 📫  You can reach me at **bocalist@gmail.com**.
 
