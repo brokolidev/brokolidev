@@ -5,7 +5,9 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=brokolidev&label=Profile%20views&color=0e75b6&style=flat" alt="brokolidev" /> </p>
 
-<p align="left"> <a href="https://user-images.githubusercontent.com/6661165/91657958-61b4fd00-eb00-11ea-9def-dc7ef5367e34.png"><img src="https://github-profile-trophy.vercel.app/?username=brokolidev" alt="brokolidev" /></a> </p>
+<p align="left"> 
+[![trophy](https://github-profile-trophy.vercel.app/?username=brokolidev)](https://github.com/brokolidev/github-profile-trophy)
+</p>
 
  - 🌱  I’ve worked on web projects for a long time, and these days I mainly use **TypeScript, C#, and PHP**.
  - 💬  Feel free to ask me about **PHP, Laravel, and the TALL stack**.
