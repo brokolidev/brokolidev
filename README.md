@@ -5,7 +5,7 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=brokolidev&label=Profile%20views&color=0e75b6&style=flat" alt="brokolidev" /> </p>
 
-[![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma)](https://github.com/ryo-ma/github-profile-trophy)
+[![trophy](https://github-profile-trophy.vercel.app/?username=ryo-ma&theme=onedark)](https://github.com/ryo-ma/github-profile-trophy)
 
  - 🌱  I’ve worked on web projects for a long time, and these days I mainly use **TypeScript, C#, and PHP**.
  - 💬  Feel free to ask me about **PHP, Laravel, and the TALL stack**.
