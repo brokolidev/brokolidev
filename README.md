@@ -7,8 +7,8 @@
 
 [![trophy](https://github-profile-trophy.vercel.app/?username=brokolidev&theme=nord)](https://github.com/brokolidev)
 
- - 🌱  I’ve worked on web projects for a long time, and these days I mainly use **TypeScript, C#, and PHP**.
- - 💬  Feel free to ask me about **PHP, Laravel, and the TALL stack**.
+ - 🌱  I’ve worked on web projects for a long time, ~~and these days I mainly use **TypeScript, C#, and PHP**~~.
+ - 💬  With the help of AI, I can develop in any language when needed.
  - 📫  You can reach me at **bocalist@gmail.com**.
 
 <h3 align="left">Connect with me:</h3>
