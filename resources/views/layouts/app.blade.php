@@ -294,15 +294,31 @@
         const roleEl = document.getElementById('typing-role');
         if (roleEl) {
             const originalRole = roleEl.dataset.role || 'Software Engineer';
+            let isHovered = false;
+
             // Initial scramble on page load
             setTimeout(() => {
                 scrambleText(roleEl, originalRole, 850);
             }, 350);
 
             // Re-trigger on hover
-            roleEl.closest('.group\\/role')?.addEventListener('mouseenter', () => {
-                scrambleText(roleEl, originalRole, 600);
-            });
+            const roleContainer = roleEl.closest('.group\\/role');
+            if (roleContainer) {
+                roleContainer.addEventListener('mouseenter', () => {
+                    isHovered = true;
+                    scrambleText(roleEl, originalRole, 600);
+                });
+                roleContainer.addEventListener('mouseleave', () => {
+                    isHovered = false;
+                });
+            }
+
+            // Recurring scramble every 5.5 seconds
+            setInterval(() => {
+                if (!isHovered) {
+                    scrambleText(roleEl, originalRole, 750);
+                }
+            }, 5500);
         }
 
         const nameEl = document.getElementById('hero-name');
