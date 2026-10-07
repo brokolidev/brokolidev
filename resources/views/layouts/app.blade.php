@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Ted Choi - Software Engineer') }}</title>
+    <title>Ted Choi - Software Engineer</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://rsms.me/">
