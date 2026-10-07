@@ -33,13 +33,20 @@
     </script>
 </head>
 
-<body class="flex min-h-full flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 selection:bg-teal-500 selection:text-white transition-colors duration-200">
+<body class="relative flex min-h-full flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 selection:bg-teal-500 selection:text-white transition-colors duration-300 overflow-x-hidden">
+    <!-- Ambient Background Light Effects -->
+    <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden" aria-hidden="true">
+        <div class="absolute -top-36 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-gradient-to-tr from-teal-400/20 via-indigo-500/15 to-transparent blur-3xl rounded-full dark:from-teal-500/10 dark:via-cyan-600/5 dark:to-transparent animate-float-slow"></div>
+        <div class="absolute top-96 -right-24 w-[480px] h-[360px] bg-gradient-to-bl from-indigo-500/15 via-purple-500/10 to-transparent blur-3xl rounded-full dark:from-indigo-600/10 dark:to-transparent animate-float-reverse"></div>
+    </div>
+
+    <!-- Header / Theme Toggle -->
     <header class="relative z-50">
         <div class="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 pt-6">
             <div class="mx-auto max-w-2xl lg:max-w-4xl flex justify-end">
-                <button type="button" id="theme-toggle" aria-label="Toggle theme" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition hover:border-zinc-300 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100 shadow-sm cursor-pointer">
-                    <i class="fas fa-sun hidden dark:block text-amber-400 text-sm transition group-hover:rotate-45"></i>
-                    <i class="fas fa-moon block dark:hidden text-zinc-600 text-sm transition group-hover:-rotate-12"></i>
+                <button type="button" id="theme-toggle" aria-label="Toggle theme" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-zinc-900 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100 cursor-pointer active:scale-95">
+                    <i class="fas fa-sun hidden dark:block text-amber-400 text-sm transition-transform duration-300 group-hover:rotate-45"></i>
+                    <i class="fas fa-moon block dark:hidden text-zinc-600 text-sm transition-transform duration-300 group-hover:-rotate-12"></i>
                 </button>
             </div>
         </div>
@@ -52,13 +59,19 @@
                 <div class="relative px-4 sm:px-8 lg:px-12">
                     <div class="mx-auto max-w-2xl lg:max-w-4xl">
                         <!-- Profile Header -->
-                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-12 border-b border-zinc-200 dark:border-zinc-800">
+                        <div class="animate-fade-in-up [animation-delay:100ms] flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 pb-12 border-b border-zinc-200 dark:border-zinc-800">
                             <div class="flex items-start gap-5">
-                                <img src="{{ asset('/img/profile.png') }}" alt="Ted Choi" class="h-20 w-20 sm:h-24 sm:w-24 shrink-0" />
+                                <img src="{{ asset('/img/profile.png') }}" alt="Ted Choi" class="h-20 w-20 sm:h-24 sm:w-24 shrink-0 transition-transform duration-300 hover:scale-105" />
                                 <div>
                                     <div class="flex items-center gap-2.5">
                                         <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Ted Choi</h1>
-                                        <span class="inline-flex items-center rounded-md bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-700/10 dark:bg-teal-400/10 dark:text-teal-400 dark:ring-teal-400/20">Active</span>
+                                        <span class="inline-flex items-center gap-1.5 rounded-md bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-700/10 dark:bg-teal-400/10 dark:text-teal-400 dark:ring-teal-400/20">
+                                            <span class="relative flex h-1.5 w-1.5">
+                                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                                                <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-teal-500"></span>
+                                            </span>
+                                            Active
+                                        </span>
                                     </div>
                                     <div class="flex flex-wrap items-center gap-y-1 gap-x-3 text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 font-mono">
                                         <span class="flex items-center gap-1.5">
@@ -79,37 +92,40 @@
 
                                     <!-- Threads Style Tags -->
                                     <div class="flex flex-wrap items-center gap-1.5 mt-3">
-                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition cursor-default">soccer</span>
-                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition cursor-default">bowling</span>
-                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition cursor-default">books</span>
-                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition cursor-default">movies</span>
-                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition cursor-default">music</span>
+                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-105 active:scale-95 transition-all duration-200 cursor-default shadow-xs">soccer</span>
+                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-105 active:scale-95 transition-all duration-200 cursor-default shadow-xs">bowling</span>
+                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-105 active:scale-95 transition-all duration-200 cursor-default shadow-xs">books</span>
+                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-105 active:scale-95 transition-all duration-200 cursor-default shadow-xs">movies</span>
+                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-105 active:scale-95 transition-all duration-200 cursor-default shadow-xs">music</span>
                                     </div>
                                 </div>
                             </div>
                             <!-- Social Connects -->
                             <div class="flex items-center justify-end gap-2">
-                                <a href="https://github.com/brokolidev" target="_blank" rel="noopener noreferrer" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition hover:border-zinc-300 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100 shadow-sm" aria-label="GitHub">
-                                    <i class="fab fa-github text-base transition group-hover:scale-110"></i>
+                                <a href="https://github.com/brokolidev" target="_blank" rel="noopener noreferrer" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-zinc-900 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100 active:scale-95" aria-label="GitHub">
+                                    <i class="fab fa-github text-base transition-transform group-hover:scale-110"></i>
                                 </a>
-                                <a href="https://www.linkedin.com/in/brokolidev/" target="_blank" rel="noopener noreferrer" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition hover:border-zinc-300 hover:text-blue-600 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-blue-400 shadow-sm" aria-label="LinkedIn">
-                                    <i class="fab fa-linkedin-in text-base transition group-hover:scale-110"></i>
+                                <a href="https://www.linkedin.com/in/brokolidev/" target="_blank" rel="noopener noreferrer" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-blue-600 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-blue-400 active:scale-95" aria-label="LinkedIn">
+                                    <i class="fab fa-linkedin-in text-base transition-transform group-hover:scale-110"></i>
                                 </a>
-                                <a href="https://www.facebook.com/bocalist" target="_blank" rel="noopener noreferrer" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition hover:border-zinc-300 hover:text-blue-500 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-blue-400 shadow-sm" aria-label="Facebook">
-                                    <i class="fab fa-facebook-f text-base transition group-hover:scale-110"></i>
+                                <a href="https://www.facebook.com/bocalist" target="_blank" rel="noopener noreferrer" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-blue-500 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-blue-400 active:scale-95" aria-label="Facebook">
+                                    <i class="fab fa-facebook-f text-base transition-transform group-hover:scale-110"></i>
                                 </a>
-                                <a href="mailto:bocalist@gmail.com" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition hover:border-zinc-300 hover:text-teal-600 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-teal-400 shadow-sm" aria-label="Email">
-                                    <i class="fas fa-envelope text-base transition group-hover:scale-110"></i>
+                                <a href="mailto:bocalist@gmail.com" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-teal-600 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-teal-400 active:scale-95" aria-label="Email">
+                                    <i class="fas fa-envelope text-base transition-transform group-hover:scale-110"></i>
                                 </a>
                             </div>
                         </div>
 
                         <!-- Featured Section: AI Perspective (Clearly Distinct) -->
-                        <div class="mt-12">
-                            <div class="relative overflow-hidden rounded-2xl border border-teal-500/30 bg-gradient-to-br from-teal-500/[0.05] via-white to-indigo-500/[0.03] dark:from-teal-500/[0.08] dark:via-zinc-900 dark:to-indigo-500/[0.05] p-6 sm:p-8 shadow-sm">
+                        <div class="mt-12 animate-fade-in-up [animation-delay:200ms] transition-all duration-300 hover:-translate-y-1">
+                            <div class="relative overflow-hidden rounded-2xl border border-teal-500/30 bg-gradient-to-br from-teal-500/[0.06] via-white/80 to-indigo-500/[0.04] dark:from-teal-500/[0.09] dark:via-zinc-900/90 dark:to-indigo-500/[0.06] p-6 sm:p-8 shadow-sm hover:shadow-xl hover:shadow-teal-500/5 dark:hover:shadow-teal-500/10 backdrop-blur-sm transition-all duration-300">
                                 <div class="flex items-center gap-2 mb-4">
                                     <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-500/10 px-3 py-1 text-xs font-semibold text-teal-700 dark:text-teal-300 border border-teal-500/20">
-                                        <span class="h-1.5 w-1.5 rounded-full bg-teal-500 animate-pulse"></span>
+                                        <span class="relative flex h-1.5 w-1.5">
+                                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                                            <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-teal-500"></span>
+                                        </span>
                                         AI-First Engineering Mindset
                                     </span>
                                 </div>
@@ -125,29 +141,29 @@
                                     </p>
                                 </div>
                                 <div class="mt-6 pt-5 border-t border-teal-500/10 flex items-center gap-2 text-xs font-medium text-zinc-500 dark:text-zinc-400">
-                                    <i class="fas fa-arrow-down text-teal-600 dark:text-teal-400"></i>
+                                    <i class="fas fa-arrow-down text-teal-600 dark:text-teal-400 animate-bounce"></i>
                                     <span>Curious about my traditional foundation and tech stacks? Explore the legacy archive below.</span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Technical Divider -->
-                        <div class="relative my-12 sm:my-14">
+                        <div class="relative my-12 sm:my-14 animate-fade-in-up [animation-delay:300ms]">
                             <div class="absolute inset-0 flex items-center" aria-hidden="true">
                                 <div class="w-full border-t border-zinc-200 dark:border-zinc-800"></div>
                             </div>
                             <div class="relative flex justify-center">
-                                <span class="bg-zinc-50 dark:bg-zinc-900 px-4 font-mono text-xs font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                                <span class="bg-zinc-50 dark:bg-zinc-950 px-4 font-mono text-xs font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
                                     // Technical Background & Q&A
                                 </span>
                             </div>
                         </div>
 
                         <!-- Legacy Q&A Grid -->
-                        <div class="grid gap-6">
+                        <div class="grid gap-6 animate-fade-in-up [animation-delay:400ms]">
                             <!-- Q1 -->
-                            <div class="rounded-xl border border-zinc-200/80 bg-white/70 dark:border-zinc-800/80 dark:bg-zinc-900/40 p-6 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition">
-                                <span class="font-mono text-xs font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">01 / Background</span>
+                            <div class="group rounded-xl border border-zinc-200/80 bg-white/70 dark:border-zinc-800/80 dark:bg-zinc-900/40 p-6 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-teal-500/40 dark:hover:border-teal-500/40 backdrop-blur-sm transition-all duration-300">
+                                <span class="font-mono text-xs font-semibold text-teal-600 dark:text-teal-400 group-hover:text-teal-500 uppercase tracking-wider transition-colors duration-200">01 / Background</span>
                                 <h3 class="mt-1.5 text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100">
                                     Q. Tell me about your background and experience.
                                 </h3>
@@ -157,8 +173,8 @@
                             </div>
 
                             <!-- Q2 -->
-                            <div class="rounded-xl border border-zinc-200/80 bg-white/70 dark:border-zinc-800/80 dark:bg-zinc-900/40 p-6 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition">
-                                <span class="font-mono text-xs font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">02 / Domain & Philosophy</span>
+                            <div class="group rounded-xl border border-zinc-200/80 bg-white/70 dark:border-zinc-800/80 dark:bg-zinc-900/40 p-6 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-teal-500/40 dark:hover:border-teal-500/40 backdrop-blur-sm transition-all duration-300">
+                                <span class="font-mono text-xs font-semibold text-teal-600 dark:text-teal-400 group-hover:text-teal-500 uppercase tracking-wider transition-colors duration-200">02 / Domain & Philosophy</span>
                                 <h3 class="mt-1.5 text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100">
                                     Q. Which domain or field are you most confident in?
                                 </h3>
@@ -168,8 +184,8 @@
                             </div>
 
                             <!-- Q3 -->
-                            <div class="rounded-xl border border-zinc-200/80 bg-white/70 dark:border-zinc-800/80 dark:bg-zinc-900/40 p-6 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition">
-                                <span class="font-mono text-xs font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">03 / Modern Stack</span>
+                            <div class="group rounded-xl border border-zinc-200/80 bg-white/70 dark:border-zinc-800/80 dark:bg-zinc-900/40 p-6 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-teal-500/40 dark:hover:border-teal-500/40 backdrop-blur-sm transition-all duration-300">
+                                <span class="font-mono text-xs font-semibold text-teal-600 dark:text-teal-400 group-hover:text-teal-500 uppercase tracking-wider transition-colors duration-200">03 / Modern Stack</span>
                                 <h3 class="mt-1.5 text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100">
                                     Q. What is your experience with Node.js?
                                 </h3>
@@ -179,8 +195,8 @@
                             </div>
 
                             <!-- Q4 -->
-                            <div class="rounded-xl border border-zinc-200/80 bg-white/70 dark:border-zinc-800/80 dark:bg-zinc-900/40 p-6 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition">
-                                <span class="font-mono text-xs font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">04 / DevOps & Containers</span>
+                            <div class="group rounded-xl border border-zinc-200/80 bg-white/70 dark:border-zinc-800/80 dark:bg-zinc-900/40 p-6 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-teal-500/40 dark:hover:border-teal-500/40 backdrop-blur-sm transition-all duration-300">
+                                <span class="font-mono text-xs font-semibold text-teal-600 dark:text-teal-400 group-hover:text-teal-500 uppercase tracking-wider transition-colors duration-200">04 / DevOps & Containers</span>
                                 <h3 class="mt-1.5 text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100">
                                     Q. How proficient are you with Docker?
                                 </h3>
@@ -190,8 +206,8 @@
                             </div>
 
                             <!-- Q5 -->
-                            <div class="rounded-xl border border-zinc-200/80 bg-white/70 dark:border-zinc-800/80 dark:bg-zinc-900/40 p-6 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition">
-                                <span class="font-mono text-xs font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">05 / Full-Stack Spectrum</span>
+                            <div class="group rounded-xl border border-zinc-200/80 bg-white/70 dark:border-zinc-800/80 dark:bg-zinc-900/40 p-6 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-teal-500/40 dark:hover:border-teal-500/40 backdrop-blur-sm transition-all duration-300">
+                                <span class="font-mono text-xs font-semibold text-teal-600 dark:text-teal-400 group-hover:text-teal-500 uppercase tracking-wider transition-colors duration-200">05 / Full-Stack Spectrum</span>
                                 <h3 class="mt-1.5 text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100">
                                     Q. Do you prefer frontend or backend development?
                                 </h3>
@@ -201,8 +217,8 @@
                             </div>
 
                             <!-- Q6 -->
-                            <div class="rounded-xl border border-zinc-200/80 bg-white/70 dark:border-zinc-800/80 dark:bg-zinc-900/40 p-6 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition">
-                                <span class="font-mono text-xs font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">06 / Infrastructure & Cloud</span>
+                            <div class="group rounded-xl border border-zinc-200/80 bg-white/70 dark:border-zinc-800/80 dark:bg-zinc-900/40 p-6 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-teal-500/40 dark:hover:border-teal-500/40 backdrop-blur-sm transition-all duration-300">
+                                <span class="font-mono text-xs font-semibold text-teal-600 dark:text-teal-400 group-hover:text-teal-500 uppercase tracking-wider transition-colors duration-200">06 / Infrastructure & Cloud</span>
                                 <h3 class="mt-1.5 text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100">
                                     Q. How experienced are you with server and cloud infrastructure?
                                 </h3>
