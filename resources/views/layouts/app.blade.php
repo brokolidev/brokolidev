@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                             <!-- Social Connects -->
-                            <div class="flex items-center gap-2">
+                            <div class="flex items-center justify-end gap-2">
                                 <a href="https://github.com/brokolidev" target="_blank" rel="noopener noreferrer" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition hover:border-zinc-300 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100 shadow-sm" aria-label="GitHub">
                                     <i class="fab fa-github text-base transition group-hover:scale-110"></i>
                                 </a>
