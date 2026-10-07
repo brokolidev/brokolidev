@@ -27,7 +27,7 @@ Route::get('/memory-game', function () {
     return view('samples.memory-game');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
