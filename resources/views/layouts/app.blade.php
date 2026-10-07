@@ -64,7 +64,7 @@
                                 <img src="{{ asset('/img/profile.png') }}" alt="Ted Choi" class="h-20 w-20 sm:h-24 sm:w-24 shrink-0 transition-transform duration-300 hover:scale-105" />
                                 <div>
                                     <div class="flex items-center gap-2.5">
-                                        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Ted Choi</h1>
+                                        <h1 id="hero-name" class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 cursor-default">Ted Choi</h1>
                                         <span class="inline-flex items-center gap-1.5 rounded-md bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-700/10 dark:bg-teal-400/10 dark:text-teal-400 dark:ring-teal-400/20">
                                             <span class="relative flex h-1.5 w-1.5">
                                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
@@ -74,9 +74,10 @@
                                         </span>
                                     </div>
                                     <div class="flex flex-wrap items-center gap-y-1 gap-x-3 text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 font-mono">
-                                        <span class="flex items-center gap-1.5">
-                                            <i class="fas fa-code text-teal-600 dark:text-teal-400 text-xs"></i>
-                                            Software Engineer
+                                        <span class="inline-flex items-center gap-1.5 cursor-default group/role">
+                                            <i class="fas fa-code text-teal-600 dark:text-teal-400 text-xs animate-glitch"></i>
+                                            <span id="typing-role" data-role="Software Engineer" class="text-zinc-800 dark:text-zinc-200 font-semibold">Software Engineer</span>
+                                            <span class="animate-cursor text-teal-500 font-bold ml-0.5" aria-hidden="true">_</span>
                                         </span>
                                         <span>•</span>
                                         <span class="flex items-center gap-1.5">
@@ -250,10 +251,66 @@
     </footer>
 
     <script>
+        // Theme toggle
         document.getElementById('theme-toggle')?.addEventListener('click', function () {
             const isDark = document.documentElement.classList.toggle('dark');
             localStorage.theme = isDark ? 'dark' : 'light';
         });
+
+        // Hacker Scramble / Cyber Decryption Typing Effect
+        function scrambleText(element, targetText, duration = 850) {
+            const chars = '!<>-_\\/[]{}—=+*^?#01~;:$';
+            let start = null;
+            const length = targetText.length;
+
+            function step(timestamp) {
+                if (!start) start = timestamp;
+                const elapsed = timestamp - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const resolvedIndex = Math.floor(progress * length);
+
+                let output = '';
+                for (let i = 0; i < length; i++) {
+                    if (i < resolvedIndex) {
+                        output += targetText[i];
+                    } else if (targetText[i] === ' ') {
+                        output += ' ';
+                    } else {
+                        output += chars[Math.floor(Math.random() * chars.length)];
+                    }
+                }
+                element.textContent = output;
+
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    element.textContent = targetText;
+                }
+            }
+            requestAnimationFrame(step);
+        }
+
+        // Initialize effects
+        const roleEl = document.getElementById('typing-role');
+        if (roleEl) {
+            const originalRole = roleEl.dataset.role || 'Software Engineer';
+            // Initial scramble on page load
+            setTimeout(() => {
+                scrambleText(roleEl, originalRole, 850);
+            }, 350);
+
+            // Re-trigger on hover
+            roleEl.closest('.group\\/role')?.addEventListener('mouseenter', () => {
+                scrambleText(roleEl, originalRole, 600);
+            });
+        }
+
+        const nameEl = document.getElementById('hero-name');
+        if (nameEl) {
+            nameEl.addEventListener('mouseenter', () => {
+                scrambleText(nameEl, 'Ted Choi', 450);
+            });
+        }
     </script>
 </body>
 
