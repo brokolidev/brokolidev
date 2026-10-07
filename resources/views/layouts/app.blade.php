@@ -98,14 +98,14 @@
                                 Calgary, Alberta
                             </div>
                             <div class="mb-2 text-gray-700 mt-10">
-                                <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i>Web Developer
+                                <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i>Software Engineer
                             </div>
                         </div>
                         <div class="bg-white px-6 py-10 mt-10 lg:px-8 border-t border-gray-300">
                             <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
                                 <p class="text-base font-semibold leading-7 text-indigo-600">Q. Tell me about your experience</p>
                                 <p class="leading-8">
-                                    I started my career as an <strong class="font-semibold text-gray-900">IT Security Manager</strong>, where I gained extensive foundational knowledge in IT. Currently, I have been working as a Web Developer for over 10 years. Most of my projects have been <strong class="font-semibold text-gray-900">PHP-based</strong>, ranging from e-commerce to CMS projects.
+                                    I started my career as an <strong class="font-semibold text-gray-900">IT Security Manager</strong>, where I gained extensive foundational knowledge in IT. Currently, I have been working as a Software Engineer for over 10 years. Most of my projects have been <strong class="font-semibold text-gray-900">PHP-based</strong>, ranging from e-commerce to CMS projects.
                                 </p>
                                 <p class="mt-6 text-base font-semibold leading-7 text-indigo-600">Q. Do you have a field you are most confident in?</p>
                                 <p class="leading-8">
