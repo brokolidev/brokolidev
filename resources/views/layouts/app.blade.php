@@ -103,6 +103,19 @@
                         </div>
                         <div class="bg-white px-6 py-10 mt-10 lg:px-8 border-t border-gray-300">
                             <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+                                <div class="mb-12 pb-10 border-b border-gray-200">
+                                    <p class="text-lg font-bold leading-7 text-indigo-600">Q. What is your perspective on AI?</p>
+                                    <p class="mt-3 leading-8">
+                                        I now spend the vast majority of my working hours actively leveraging <strong class="font-semibold text-gray-900">AI</strong>. Today, AI has evolved beyond software development into an essential paradigm across all industries, and how effectively one utilizes AI directly reflects an engineer's capability and impact.
+                                    </p>
+                                    <p class="mt-4 leading-8">
+                                        I utilize AI as a powerful catalyst to bridge knowledge gaps and elevate my problem-solving ability, experiencing dramatic leaps in productivity and execution speed every single day. In this era, specific programming languages, platforms, or domains are no longer the bottleneck—what truly matters is the vision you dream and dare to build.
+                                    </p>
+                                    <p class="mt-5 text-sm text-gray-500 italic">
+                                        * For those curious about my traditional background, tech stacks, and domain experience, please feel free to explore the legacy Q&A below.
+                                    </p>
+                                </div>
+
                                 <p class="text-base font-semibold leading-7 text-indigo-600">Q. Tell me about your background and experience.</p>
                                 <p class="leading-8">
                                     I began my career as an <strong class="font-semibold text-gray-900">IT Security Manager</strong>, which provided me with a solid foundation in IT infrastructure and security. Over the past 10+ years, I have worked as a Software Engineer, focusing primarily on <strong class="font-semibold text-gray-900">PHP-based</strong> platforms ranging from large-scale e-commerce systems to custom CMS solutions.
