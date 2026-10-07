@@ -8,14 +8,12 @@ services:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD:-}'
             MYSQL_ROOT_HOST: '%'
             MYSQL_DATABASE: '${DB_DATABASE:-brokolidev}'
-            MYSQL_USER: '${DB_USERNAME:-root}'
-            MYSQL_PASSWORD: '${DB_PASSWORD:-}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
             - 'brokolidev-mysql:/var/lib/mysql'
         command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
         healthcheck:
-            test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD:-}"]
+            test: ["CMD", "mysqladmin", "ping"]
             retries: 3
             timeout: 5s
 
