@@ -37,21 +37,13 @@ jobs:
           composer validate --no-check-publish
           composer install --prefer-dist --no-progress --no-dev --optimize-autoloader
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies and build assets
         run: |
-          pnpm install --frozen-lockfile
-          pnpm run build
+          bun install --frozen-lockfile
+          bun run build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
