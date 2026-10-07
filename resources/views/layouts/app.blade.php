@@ -66,7 +66,7 @@
                         <!-- Profile Header -->
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-12 border-b border-zinc-200 dark:border-zinc-800">
                             <div class="flex items-center gap-5">
-                                <img src="{{ asset('/img/profile.png') }}" alt="Ted Choi" class="h-20 w-20 sm:h-24 sm:w-24 rounded-2xl object-cover ring-1 ring-zinc-900/10 dark:ring-white/10 shadow-md bg-zinc-100 dark:bg-zinc-800" />
+                                <img src="{{ asset('/img/profile.png') }}" alt="Ted Choi" class="h-20 w-20 sm:h-24 sm:w-24" />
                                 <div>
                                     <div class="flex items-center gap-2.5">
                                         <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Ted Choi</h1>
