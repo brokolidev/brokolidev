@@ -23,43 +23,32 @@
 
     <!-- Scripts -->
     @vite('resources/js/app.js')
+
+    <!-- Theme Initialization -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 </head>
 
-<body class="flex min-h-full flex-col bg-zinc-50 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 selection:bg-teal-500 selection:text-white">
-    <header class="pointer-events-none relative z-50 flex flex-col">
-        <div class="top-0 z-10 h-16 pt-6">
-            <div class="sm:px-8 w-full">
-                <div class="mx-auto max-w-7xl lg:px-8">
-                    <div class="relative px-4 sm:px-8 lg:px-12">
-                        <div class="mx-auto max-w-2xl lg:max-w-4xl">
-                            <div class="relative flex gap-4">
-                                <div class="flex flex-1 justify-center">
-                                    <nav class="pointer-events-auto">
-                                        <ul class="flex rounded-full bg-white/90 px-4 py-1 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-                                            <li>
-                                                <a @class([ 'text-teal-600 dark:text-teal-400 font-semibold' => request()->is('/'),
-                                                    'relative block px-3 py-1.5 transition hover:text-teal-600 dark:hover:text-teal-400'])
-                                                    href="/">About</a>
-                                            </li>
-                                            <li>
-                                                <a @class([ 'text-teal-600 dark:text-teal-400 font-semibold' => request()->is('articles') || request()->is('articles/*'),
-                                                    'relative block px-3 py-1.5 transition hover:text-teal-600 dark:hover:text-teal-400'])
-                                                    href="/articles">Articles</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<body class="flex min-h-full flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 selection:bg-teal-500 selection:text-white transition-colors duration-200">
+    <header class="relative z-50">
+        <div class="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 pt-6">
+            <div class="mx-auto max-w-2xl lg:max-w-4xl flex justify-end">
+                <button type="button" id="theme-toggle" aria-label="Toggle theme" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition hover:border-zinc-300 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100 shadow-sm cursor-pointer">
+                    <i class="fas fa-sun hidden dark:block text-amber-400 text-sm transition group-hover:rotate-45"></i>
+                    <i class="fas fa-moon block dark:hidden text-zinc-600 text-sm transition group-hover:-rotate-12"></i>
+                </button>
             </div>
         </div>
     </header>
 
     <main class="flex-auto">
         @section('contents')
-        <div class="sm:px-8 mt-12 sm:mt-16 pb-16">
+        <div class="sm:px-8 mt-6 sm:mt-10 pb-16">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="relative px-4 sm:px-8 lg:px-12">
                     <div class="mx-auto max-w-2xl lg:max-w-4xl">
@@ -232,6 +221,12 @@
     </footer>
 
     @livewireScripts
+    <script>
+        document.getElementById('theme-toggle')?.addEventListener('click', function () {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.theme = isDark ? 'dark' : 'light';
+        });
+    </script>
 </body>
 
 </html>
