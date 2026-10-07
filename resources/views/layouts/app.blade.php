@@ -109,7 +109,7 @@
                                 </p>
                                 <p class="mt-6 text-base font-semibold leading-7 text-indigo-600">Q. Which domain or field are you most confident in?</p>
                                 <p class="leading-8">
-                                    Most of the companies I have worked with specialized in digital commerce, allowing me to build deep expertise in the <strong class="font-semibold text-gray-900">E-commerce</strong> domain. Additionally, through my hands-on experience in various startups, I have developed the ability to translate business requirements into technical solutions and build infrastructure from the ground up for small-to-medium-sized projects.
+                                    Most of the companies I have worked with specialized in digital commerce, allowing me to build deep expertise in the <strong class="font-semibold text-gray-900">E-commerce</strong> domain. Additionally, through my hands-on experience in various startups, I have developed the ability to build infrastructure from the ground up for small-to-medium-sized projects. I believe developers are creators who turn imagination into reality—transforming abstract, ambiguous requirements into reliable, production-ready services, with the ultimate goal of delivering tangible value to real-world businesses.
                                 </p>
                                 <p class="mt-6 text-base font-semibold leading-7 text-indigo-600">Q. What is your experience with Node.js?</p>
                                 <p class="leading-8">
