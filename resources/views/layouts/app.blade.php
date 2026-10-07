@@ -53,8 +53,8 @@
                     <div class="mx-auto max-w-2xl lg:max-w-4xl">
                         <!-- Profile Header -->
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-12 border-b border-zinc-200 dark:border-zinc-800">
-                            <div class="flex items-center gap-5">
-                                <img src="{{ asset('/img/profile.png') }}" alt="Ted Choi" class="h-20 w-20 sm:h-24 sm:w-24" />
+                            <div class="flex items-start gap-5">
+                                <img src="{{ asset('/img/profile.png') }}" alt="Ted Choi" class="h-20 w-20 sm:h-24 sm:w-24 shrink-0" />
                                 <div>
                                     <div class="flex items-center gap-2.5">
                                         <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Ted Choi</h1>
@@ -70,6 +70,20 @@
                                             <i class="fas fa-location-dot text-zinc-400 text-xs"></i>
                                             Calgary, Alberta
                                         </span>
+                                    </div>
+
+                                    <!-- Bio Text -->
+                                    <p class="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-normal">
+                                        An amateur bowler, an amateur soccer player, a reader, a listener, and a software engineer.
+                                    </p>
+
+                                    <!-- Threads Style Tags -->
+                                    <div class="flex flex-wrap items-center gap-1.5 mt-3">
+                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition cursor-default">soccer</span>
+                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition cursor-default">bowling</span>
+                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition cursor-default">books</span>
+                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition cursor-default">movies</span>
+                                        <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition cursor-default">music</span>
                                     </div>
                                 </div>
                             </div>
