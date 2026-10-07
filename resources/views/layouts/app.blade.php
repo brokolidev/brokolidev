@@ -19,7 +19,6 @@
 
     <!-- Styles -->
     @vite('resources/css/app.css')
-    @livewireStyles
 
     <!-- Scripts -->
     @vite('resources/js/app.js')
@@ -220,7 +219,6 @@
         </div>
     </footer>
 
-    @livewireScripts
     <script>
         document.getElementById('theme-toggle')?.addEventListener('click', function () {
             const isDark = document.documentElement.classList.toggle('dark');
