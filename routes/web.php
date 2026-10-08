@@ -39,6 +39,55 @@ Route::controller(ArticleController::class)->group(function () {
     Route::get('/articles/{article}', 'show')->name('article.show');
 });
 
+/**
+ * Dynamic XML Sitemap
+ */
+Route::get('/sitemap.xml', function () {
+    $baseUrl = request()->getHost() && !in_array(request()->getHost(), ['localhost', '127.0.0.1'])
+        ? request()->schemeAndHttpHost()
+        : (config('app.url') && !str_contains(config('app.url'), 'localhost') ? rtrim(config('app.url'), '/') : 'https://brokolidev.com');
+
+    $articles = [];
+    try {
+        $articles = \App\Models\Article::latest()->get(['id', 'updated_at']);
+    } catch (\Throwable $e) {
+        // Fallback gracefully if database connection is unavailable
+    }
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+    // Home
+    $xml .= '<url>';
+    $xml .= '<loc>' . htmlspecialchars($baseUrl . '/') . '</loc>';
+    $xml .= '<changefreq>weekly</changefreq>';
+    $xml .= '<priority>1.0</priority>';
+    $xml .= '</url>';
+
+    // Articles Index
+    $xml .= '<url>';
+    $xml .= '<loc>' . htmlspecialchars($baseUrl . '/articles') . '</loc>';
+    $xml .= '<changefreq>daily</changefreq>';
+    $xml .= '<priority>0.8</priority>';
+    $xml .= '</url>';
+
+    // Individual Article Pages
+    foreach ($articles as $article) {
+        $xml .= '<url>';
+        $xml .= '<loc>' . htmlspecialchars($baseUrl . '/articles/' . $article->id) . '</loc>';
+        if ($article->updated_at) {
+            $xml .= '<lastmod>' . $article->updated_at->toAtomString() . '</lastmod>';
+        }
+        $xml .= '<changefreq>monthly</changefreq>';
+        $xml .= '<priority>0.7</priority>';
+        $xml .= '</url>';
+    }
+
+    $xml .= '</urlset>';
+
+    return response($xml, 200)->header('Content-Type', 'text/xml');
+});
+
 Route::get('/get_stressed', function(){
 
     $client = new GuzzleHttp\Client();

@@ -27,11 +27,12 @@ class Article extends Model
 
         $environment->addExtension(new CommonMarkCoreExtension());
         $environment->addExtension(new GithubFlavoredMarkdownExtension());
-        $environment->addExtension(new TorchlightExtension());
+        if (class_exists(TorchlightExtension::class)) {
+            $environment->addExtension(new TorchlightExtension());
+        }
 
         $converter = new MarkdownConverter($environment);
 
-        return $converter->convert($this->content);
-
+        return $converter->convert($this->content ?? '');
     }
 }

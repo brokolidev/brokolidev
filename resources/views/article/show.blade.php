@@ -1,5 +1,47 @@
 @extends('layouts.app')
 
+@php
+    $plainText = trim(preg_replace('/\s+/', ' ', strip_tags(Str::of($article->content)->markdown())));
+    $excerpt = Str::limit($plainText, 160);
+@endphp
+
+@section('title', e($article->title) . ' - Ted Choi')
+@section('meta_description', $excerpt)
+@section('canonical_url', route('article.show', ['article' => $article->id]))
+@section('og_type', 'article')
+@section('og_title', e($article->title) . ' - Ted Choi')
+@section('og_description', $excerpt)
+
+@section('json_ld')
+@php
+    $articleSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BlogPosting',
+        'headline' => $article->title,
+        'description' => $excerpt,
+        'url' => route('article.show', ['article' => $article->id]),
+        'datePublished' => $article->created_at->toIso8601String(),
+        'dateModified' => $article->updated_at->toIso8601String(),
+        'author' => [
+            '@type' => 'Person',
+            'name' => 'Ted Choi',
+            'url' => 'https://brokolidev.com',
+        ],
+        'publisher' => [
+            '@type' => 'Person',
+            'name' => 'Ted Choi',
+        ],
+        'mainEntityOfPage' => [
+            '@type' => 'WebPage',
+            '@id' => route('article.show', ['article' => $article->id]),
+        ],
+    ];
+@endphp
+<script type="application/ld+json">
+{!! json_encode($articleSchema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) !!}
+</script>
+@endsection
+
 @section('contents')
     <div class="sm:px-8 lg:mt-4 mb-32">
         <div class="mx-auto max-w-7xl lg:px-8">
@@ -22,7 +64,7 @@
                                     <h1
                                         class="mt-6 text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
                                         {{ $article->title }}</h1>
-                                    <time datetime="2022-09-05"
+                                    <time datetime="{{ $article->created_at->toDateString() }}"
                                           class="order-first flex items-center text-base text-zinc-400 dark:text-zinc-500">
                                         <span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span><span
                                             class="ml-3">{{ $article->created_at->format('F d, Y') }}</span></time>

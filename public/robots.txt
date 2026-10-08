@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /dashboard
+Disallow: /get_stressed
+Disallow: /slack/
+
+Sitemap: https://brokolidev.com/sitemap.xml

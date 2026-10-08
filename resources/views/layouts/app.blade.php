@@ -5,10 +5,42 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#09090b" />
-    <link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Ted Choi - Software Engineer</title>
+    <!-- Primary Meta Tags -->
+    <title>@yield('title', 'Ted Choi - Software Engineer | Full-Stack & AI-Assisted Developer')</title>
+    <meta name="title" content="@yield('title', 'Ted Choi - Software Engineer | Full-Stack & AI-Assisted Developer')">
+    <meta name="description" content="@yield('meta_description', 'Ted Choi is a Software Engineer based in Calgary with 10+ years of experience specializing in full-stack web development, PHP/Laravel, Node.js/NestJS, Docker, cloud infrastructure, and AI-first engineering.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'Ted Choi, Software Engineer, Full Stack Developer, Calgary, Alberta, Web Developer, PHP, Laravel, Node.js, NestJS, TypeScript, Docker, Cloud, AWS, GCP, Azure, AI Developer, brokolidev')">
+    <meta name="author" content="Ted Choi">
+    <meta name="robots" content="@yield('meta_robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1')">
+    <link rel="canonical" href="@yield('canonical_url', url()->current())" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:site_name" content="brokolidev">
+    <meta property="og:title" content="@yield('og_title', 'Ted Choi - Software Engineer | Full-Stack & AI-Assisted Developer')">
+    <meta property="og:description" content="@yield('og_description', 'Ted Choi is a Software Engineer based in Calgary with 10+ years of experience specializing in full-stack web development, PHP/Laravel, Node.js/NestJS, Docker, cloud infrastructure, and AI-first engineering.')">
+    <meta property="og:url" content="@yield('canonical_url', url()->current())">
+    <meta property="og:image" content="@yield('og_image', asset('/img/profile.png'))">
+    <meta property="og:image:alt" content="@yield('og_image_alt', 'Ted Choi - Software Engineer')">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ko_KR">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="@yield('twitter_card', 'summary_large_image')">
+    <meta name="twitter:title" content="@yield('og_title', 'Ted Choi - Software Engineer | Full-Stack & AI-Assisted Developer')">
+    <meta name="twitter:description" content="@yield('og_description', 'Ted Choi is a Software Engineer based in Calgary with 10+ years of experience specializing in full-stack web development, PHP/Laravel, Node.js/NestJS, Docker, cloud infrastructure, and AI-driven solutions.')">
+    <meta name="twitter:image" content="@yield('og_image', asset('/img/profile.png'))">
+    <meta name="twitter:creator" content="@brokolidev">
+
+    <!-- Favicons & Manifest -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/img/favicon_io/favicon-32x32.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/img/favicon_io/favicon-16x16.png') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/img/favicon_io/apple-touch-icon.png') }}" />
+    <link rel="manifest" href="{{ asset('/img/favicon_io/site.webmanifest') }}" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KR5V5X1NT"></script>
@@ -20,11 +52,88 @@
         gtag('config', 'G-0KR5V5X1NT');
     </script>
 
+    <!-- Structured Data (JSON-LD Schema.org) -->
+    @hasSection('json_ld')
+        @yield('json_ld')
+    @else
+        @php
+            $defaultSchema = [
+                '@context' => 'https://schema.org',
+                '@graph' => [
+                    [
+                        '@type' => 'WebSite',
+                        '@id' => 'https://brokolidev.com/#website',
+                        'url' => 'https://brokolidev.com',
+                        'name' => 'brokolidev',
+                        'description' => 'Portfolio and technical blog of Ted Choi, Software Engineer.',
+                        'publisher' => [
+                            '@id' => 'https://brokolidev.com/#person',
+                        ],
+                    ],
+                    [
+                        '@type' => 'ProfilePage',
+                        '@id' => url()->current() . '#webpage',
+                        'url' => url()->current(),
+                        'name' => 'Ted Choi - Software Engineer',
+                        'isPartOf' => [
+                            '@id' => 'https://brokolidev.com/#website',
+                        ],
+                        'about' => [
+                            '@id' => 'https://brokolidev.com/#person',
+                        ],
+                        'mainEntity' => [
+                            '@id' => 'https://brokolidev.com/#person',
+                        ],
+                    ],
+                    [
+                        '@type' => 'Person',
+                        '@id' => 'https://brokolidev.com/#person',
+                        'name' => 'Ted Choi',
+                        'alternateName' => ['brokolidev', '최원석', 'Ted'],
+                        'jobTitle' => 'Software Engineer',
+                        'description' => 'Software engineer with 10+ years of experience specializing in full-stack architecture, e-commerce platforms, cloud infrastructure, and AI-first engineering.',
+                        'image' => asset('/img/profile.png'),
+                        'url' => 'https://brokolidev.com',
+                        'address' => [
+                            '@type' => 'PostalAddress',
+                            'addressLocality' => 'Calgary',
+                            'addressRegion' => 'Alberta',
+                            'addressCountry' => 'CA',
+                        ],
+                        'sameAs' => [
+                            'https://github.com/brokolidev',
+                            'https://www.linkedin.com/in/brokolidev/',
+                            'https://www.facebook.com/bocalist',
+                        ],
+                        'knowsAbout' => [
+                            'Software Engineering',
+                            'Full Stack Development',
+                            'PHP',
+                            'Laravel',
+                            'Node.js',
+                            'NestJS',
+                            'TypeScript',
+                            'Docker',
+                            'DevOps & CI/CD',
+                            'Cloud Infrastructure',
+                            'Amazon Web Services (AWS)',
+                            'Microsoft Azure',
+                            'Google Cloud Platform (GCP)',
+                            'Artificial Intelligence',
+                            'E-commerce Architecture',
+                        ],
+                    ],
+                ],
+            ];
+        @endphp
+        <script type="application/ld+json">
+        {!! json_encode($defaultSchema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) !!}
+        </script>
+    @endif
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/img/apple-icon.png') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <!-- Styles -->
@@ -71,7 +180,7 @@
                         <!-- Profile Header -->
                         <div class="animate-fade-in-up [animation-delay:100ms] flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 pb-12 border-b border-zinc-200 dark:border-zinc-800">
                             <div class="flex items-start gap-5">
-                                <img src="{{ asset('/img/profile.png') }}" alt="Ted Choi" class="h-20 w-20 sm:h-24 sm:w-24 shrink-0 transition-transform duration-300 hover:scale-105" />
+                                <img src="{{ asset('/img/profile.png') }}" alt="Ted Choi - Software Engineer" class="h-20 w-20 sm:h-24 sm:w-24 shrink-0 transition-transform duration-300 hover:scale-105" />
                                 <div>
                                     <div class="flex items-center gap-2.5">
                                         <h1 id="hero-name" class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 cursor-default">Ted Choi</h1>
