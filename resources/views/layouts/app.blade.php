@@ -104,6 +104,7 @@
                             'https://github.com/brokolidev',
                             'https://www.linkedin.com/in/brokolidev/',
                             'https://www.facebook.com/bocalist',
+                            'https://buymeacoffee.com/brokolidev',
                         ],
                         'knowsAbout' => [
                             'Software Engineering',
@@ -230,6 +231,9 @@
                                 </a>
                                 <a href="https://www.facebook.com/bocalist" target="_blank" rel="noopener noreferrer" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-blue-500 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-blue-400 active:scale-95" aria-label="Facebook">
                                     <i class="fab fa-facebook-f text-base transition-transform group-hover:scale-110"></i>
+                                </a>
+                                <a href="https://buymeacoffee.com/brokolidev" target="_blank" rel="noopener noreferrer" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-amber-500 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-amber-400 active:scale-95" aria-label="Buy Me a Coffee">
+                                    <i class="fas fa-mug-hot text-base transition-transform group-hover:scale-110"></i>
                                 </a>
                                 <a href="mailto:bocalist@gmail.com" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-teal-600 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-teal-400 active:scale-95" aria-label="Email">
                                     <i class="fas fa-envelope text-base transition-transform group-hover:scale-110"></i>
@@ -369,6 +373,41 @@
         </div>
     </footer>
 
+    <!-- Buy Me a Coffee Floating Banner -->
+    <aside id="bmc-floating-widget" aria-label="Support with a coffee" class="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-50 flex items-center group transition-all duration-300">
+        <!-- Floating Action Button -->
+        <a href="https://buymeacoffee.com/brokolidev" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="relative flex items-center gap-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 px-4 py-2.5 sm:px-5 sm:py-3 text-zinc-950 font-semibold text-xs sm:text-sm shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/40 border border-amber-300/60 hover:-translate-y-1 hover:scale-105 active:scale-95 transition-all duration-300 backdrop-blur-md cursor-pointer select-none">
+            
+            <!-- Animated Ping Badge -->
+            <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500 ring-2 ring-white dark:ring-zinc-950"></span>
+            </span>
+
+            <!-- Coffee Mug Icon -->
+            <span class="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-950/10 transition-transform duration-300 group-hover:rotate-12">
+                <i class="fas fa-mug-hot text-zinc-950 text-xs sm:text-sm"></i>
+            </span>
+
+            <!-- Text Content -->
+            <span class="font-medium tracking-tight whitespace-nowrap">
+                Buy me a coffee
+            </span>
+        </a>
+
+        <!-- Dismiss button -->
+        <button type="button" 
+                id="bmc-dismiss-btn" 
+                aria-label="Close coffee banner" 
+                title="Dismiss"
+                class="ml-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-zinc-900/60 hover:bg-zinc-900/90 text-zinc-300 hover:text-white dark:bg-zinc-800/80 dark:hover:bg-zinc-700 text-xs backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-200 cursor-pointer shadow-xs active:scale-90">
+            <i class="fas fa-times text-[10px]"></i>
+        </button>
+    </aside>
+
     <script>
         // Theme toggle
         document.getElementById('theme-toggle')?.addEventListener('click', function () {
@@ -444,6 +483,26 @@
         if (nameEl) {
             nameEl.addEventListener('mouseenter', () => {
                 scrambleText(nameEl, 'Ted Choi', 450);
+            });
+        }
+
+        // Buy Me a Coffee widget dismiss logic
+        const bmcWidget = document.getElementById('bmc-floating-widget');
+        const bmcDismissBtn = document.getElementById('bmc-dismiss-btn');
+        if (bmcWidget && bmcDismissBtn) {
+            if (sessionStorage.getItem('bmc_dismissed') === 'true') {
+                bmcWidget.style.display = 'none';
+            }
+            bmcDismissBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                bmcWidget.style.opacity = '0';
+                bmcWidget.style.transform = 'translateY(12px) scale(0.95)';
+                bmcWidget.style.transition = 'all 0.25s ease-out';
+                setTimeout(() => {
+                    bmcWidget.style.display = 'none';
+                }, 250);
+                sessionStorage.setItem('bmc_dismissed', 'true');
             });
         }
     </script>
