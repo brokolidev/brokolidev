@@ -171,9 +171,8 @@
 
                 <!-- Navigation Links & Theme Toggle -->
                 <nav class="flex items-center gap-2">
-                    <a href="https://blog.brokolidev.com" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-200/80 hover:bg-teal-100 hover:border-teal-300 dark:bg-teal-950/40 dark:text-teal-300 dark:border-teal-500/30 dark:hover:bg-teal-900/60 transition-all duration-200 shadow-2xs">
+                    <a href="https://blog.brokolidev.com" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-200/80 hover:bg-teal-100 hover:border-teal-300 dark:bg-teal-950/40 dark:text-teal-300 dark:border-teal-500/30 dark:hover:bg-teal-900/60 transition-all duration-200 shadow-2xs">
                         <span>Blog</span>
-                        <i class="fas fa-arrow-up-right-from-square text-[10px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
                     </a>
 
                     <!-- Theme Toggle -->
