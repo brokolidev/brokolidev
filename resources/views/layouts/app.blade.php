@@ -160,14 +160,40 @@
         <div class="absolute top-96 -right-24 w-[480px] h-[360px] bg-gradient-to-bl from-indigo-500/15 via-purple-500/10 to-transparent blur-3xl rounded-full dark:from-indigo-600/10 dark:to-transparent animate-float-reverse"></div>
     </div>
 
-    <!-- Header / Theme Toggle -->
+    <!-- Header / Navbar -->
     <header class="relative z-50">
         <div class="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 pt-6">
-            <div class="mx-auto max-w-2xl lg:max-w-4xl flex justify-end">
-                <button type="button" id="theme-toggle" aria-label="Toggle theme" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-zinc-900 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100 cursor-pointer active:scale-95">
-                    <i class="fas fa-sun hidden dark:block text-amber-400 text-sm transition-transform duration-300 group-hover:rotate-45"></i>
-                    <i class="fas fa-moon block dark:hidden text-zinc-600 text-sm transition-transform duration-300 group-hover:-rotate-12"></i>
-                </button>
+            <div class="mx-auto max-w-2xl lg:max-w-4xl flex items-center justify-between">
+                <!-- Brand / Logo -->
+                <a href="/" class="group flex items-center gap-2 text-zinc-900 dark:text-zinc-100 font-bold text-sm tracking-tight transition-transform duration-200 hover:scale-105">
+                    <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-teal-500/10 border border-teal-500/20 text-teal-600 dark:text-teal-400 font-mono text-xs shadow-xs">
+                        🥦
+                    </span>
+                    <span>brokoli<span class="text-teal-600 dark:text-teal-400 font-semibold">.dev</span></span>
+                </a>
+
+                <!-- Navigation Links & Theme Toggle -->
+                <nav class="flex items-center gap-1 sm:gap-2">
+                    <a href="#about" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-all duration-200">
+                        About
+                    </a>
+                    <a href="#ai-mindset" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-all duration-200">
+                        AI Perspective
+                    </a>
+                    <a href="#qa-archive" class="hidden sm:inline-block px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-all duration-200">
+                        Q&A
+                    </a>
+                    <a href="https://blog.brokolidev.com" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-200/80 hover:bg-teal-100 hover:border-teal-300 dark:bg-teal-950/40 dark:text-teal-300 dark:border-teal-500/30 dark:hover:bg-teal-900/60 transition-all duration-200 shadow-2xs">
+                        <span>Blog</span>
+                        <i class="fas fa-arrow-up-right-from-square text-[10px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+                    </a>
+
+                    <!-- Theme Toggle -->
+                    <button type="button" id="theme-toggle" aria-label="Toggle theme" class="ml-1 group flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-zinc-900 hover:shadow-xs dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100 cursor-pointer active:scale-95">
+                        <i class="fas fa-sun hidden dark:block text-amber-400 text-xs transition-transform duration-300 group-hover:rotate-45"></i>
+                        <i class="fas fa-moon block dark:hidden text-zinc-600 text-xs transition-transform duration-300 group-hover:-rotate-12"></i>
+                    </button>
+                </nav>
             </div>
         </div>
     </header>
@@ -179,7 +205,7 @@
                 <div class="relative px-4 sm:px-8 lg:px-12">
                     <div class="mx-auto max-w-2xl lg:max-w-4xl">
                         <!-- Profile Header -->
-                        <div class="animate-fade-in-up [animation-delay:100ms] flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 pb-12 border-b border-zinc-200 dark:border-zinc-800">
+                        <div id="about" class="animate-fade-in-up [animation-delay:100ms] flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 pb-12 border-b border-zinc-200 dark:border-zinc-800">
                             <div class="flex items-start gap-5">
                                 <img src="{{ asset('/img/profile.png') }}" alt="Ted Choi - Software Engineer" class="h-20 w-20 sm:h-24 sm:w-24 shrink-0 transition-transform duration-300 hover:scale-105" />
                                 <div>
@@ -242,7 +268,7 @@
                         </div>
 
                         <!-- Featured Section: AI Perspective (Clearly Distinct) -->
-                        <div class="mt-12 animate-fade-in-up [animation-delay:200ms] transition-all duration-300 hover:-translate-y-1">
+                        <div id="ai-mindset" class="mt-12 animate-fade-in-up [animation-delay:200ms] transition-all duration-300 hover:-translate-y-1">
                             <div class="relative overflow-hidden rounded-2xl border border-teal-500/30 bg-gradient-to-br from-teal-500/[0.06] via-white/80 to-indigo-500/[0.04] dark:from-teal-500/[0.09] dark:via-zinc-900/90 dark:to-indigo-500/[0.06] p-6 sm:p-8 shadow-sm hover:shadow-xl hover:shadow-teal-500/5 dark:hover:shadow-teal-500/10 backdrop-blur-sm transition-all duration-300">
                                 <div class="flex items-center gap-2 mb-4">
                                     <span class="inline-flex items-center gap-1.5 rounded-full bg-teal-500/10 px-3 py-1 text-xs font-semibold text-teal-700 dark:text-teal-300 border border-teal-500/20">
@@ -272,7 +298,7 @@
                         </div>
 
                         <!-- Technical Divider -->
-                        <div class="relative my-12 sm:my-14 animate-fade-in-up [animation-delay:300ms]">
+                        <div id="qa-archive" class="relative my-12 sm:my-14 animate-fade-in-up [animation-delay:300ms]">
                             <div class="absolute inset-0 flex items-center" aria-hidden="true">
                                 <div class="w-full border-t border-zinc-200 dark:border-zinc-800"></div>
                             </div>
