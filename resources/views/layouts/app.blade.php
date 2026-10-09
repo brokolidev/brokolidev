@@ -170,8 +170,11 @@
                 </a>
 
                 <!-- Navigation Links & Theme Toggle -->
-                <nav class="flex items-center gap-2">
-                    <a href="https://blog.brokolidev.com" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-200/80 hover:bg-teal-100 hover:border-teal-300 dark:bg-teal-950/40 dark:text-teal-300 dark:border-teal-500/30 dark:hover:bg-teal-900/60 transition-all duration-200 shadow-2xs">
+                <nav class="flex items-center gap-1.5 sm:gap-2">
+                    <a href="/" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-200/80 dark:bg-teal-950/40 dark:text-teal-300 dark:border-teal-500/30 transition-all duration-200 shadow-2xs">
+                        <span>Profile</span>
+                    </a>
+                    <a href="https://blog.brokolidev.com" class="px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-all duration-200">
                         <span>Blog</span>
                     </a>
 
