@@ -170,23 +170,14 @@
                 </a>
 
                 <!-- Navigation Links & Theme Toggle -->
-                <nav class="flex items-center gap-1 sm:gap-2">
-                    <a href="#about" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-all duration-200">
-                        About
-                    </a>
-                    <a href="#ai-mindset" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-all duration-200">
-                        AI Perspective
-                    </a>
-                    <a href="#qa-archive" class="hidden sm:inline-block px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-all duration-200">
-                        Q&A
-                    </a>
+                <nav class="flex items-center gap-2">
                     <a href="https://blog.brokolidev.com" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-200/80 hover:bg-teal-100 hover:border-teal-300 dark:bg-teal-950/40 dark:text-teal-300 dark:border-teal-500/30 dark:hover:bg-teal-900/60 transition-all duration-200 shadow-2xs">
                         <span>Blog</span>
                         <i class="fas fa-arrow-up-right-from-square text-[10px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
                     </a>
 
                     <!-- Theme Toggle -->
-                    <button type="button" id="theme-toggle" aria-label="Toggle theme" class="ml-1 group flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-zinc-900 hover:shadow-xs dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100 cursor-pointer active:scale-95">
+                    <button type="button" id="theme-toggle" aria-label="Toggle theme" class="group flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-zinc-900 hover:shadow-xs dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100 cursor-pointer active:scale-95">
                         <i class="fas fa-sun hidden dark:block text-amber-400 text-xs transition-transform duration-300 group-hover:rotate-45"></i>
                         <i class="fas fa-moon block dark:hidden text-zinc-600 text-xs transition-transform duration-300 group-hover:-rotate-12"></i>
                     </button>
