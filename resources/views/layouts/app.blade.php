@@ -165,10 +165,7 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 pt-6">
             <div class="mx-auto max-w-2xl lg:max-w-4xl flex items-center justify-between">
                 <!-- Brand / Logo -->
-                <a href="/" class="group flex items-center gap-2 text-zinc-900 dark:text-zinc-100 font-bold text-sm tracking-tight transition-transform duration-200 hover:scale-105">
-                    <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-teal-500/10 border border-teal-500/20 text-teal-600 dark:text-teal-400 font-mono text-xs shadow-xs">
-                        🥦
-                    </span>
+                <a href="/" class="group flex items-center text-zinc-900 dark:text-zinc-100 font-bold text-base tracking-tight transition-opacity duration-200 hover:opacity-80">
                     <span>brokoli<span class="text-teal-600 dark:text-teal-400 font-semibold">.dev</span></span>
                 </a>
 
@@ -206,19 +203,17 @@
                     <div class="mx-auto max-w-2xl lg:max-w-4xl">
                         <!-- Profile Header -->
                         <div id="about" class="animate-fade-in-up [animation-delay:100ms] flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 pb-12 border-b border-zinc-200 dark:border-zinc-800">
-                            <div class="flex items-start gap-5">
-                                <img src="{{ asset('/img/profile.png') }}" alt="Ted Choi - Software Engineer" class="h-20 w-20 sm:h-24 sm:w-24 shrink-0 transition-transform duration-300 hover:scale-105" />
-                                <div>
-                                    <div class="flex items-center gap-2.5">
-                                        <h1 id="hero-name" class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 cursor-default">Ted Choi</h1>
-                                        <span class="inline-flex items-center gap-1.5 rounded-md bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-700/10 dark:bg-teal-400/10 dark:text-teal-400 dark:ring-teal-400/20">
-                                            <span class="relative flex h-1.5 w-1.5">
-                                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                                                <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-teal-500"></span>
-                                            </span>
-                                            Active
+                            <div>
+                                <div class="flex items-center gap-2.5">
+                                    <h1 id="hero-name" class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 cursor-default">Ted Choi</h1>
+                                    <span class="inline-flex items-center gap-1.5 rounded-md bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-700/10 dark:bg-teal-400/10 dark:text-teal-400 dark:ring-teal-400/20">
+                                        <span class="relative flex h-1.5 w-1.5">
+                                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                                            <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-teal-500"></span>
                                         </span>
-                                    </div>
+                                        Active
+                                    </span>
+                                </div>
                                     <div class="flex flex-wrap items-center gap-y-1 gap-x-3 text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 font-mono">
                                         <span class="inline-flex items-center gap-1.5 cursor-default group/role">
                                             <i class="fas fa-code text-teal-600 dark:text-teal-400 text-xs animate-glitch"></i>
@@ -246,7 +241,6 @@
                                         <span class="inline-flex items-center rounded-full bg-zinc-100 dark:bg-zinc-800/90 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-105 active:scale-95 transition-all duration-200 cursor-default shadow-xs">music</span>
                                     </div>
                                 </div>
-                            </div>
                             <!-- Social Connects -->
                             <div class="flex items-center justify-end gap-2">
                                 <a href="https://github.com/brokolidev" target="_blank" rel="noopener noreferrer" class="group flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-zinc-900 hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100 active:scale-95" aria-label="GitHub">
