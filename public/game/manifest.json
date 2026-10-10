@@ -1,0 +1,66 @@
+{
+  "name": "Squishy Dumpling Heist",
+  "engine": "sprite-gen",
+  "spec_version": "2.5.3",
+  "author": "Hyunseung Choi",
+  "frame_layout": {
+    "cell_width": 64,
+    "cell_height": 64,
+    "unit": "pixels"
+  },
+  "states": {
+    "player_idle": {
+      "breathe": {
+        "depth": 0.07,
+        "breaths": 2,
+        "lag": 0.10,
+        "rigid_row": 24,
+        "anatomy": {
+          "height": 48,
+          "rigid_row": 24,
+          "axis_x": 32,
+          "torso_half": 14,
+          "max_half": 18,
+          "basis_row": 44
+        }
+      },
+      "fps": 4
+    },
+    "player_walk": {
+      "fps": 8,
+      "waddle": {
+        "tilt": 0.12,
+        "bob": 5,
+        "squash": 0.06
+      }
+    },
+    "dumpling_idle": {
+      "breathe": {
+        "depth": 0.09,
+        "breaths": 1,
+        "lag": 0.14,
+        "rigid_row": 16,
+        "anatomy": {
+          "height": 38,
+          "rigid_row": 16,
+          "axis_x": 32,
+          "torso_half": 16,
+          "max_half": 20,
+          "basis_row": 36
+        }
+      },
+      "fps": 4
+    },
+    "dumpling_carried": {
+      "breathe": {
+        "depth": 0.12,
+        "breaths": 2,
+        "lag": 0.10
+      },
+      "jiggle": {
+        "stiffness": 220,
+        "damping": 10
+      }
+    }
+  }
+}

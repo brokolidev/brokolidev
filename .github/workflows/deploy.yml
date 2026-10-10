@@ -47,6 +47,7 @@ jobs:
           cp public/favicon.ico dist/ 2>/dev/null || true
           cp public/robots.txt dist/ 2>/dev/null || true
           cp public/sitemap.xml dist/ 2>/dev/null || true
+          cp -r public/game dist/ 2>/dev/null || true
 
       - name: Deploy to Cloudflare Pages
         env:
