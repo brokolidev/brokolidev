@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>🥚 Squishy Egg Hatchery Heist! - Kids Adventure Game</title>
+  <title>🦊 꼬마 여우 루루와 신비한 알 구출 작전! - Kids 2D Adventure</title>
   <script>
     if (window.location.protocol.startsWith('http') && (window.location.pathname === '/game' || window.location.pathname.startsWith('/game/'))) {
       const base = document.createElement('base');
@@ -11,15 +11,15 @@
       document.head.appendChild(base);
     }
   </script>
-  <link rel="stylesheet" href="style.css?v=3.0">
+  <link rel="stylesheet" href="style.css?v=4.0">
 </head>
 <body>
   <div class="game-container">
     <!-- Header HUD -->
     <header class="header-hud">
       <div class="logo-area">
-        <span style="font-size: 28px;">🥚</span>
-        <h1 class="game-title">🥚 신비한 알 구출 & 부화 대작전!</h1>
+        <span style="font-size: 28px;">🦊</span>
+        <h1 class="game-title">🦊 꼬마 여우의 신비한 알 부화 모험!</h1>
       </div>
       <div class="status-badges">
         <div class="badge" id="stageBadge">
@@ -41,7 +41,7 @@
 
     <!-- Guide Instruction & Squish Slider Banner -->
     <div class="guide-banner">
-      <span id="guideMsg">🥚 잠든 신비한 알을 둥지로 구출해오세요! 따뜻하게 품어주면 부화해요!</span>
+      <span id="guideMsg">🦊 꼬마 여우 루루: 귀여운 토끼 순찰대의 랜턴 빛을 피해 신비한 알을 둥지로 데려오세요!</span>
       <div class="slider-control">
         <label for="squishSlider">🌊 말랑함(Squish):</label>
         <input type="range" id="squishSlider" min="0.5" max="2.6" step="0.1" value="1.4">
@@ -58,17 +58,17 @@
       <!-- Start Game Overlay -->
       <div id="startOverlay" class="overlay">
         <div class="modal-box">
-          <div style="font-size: 54px; animation: bounce 1.2s infinite alternate;">🥚✨🐣</div>
-          <h2 class="modal-title">알 구출 & 부화 대작전!</h2>
+          <div style="font-size: 54px; animation: bounce 1.2s infinite alternate;">🦊🌿🥚🐣</div>
+          <h2 class="modal-title">꼬마 여우 루루와 신비한 알 구출 작전!</h2>
           <p class="modal-desc">
-            꼬마 모험가 <b>루루(Little Fox)</b>와 함께 잠든 <b>신비한 알</b>들을 머리에 업고 <b>아지트 둥지</b>로 데려오세요! 둥지에 놓아두면 잠시 후 알이 꿈틀거리며 <b>귀여운 아기 동물들(병아리 삐약이, 아기용 루비뇽, 아기공룡 롱이, 꼬마펭귄 핑구)</b>로 부화하여 둥지를 자유롭게 뛰어놀아요!
+            귀여운 꼬마 여우 <b>루루(Lulu)</b>와 함께 초원 곳곳에 놓인 <b>신비한 알</b>들을 조심스럽게 안고 <b>따뜻한 아지트 둥지</b>로 데려오세요! 둥지에 놓아두면 잠시 후 알이 톡톡 깨지며 <b>사랑스러운 아기 동물들(아기새 삐약이, 아기용 루비뇽, 아기공룡 롱이, 꼬마펭귄 핑구, 아기별 슬라임)</b>로 부화하여 둥지를 자유롭게 뛰어놀아요!
           </p>
           <div class="control-tips">
             <b>🕹️ 신나는 조작법:</b><br>
             • 이동: <b>키보드 방향키</b> 또는 <b>W, A, S, D</b> (또는 아래 터치 버튼)<br>
-            • 알에게 다가가면 머리 위에 업혀요! <b>아지트 둥지</b>로 쏙 데려오기!<br>
-            • 둥지에서 잠시 기다리면 <b>알이 톡톡 깨지며 사랑스러운 아기 동물</b>이 탄생해요!<br>
-            • 셰프 아저씨의 <b>노란색 탐색 조명</b>을 조심조심 피하세요!
+            • 알에게 다가가면 양손으로 소중히 안아요! <b>아지트 둥지</b>로 쏙 데려오기!<br>
+            • 둥지에서 잠시 기다리면 <b>알이 톡톡 깨지며 아기 동물</b>이 부화해요!<br>
+            • 호기심 많은 <b>토끼 순찰대(버니)</b>의 <b>따뜻한 등불(랜턴) 빛</b>을 조심조심 피하세요!
           </div>
           <button id="startBtn" class="primary-btn">모험 시작하기! 🚀 (Start)</button>
         </div>
@@ -111,10 +111,10 @@
   </div>
 
   <!-- Scripts with cache busters -->
-  <script src="sprite-gen/sprite_gen/serve/curator/src/breathe.js?v=3.0"></script>
-  <script src="js/audio.js?v=3.0"></script>
-  <script src="js/sprite_animator.js?v=3.0"></script>
-  <script src="js/renderer.js?v=3.0"></script>
-  <script src="js/game.js?v=3.0"></script>
+  <script src="sprite-gen/sprite_gen/serve/curator/src/breathe.js?v=4.0"></script>
+  <script src="js/audio.js?v=4.0"></script>
+  <script src="js/sprite_animator.js?v=4.0"></script>
+  <script src="js/renderer.js?v=4.0"></script>
+  <script src="js/game.js?v=4.0"></script>
 </body>
 </html>

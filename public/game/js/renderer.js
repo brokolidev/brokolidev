@@ -106,21 +106,88 @@ class GameRenderer {
     ctx.restore();
   }
 
-  // Draw warm kitchen checkerboard flooring
+  // Draw cute 2D storybook garden meadow flooring with wildflowers & stepping stones
   drawEnvironment(width, height) {
     const ctx = this.ctx;
-    const tileSize = 48;
+    const tileSize = 44;
+
+    // 1. Soft Grass Checker Tiles
     for (let y = 0; y < height; y += tileSize) {
       for (let x = 0; x < width; x += tileSize) {
         const isLight = ((x / tileSize) + (y / tileSize)) % 2 === 0;
-        ctx.fillStyle = isLight ? '#FFFDF5' : '#FFF3DE';
+        ctx.fillStyle = isLight ? '#8CD668' : '#7EC85A';
         ctx.fillRect(x, y, tileSize, tileSize);
 
-        ctx.strokeStyle = 'rgba(235, 215, 190, 0.45)';
+        ctx.strokeStyle = 'rgba(95, 175, 65, 0.28)';
         ctx.lineWidth = 1;
         ctx.strokeRect(x, y, tileSize, tileSize);
       }
     }
+
+    // 2. Cute Cobblestone Stepping Stones winding through the garden
+    const stones = [
+      { x: 130, y: 460, r: 16 }, { x: 175, y: 420, r: 14 }, { x: 230, y: 390, r: 15 },
+      { x: 290, y: 340, r: 17 }, { x: 370, y: 310, r: 15 }, { x: 440, y: 280, r: 18 },
+      { x: 520, y: 240, r: 15 }, { x: 590, y: 190, r: 16 }, { x: 660, y: 140, r: 17 }
+    ];
+    stones.forEach(s => {
+      ctx.beginPath();
+      ctx.ellipse(s.x, s.y + 2, s.r + 2, s.r * 0.7 + 2, 0.2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(70, 130, 40, 0.25)';
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.ellipse(s.x, s.y, s.r, s.r * 0.7, 0.2, 0, Math.PI * 2);
+      ctx.fillStyle = '#F4EAD4';
+      ctx.fill();
+      ctx.strokeStyle = '#D8C3A5';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Stone highlight
+      ctx.beginPath();
+      ctx.ellipse(s.x - 3, s.y - 2, s.r * 0.4, s.r * 0.25, 0.2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+      ctx.fill();
+    });
+
+    // 3. Adorable Wildflowers & Clover Tufts across the meadow
+    const flowers = [
+      { x: 80, y: 120, type: 'daisy' }, { x: 160, y: 80, type: 'pink' },
+      { x: 220, y: 530, type: 'clover' }, { x: 360, y: 80, type: 'daisy' },
+      { x: 480, y: 170, type: 'blue' }, { x: 540, y: 490, type: 'pink' },
+      { x: 670, y: 240, type: 'clover' }, { x: 740, y: 390, type: 'daisy' },
+      { x: 750, y: 80, type: 'pink' }, { x: 430, y: 540, type: 'daisy' },
+      { x: 120, y: 240, type: 'clover' }, { x: 620, y: 550, type: 'blue' }
+    ];
+
+    flowers.forEach(f => {
+      if (f.type === 'clover') {
+        // Little 3-leaf clover
+        ctx.fillStyle = '#40916C';
+        for (let a = 0; a < 3; a++) {
+          const ang = a * (Math.PI * 2 / 3) - Math.PI / 2;
+          ctx.beginPath();
+          ctx.arc(f.x + Math.cos(ang) * 4, f.y + Math.sin(ang) * 4, 3.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      } else {
+        // Cute 5-petal flower
+        const petalColor = f.type === 'pink' ? '#FFB5A7' : (f.type === 'blue' ? '#A2D2FF' : '#FFFFFF');
+        ctx.fillStyle = petalColor;
+        for (let a = 0; a < 5; a++) {
+          const ang = a * (Math.PI * 2 / 5);
+          ctx.beginPath();
+          ctx.arc(f.x + Math.cos(ang) * 4.5, f.y + Math.sin(ang) * 4.5, 3.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        // Center
+        ctx.beginPath();
+        ctx.arc(f.x, f.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#FFD166';
+        ctx.fill();
+      }
+    });
   }
 
   // Draw Safe Base (Cozy Golden Nest & Incubator)
@@ -134,7 +201,7 @@ class GameRenderer {
     // Drop shadow
     ctx.beginPath();
     ctx.arc(x, y + 6, r + 6, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.10)';
+    ctx.fillStyle = 'rgba(30, 70, 20, 0.25)';
     ctx.fill();
 
     // Outer Straw Nest Weave Ring
@@ -177,7 +244,7 @@ class GameRenderer {
     ctx.textAlign = 'center';
     ctx.fillText(`🪺 아지트 둥지 (Cozy Nest) · 🐣 ${totalHatched}/${totalEggs}`, x, y + r + 20);
 
-    // Steam particles
+    // Steam & warm sparkle particles
     if (Math.random() < 0.2) {
       this.addParticle({
         x: x + (Math.random() - 0.5) * (r * 1.2),
@@ -196,67 +263,140 @@ class GameRenderer {
     ctx.restore();
   }
 
-  // Draw kitchen furniture obstacles
+  // Draw cute 2D garden obstacles (Tree Stumps, Mushroom Tables, Planters, Honey Pots)
   drawObstacle(obs) {
     const ctx = this.ctx;
     ctx.save();
 
-    // Drop shadow
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-    ctx.fillRect(obs.x + 4, obs.y + 6, obs.w, obs.h);
+    // Soft garden drop shadow
+    ctx.fillStyle = 'rgba(40, 90, 30, 0.22)';
+    this.roundRect(ctx, obs.x + 4, obs.y + 8, obs.w, obs.h, 14);
+    ctx.fill();
 
-    if (obs.type === 'cutting_board') {
-      ctx.fillStyle = '#E3B278';
-      this.roundRect(ctx, obs.x, obs.y, obs.w, obs.h, 12);
+    if (obs.type === 'mushroom') {
+      // 🍄 Cute Red Polka-dot Mushroom Table
+      // Stem
+      ctx.fillStyle = '#FDF0D5';
+      this.roundRect(ctx, obs.x + obs.w * 0.3, obs.y + obs.h * 0.4, obs.w * 0.4, obs.h * 0.6, 8);
       ctx.fill();
-      ctx.strokeStyle = '#B88247';
-      ctx.lineWidth = 3;
-      ctx.stroke();
-
-      // Handle hole
-      ctx.beginPath();
-      ctx.arc(obs.x + 16, obs.y + obs.h / 2, 6, 0, Math.PI * 2);
-      ctx.fillStyle = '#FFF5E4';
-      ctx.fill();
-      ctx.stroke();
-
-      // Sliced carrot
-      ctx.beginPath();
-      ctx.arc(obs.x + obs.w - 24, obs.y + obs.h / 2, 10, 0, Math.PI * 2);
-      ctx.fillStyle = '#FF7A30';
-      ctx.fill();
-      ctx.strokeStyle = '#D65612';
+      ctx.strokeStyle = '#DDA15E';
       ctx.lineWidth = 2;
       ctx.stroke();
-    } else if (obs.type === 'teacup') {
+
+      // Red Cap
       ctx.beginPath();
-      ctx.arc(obs.x + obs.w / 2, obs.y + obs.h / 2, obs.w / 2, 0, Math.PI * 2);
-      ctx.fillStyle = '#89CFF0';
+      ctx.arc(obs.x + obs.w / 2, obs.y + obs.h * 0.45, obs.w * 0.52, Math.PI, 0);
+      ctx.closePath();
+      ctx.fillStyle = '#E63946';
       ctx.fill();
-      ctx.strokeStyle = '#5AA0D4';
+      ctx.strokeStyle = '#9D0208';
       ctx.lineWidth = 3;
       ctx.stroke();
 
+      // White Polka Dots
+      ctx.fillStyle = '#FFFFFF';
       ctx.beginPath();
-      ctx.arc(obs.x + obs.w / 2, obs.y + obs.h / 2, obs.w / 2 - 6, 0, Math.PI * 2);
-      ctx.fillStyle = '#98D8AA';
+      ctx.arc(obs.x + obs.w / 2, obs.y + obs.h * 0.22, 6, 0, Math.PI * 2);
+      ctx.arc(obs.x + obs.w * 0.26, obs.y + obs.h * 0.35, 4.5, 0, Math.PI * 2);
+      ctx.arc(obs.x + obs.w * 0.74, obs.y + obs.h * 0.35, 4.5, 0, Math.PI * 2);
       ctx.fill();
+    } else if (obs.type === 'planter' || obs.type === 'cutting_board') {
+      // 🌷 Cute Wooden Flower Planter Box
+      ctx.fillStyle = '#B07D62';
+      this.roundRect(ctx, obs.x, obs.y + 12, obs.w, obs.h - 12, 8);
+      ctx.fill();
+      ctx.strokeStyle = '#6F4E37';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Wooden planks line
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(obs.x + 4, obs.y + 16, obs.w - 8, 4);
+
+      // Blooming Flowers & Leaves
+      const numFlowers = Math.max(2, Math.floor(obs.w / 28));
+      for (let i = 0; i < numFlowers; i++) {
+        const fx = obs.x + 16 + i * 26;
+        const fy = obs.y + 10;
+        // Green leaves
+        ctx.fillStyle = '#52B788';
+        ctx.beginPath();
+        ctx.ellipse(fx - 4, fy + 2, 6, 3, -0.4, 0, Math.PI * 2);
+        ctx.ellipse(fx + 4, fy + 2, 6, 3, 0.4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Flower Blossom
+        const colors = ['#FF4D6D', '#FFB703', '#9D4EDD', '#4CC9F0'];
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.beginPath();
+        ctx.arc(fx, fy - 2, 7, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#FFF';
+        ctx.beginPath();
+        ctx.arc(fx, fy - 2, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    } else if (obs.type === 'honey_pot' || obs.type === 'teacup') {
+      // 🍯 Cute Golden Clay Honey Pot
+      const cx = obs.x + obs.w / 2;
+      const cy = obs.y + obs.h / 2;
+      ctx.beginPath();
+      ctx.arc(cx, cy, obs.w / 2 - 2, 0, Math.PI * 2);
+      ctx.fillStyle = '#E76F51';
+      ctx.fill();
+      ctx.strokeStyle = '#9C412C';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Honey dripping
+      ctx.beginPath();
+      ctx.arc(cx, cy - 4, obs.w / 2 - 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFB703';
+      ctx.fill();
+
+      // Cute Little Bee
+      ctx.fillStyle = '#FFD166';
+      ctx.beginPath();
+      ctx.ellipse(cx + 8, cy - 14, 5, 3.5, 0.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#000';
+      ctx.fillRect(cx + 7, cy - 17, 1.5, 6);
     } else {
-      ctx.fillStyle = '#D4A373';
-      this.roundRect(ctx, obs.x, obs.y, obs.w, obs.h, 8);
+      // 🪵 Woody Tree Stump with Growth Rings & Moss
+      ctx.fillStyle = '#8B5A2B';
+      this.roundRect(ctx, obs.x, obs.y, obs.w, obs.h, 12);
       ctx.fill();
-      ctx.strokeStyle = '#9C6644';
+      ctx.strokeStyle = '#5C3A1E';
       ctx.lineWidth = 3;
       ctx.stroke();
 
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
-      ctx.fillRect(obs.x + 3, obs.y + 3, obs.w - 6, 6);
+      // Top wood cut surface
+      ctx.fillStyle = '#D4A373';
+      this.roundRect(ctx, obs.x + 4, obs.y + 4, obs.w - 8, obs.h - 8, 8);
+      ctx.fill();
+
+      // Growth Rings
+      ctx.strokeStyle = 'rgba(140, 90, 50, 0.45)';
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.ellipse(obs.x + obs.w / 2, obs.y + obs.h / 2, obs.w * 0.32, obs.h * 0.28, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.ellipse(obs.x + obs.w / 2, obs.y + obs.h / 2, obs.w * 0.16, obs.h * 0.14, 0, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Cute little green sprout leaf
+      ctx.fillStyle = '#70E000';
+      ctx.beginPath();
+      ctx.ellipse(obs.x + 16, obs.y + 6, 6, 3, -0.6, 0, Math.PI * 2);
+      ctx.fill();
     }
 
     ctx.restore();
   }
 
-  // Draw NPC Vision Light Cone
+  // Draw Bunny Guard Lantern Light Beam
   drawNPCVisionCone(npc) {
     const ctx = this.ctx;
     ctx.save();
@@ -266,21 +406,30 @@ class GameRenderer {
     const coneDist = npc.visionDistance || 145;
     const facing = npc.facingAngle || 0;
 
+    // Glowing warm lantern cone gradient
+    const grad = ctx.createRadialGradient(0, 0, 8, 0, 0, coneDist);
+    if (npc.isAlerted) {
+      grad.addColorStop(0, 'rgba(255, 77, 109, 0.65)');
+      grad.addColorStop(0.7, 'rgba(255, 77, 109, 0.35)');
+      grad.addColorStop(1, 'rgba(255, 77, 109, 0.02)');
+      ctx.strokeStyle = 'rgba(255, 77, 109, 0.85)';
+    } else {
+      grad.addColorStop(0, 'rgba(255, 230, 109, 0.55)');
+      grad.addColorStop(0.7, 'rgba(255, 215, 0, 0.25)');
+      grad.addColorStop(1, 'rgba(255, 215, 0, 0.01)');
+      ctx.strokeStyle = 'rgba(255, 215, 0, 0.7)';
+    }
+
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.arc(0, 0, coneDist, facing - coneAngle / 2, facing + coneAngle / 2);
     ctx.closePath();
-
-    if (npc.isAlerted) {
-      ctx.fillStyle = 'rgba(255, 59, 48, 0.32)';
-      ctx.strokeStyle = 'rgba(255, 59, 48, 0.7)';
-    } else {
-      ctx.fillStyle = 'rgba(255, 215, 0, 0.22)';
-      ctx.strokeStyle = 'rgba(255, 215, 0, 0.55)';
-    }
+    ctx.fillStyle = grad;
     ctx.fill();
     ctx.lineWidth = 2;
+    if (typeof ctx.setLineDash === 'function') ctx.setLineDash([6, 6]);
     ctx.stroke();
+    if (typeof ctx.setLineDash === 'function') ctx.setLineDash([]);
 
     ctx.restore();
   }
@@ -823,64 +972,514 @@ class GameRenderer {
   }
 
   /**
-   * Synchronizes 2D animated sprites from aldegad/sprite-gen with game entity states.
+   * Synchronizes 2D animated sprites (all characters rendered natively on Canvas 2D).
    */
   syncDOMSprites(player, eggsList, npcs, gameTime) {
-    if (!this.spriteLayer) return;
-    const eggs = eggsList || [];
+    if (this.spriteLayer && this.spriteLayer.innerHTML !== '') {
+      this.spriteLayer.innerHTML = '';
+    }
+  }
 
-    // Automatically synchronize scale with canvas responsive display size
-    if (this.canvas.clientWidth > 0 && this.canvas.width > 0) {
-      const scale = this.canvas.clientWidth / this.canvas.width;
-      this.spriteLayer.style.transform = `scale(${scale})`;
-      this.spriteLayer.style.transformOrigin = 'top left';
-      this.spriteLayer.style.width = `${this.canvas.width}px`;
-      this.spriteLayer.style.height = `${this.canvas.height}px`;
+  // Draw Super Cute 2D Fox Hero (Player)
+  drawFoxPlayer(player, gameTime) {
+    const ctx = this.ctx;
+    const isMoving = player.speed > 5;
+    const runCycle = player.walkDistance * 0.16;
+    const bobY = isMoving ? -Math.abs(Math.sin(runCycle)) * 7 : Math.sin(gameTime * 2.5) * 1.5;
+    const tilt = isMoving ? Math.sin(runCycle) * 0.08 : 0;
+    const facingLeft = player.facing === 'left';
+    const breathe = this.animator.getBreatheDeformation(gameTime, 1.4, 0.08);
+
+    // Blinking eye timer
+    const blinkCycle = (gameTime * 0.6) % 3.5;
+    const isBlinking = blinkCycle < 0.14;
+
+    ctx.save();
+    ctx.translate(player.x, player.y + bobY);
+    if (facingLeft) ctx.scale(-1, 1);
+    ctx.rotate(player.isCaught ? player.dizzyAngle : tilt);
+    ctx.scale(breathe.sx, breathe.sy);
+
+    // 1. Soft ground shadow
+    ctx.save();
+    ctx.translate(0, -bobY);
+    ctx.beginPath();
+    ctx.ellipse(0, 18, 16, 7, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(30, 70, 20, 0.22)';
+    ctx.fill();
+    ctx.restore();
+
+    // 2. Giant Bushy Fox Tail with White Tip
+    const tailSway = isMoving ? Math.sin(runCycle * 1.2) * 0.38 - 0.2 : Math.sin(gameTime * 3) * 0.15 - 0.15;
+    ctx.save();
+    ctx.translate(-10, 2);
+    ctx.rotate(tailSway);
+
+    // Main orange tail
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo(-12, -8, -26, 4, -28, 14);
+    ctx.bezierCurveTo(-26, 26, -10, 24, 0, 10);
+    ctx.closePath();
+    ctx.fillStyle = '#FF7A18';
+    ctx.fill();
+    ctx.strokeStyle = '#D95800';
+    ctx.lineWidth = 1.8;
+    ctx.stroke();
+
+    // Fluffy white tip of tail
+    ctx.beginPath();
+    ctx.moveTo(-20, 8);
+    ctx.bezierCurveTo(-26, 4, -28, 14, -22, 22);
+    ctx.bezierCurveTo(-18, 18, -16, 12, -20, 8);
+    ctx.closePath();
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fill();
+    ctx.restore();
+
+    // 3. Cute Fox Feet taking steps
+    const lFootY = isMoving ? Math.sin(runCycle * 2) * 4 : 0;
+    const rFootY = isMoving ? -Math.sin(runCycle * 2) * 4 : 0;
+    ctx.fillStyle = '#4A2810';
+    ctx.beginPath();
+    ctx.ellipse(-6, 16 + lFootY, 4.5, 3, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(6, 16 + rFootY, 4.5, 3, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 4. Round Fluffy Fox Body
+    ctx.beginPath();
+    ctx.arc(0, 2, 17, 0, Math.PI * 2);
+    ctx.fillStyle = '#FF7A18';
+    ctx.fill();
+    ctx.strokeStyle = '#D95800';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // White Chest Bib
+    ctx.beginPath();
+    ctx.ellipse(0, 6, 11, 9, 0, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFFDF5';
+    ctx.fill();
+
+    // 5. Fox Head with Fluffy Cheek Tufts
+    ctx.beginPath();
+    ctx.arc(0, -6, 16, 0, Math.PI * 2);
+    ctx.fillStyle = '#FF8C2B';
+    ctx.fill();
+    ctx.strokeStyle = '#D95800';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // White cheek tufts
+    ctx.fillStyle = '#FFFDF5';
+    ctx.beginPath();
+    ctx.moveTo(-16, -4);
+    ctx.lineTo(-22, -1);
+    ctx.lineTo(-15, 6);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(16, -4);
+    ctx.lineTo(22, -1);
+    ctx.lineTo(15, 6);
+    ctx.closePath();
+    ctx.fill();
+
+    // 6. Pointy Triangular Fox Ears with Pink Interior & Dark Tips
+    // Left ear
+    ctx.beginPath();
+    ctx.moveTo(-12, -16);
+    ctx.lineTo(-17, -32);
+    ctx.lineTo(-3, -20);
+    ctx.closePath();
+    ctx.fillStyle = '#FF7A18';
+    ctx.fill();
+    ctx.strokeStyle = '#D95800';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.fillStyle = '#3D1E0B';
+    ctx.beginPath();
+    ctx.moveTo(-15, -28);
+    ctx.lineTo(-17, -32);
+    ctx.lineTo(-10, -25);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = '#FFCAD4';
+    ctx.beginPath();
+    ctx.moveTo(-11, -17);
+    ctx.lineTo(-14, -27);
+    ctx.lineTo(-5, -20);
+    ctx.closePath();
+    ctx.fill();
+
+    // Right ear
+    ctx.beginPath();
+    ctx.moveTo(3, -20);
+    ctx.lineTo(17, -32);
+    ctx.lineTo(12, -16);
+    ctx.closePath();
+    ctx.fillStyle = '#FF7A18';
+    ctx.fill();
+    ctx.strokeStyle = '#D95800';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.fillStyle = '#3D1E0B';
+    ctx.beginPath();
+    ctx.moveTo(10, -25);
+    ctx.lineTo(17, -32);
+    ctx.lineTo(15, -28);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = '#FFCAD4';
+    ctx.beginPath();
+    ctx.moveTo(5, -20);
+    ctx.lineTo(14, -27);
+    ctx.lineTo(11, -17);
+    ctx.closePath();
+    ctx.fill();
+
+    // 7. Sparkling Fox Face
+    if (player.isCaught) {
+      // Dizzy spiral eyes
+      ctx.strokeStyle = '#2B1B17';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(-6, -6, 4, 0, Math.PI * 2);
+      ctx.moveTo(-6, -6);
+      ctx.lineTo(-3, -6);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(6, -6, 4, 0, Math.PI * 2);
+      ctx.moveTo(6, -6);
+      ctx.lineTo(9, -6);
+      ctx.stroke();
+    } else if (isBlinking || player.carriedEgg) {
+      // Happy squint eyes: ^ ^
+      ctx.strokeStyle = '#2B1B17';
+      ctx.lineWidth = 2.4;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.arc(-6, -6, 4, Math.PI, 0);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(6, -6, 4, Math.PI, 0);
+      ctx.stroke();
+    } else {
+      // Big sparkling anime eyes
+      ctx.beginPath();
+      ctx.ellipse(-6, -6, 4, 5, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#2B1B17';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(-7, -8, 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(-5, -4, 0.9, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.ellipse(6, -6, 4, 5, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#2B1B17';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(5, -8, 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(7, -4, 0.9, 0, Math.PI * 2);
+      ctx.fill();
     }
 
-    // 1. Sync Player: attack-fox-hood.gif
-    if (player) {
-      const pSprite = this.getOrCreateSprite('player', 'sprite-gen/docs/assets/attack-fox-hood.gif');
-      if (pSprite) {
-        const isMoving = player.speed > 5;
-        const walkAnim = isMoving ? this.animator.getWalkCycle(player.walkDistance, player.speed) : { tilt: 0, bobY: 0, scaleX: 1, scaleY: 1 };
-        const breathe = isMoving ? { sx: 1, sy: 1 } : this.animator.getBreatheDeformation(gameTime, 1.4, 0.08);
+    // Rosy blushing cheeks
+    ctx.fillStyle = 'rgba(255, 105, 135, 0.55)';
+    ctx.beginPath();
+    ctx.ellipse(-10, -1, 3.5, 2.2, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(10, -1, 3.5, 2.2, 0, 0, Math.PI * 2);
+    ctx.fill();
 
-        const w = 72;
-        const h = 68;
-        pSprite.style.width = `${w}px`;
-        pSprite.style.height = `${h}px`;
-        pSprite.style.left = `${player.x - w / 2}px`;
-        pSprite.style.top = `${player.y - h + 16}px`;
+    // Cute little black button nose
+    ctx.fillStyle = '#1A1A1A';
+    ctx.beginPath();
+    ctx.ellipse(0, -1, 2.4, 1.6, 0, 0, Math.PI * 2);
+    ctx.fill();
 
-        const flip = player.facing === 'left' ? -1 : 1;
-        const rot = player.isCaught ? player.dizzyAngle : walkAnim.tilt;
+    // Adorable cat mouth: ω
+    ctx.strokeStyle = '#2B1B17';
+    ctx.lineWidth = 1.6;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.arc(-2.2, 2.2, 2.2, 0, Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(2.2, 2.2, 2.2, 0, Math.PI);
+    ctx.stroke();
 
-        pSprite.style.transform = `scaleX(${flip}) translateY(${walkAnim.bobY}px) scale(${walkAnim.scaleX * breathe.sx}, ${walkAnim.scaleY * breathe.sy}) rotate(${rot}rad)`;
-        pSprite.style.display = 'block';
-      }
+    // 8. Front Paws holding egg up if carrying
+    if (player.carriedEgg) {
+      ctx.fillStyle = '#4A2810';
+      ctx.beginPath();
+      ctx.ellipse(-8, -14, 4, 3, -0.4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(8, -14, 4, 3, 0.4, 0, Math.PI * 2);
+      ctx.fill();
     }
 
-    // 2. Sync Patrolling Guard NPCs: attack-paladin.gif & attack-claudecy-samurai.gif
-    npcs.forEach((npc, idx) => {
-      const src = npc.role === 'dog' ? 'sprite-gen/docs/assets/attack-claudecy-samurai.gif' : 'sprite-gen/docs/assets/attack-paladin.gif';
-      const nSprite = this.getOrCreateSprite(`npc_${npc.id}`, src);
-      if (nSprite) {
-        const w = 68;
-        const h = 76;
-        nSprite.style.width = `${w}px`;
-        nSprite.style.height = `${h}px`;
-        nSprite.style.left = `${npc.x - w / 2}px`;
-        nSprite.style.top = `${npc.y - h + 18}px`;
+    ctx.restore();
+  }
 
-        const flip = Math.cos(npc.facingAngle) < 0 ? -1 : 1;
-        const alertPulse = npc.isAlerted ? 'drop-shadow(0 0 12px rgba(255, 59, 48, 0.9))' : 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25))';
-        nSprite.style.filter = alertPulse;
+  // Draw Super Cute Bunny Guard (Chaser NPC)
+  drawBunnyNPC(npc, gameTime) {
+    const ctx = this.ctx;
+    const facingLeft = Math.cos(npc.facingAngle) < 0;
+    const hopCycle = npc.walkDistance * 0.14;
+    const hopY = -Math.abs(Math.sin(hopCycle)) * 9;
+    const waddleTilt = Math.sin(hopCycle) * 0.08;
 
-        nSprite.style.transform = `scaleX(${flip})`;
-        nSprite.style.display = 'block';
-      }
-    });
+    // Bunny Theme Colors
+    const bType = npc.bunnyType || 'vanilla';
+    let furColor = '#FFFDF7';
+    let innerEarColor = '#FFCAD4';
+    let collarColor = '#FF6B8B';
+    let eyeColor = '#2B1B17';
+
+    if (bType === 'cocoa') {
+      furColor = '#DDB892';
+      innerEarColor = '#EDE0D4';
+      collarColor = '#7F5539';
+    } else if (bType === 'berry') {
+      furColor = '#E2D4F0';
+      innerEarColor = '#F3E8FF';
+      collarColor = '#9D4EDD';
+    }
+
+    ctx.save();
+    ctx.translate(npc.x, npc.y + hopY);
+    if (facingLeft) ctx.scale(-1, 1);
+    ctx.rotate(waddleTilt);
+
+    // 1. Soft ground shadow
+    ctx.save();
+    ctx.translate(0, -hopY);
+    ctx.beginPath();
+    const shadowScale = 1 - Math.min(0.5, Math.abs(hopY) / 18);
+    ctx.ellipse(0, 18, 16 * shadowScale, 7 * shadowScale, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(30, 70, 20, 0.22)';
+    ctx.fill();
+    ctx.restore();
+
+    // 2. Cotton-ball Bunny Tail
+    ctx.beginPath();
+    ctx.arc(-14, 6, 7, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.08)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // 3. Cute Bunny Feet
+    const lFootY = Math.sin(hopCycle * 2) * 3;
+    const rFootY = -Math.sin(hopCycle * 2) * 3;
+    ctx.fillStyle = furColor;
+    ctx.beginPath();
+    ctx.ellipse(-7, 16 + lFootY, 6, 3.5, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(7, 16 + rFootY, 6, 3.5, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 4. Chubby Round Bunny Body
+    ctx.beginPath();
+    ctx.arc(0, 2, 17, 0, Math.PI * 2);
+    ctx.fillStyle = furColor;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.12)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Soft White Belly
+    ctx.beginPath();
+    ctx.ellipse(0, 5, 11, 9, 0, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fill();
+
+    // Cute Collar & Bell Ribbon
+    ctx.fillStyle = collarColor;
+    this.roundRect(ctx, -10, -7, 20, 4, 2);
+    ctx.fill();
+    // Little golden bell
+    ctx.beginPath();
+    ctx.arc(0, -4, 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFD166';
+    ctx.fill();
+
+    // 5. Cute Round Bunny Head
+    ctx.beginPath();
+    ctx.arc(0, -9, 15, 0, Math.PI * 2);
+    ctx.fillStyle = furColor;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.12)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // 6. Long Floppy/Perky Bunny Ears
+    const earBounce = npc.isAlerted ? -0.1 : Math.sin(hopCycle) * 0.25;
+
+    // Left Ear
+    ctx.save();
+    ctx.translate(-7, -22);
+    ctx.rotate(-0.15 + earBounce);
+    ctx.beginPath();
+    ctx.ellipse(0, -14, 5.5, 16, 0, 0, Math.PI * 2);
+    ctx.fillStyle = furColor;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Left Inner Ear Pink
+    ctx.beginPath();
+    ctx.ellipse(0, -14, 3, 12, 0, 0, Math.PI * 2);
+    ctx.fillStyle = innerEarColor;
+    ctx.fill();
+    ctx.restore();
+
+    // Right Ear
+    ctx.save();
+    ctx.translate(7, -22);
+    ctx.rotate(0.15 - earBounce);
+    ctx.beginPath();
+    ctx.ellipse(0, -14, 5.5, 16, 0, 0, Math.PI * 2);
+    ctx.fillStyle = furColor;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Right Inner Ear Pink
+    ctx.beginPath();
+    ctx.ellipse(0, -14, 3, 12, 0, 0, Math.PI * 2);
+    ctx.fillStyle = innerEarColor;
+    ctx.fill();
+    ctx.restore();
+
+    // 7. Bunny Face: Big sparkling eyes & pink nose
+    ctx.beginPath();
+    ctx.ellipse(-5, -9, 3.5, 4.5, 0, 0, Math.PI * 2);
+    ctx.fillStyle = eyeColor;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(-6, -11, 1.6, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.ellipse(5, -9, 3.5, 4.5, 0, 0, Math.PI * 2);
+    ctx.fillStyle = eyeColor;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(4, -11, 1.6, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fill();
+
+    // Rosy Pink Cheeks
+    ctx.fillStyle = '#FFB5A7';
+    ctx.beginPath();
+    ctx.ellipse(-9, -5, 3.2, 2, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(9, -5, 3.2, 2, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Pink Y nose & mouth
+    ctx.fillStyle = '#FF758F';
+    ctx.beginPath();
+    ctx.ellipse(0, -5, 2.2, 1.6, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = '#2B1B17';
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    ctx.moveTo(0, -3.5);
+    ctx.lineTo(0, -1);
+    ctx.arc(-2, 0, 2, Math.PI * 1.5, 0);
+    ctx.moveTo(0, -1);
+    ctx.arc(2, 0, 2, Math.PI * 1.5, Math.PI);
+    ctx.stroke();
+
+    // Whiskers
+    ctx.strokeStyle = 'rgba(70, 50, 40, 0.4)';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(-7, -4); ctx.lineTo(-15, -6);
+    ctx.moveTo(-7, -2); ctx.lineTo(-15, -1);
+    ctx.moveTo(7, -4); ctx.lineTo(15, -6);
+    ctx.moveTo(7, -2); ctx.lineTo(15, -1);
+    ctx.stroke();
+
+    // 8. Cute Lantern held in front paw
+    ctx.save();
+    ctx.translate(11, 2);
+    ctx.fillStyle = '#B07D62';
+    this.roundRect(ctx, -4, -6, 8, 12, 2);
+    ctx.fill();
+    ctx.fillStyle = npc.isAlerted ? '#FF4D6D' : '#FFE066';
+    ctx.fillRect(-2.5, -4, 5, 8);
+    ctx.restore();
+
+    ctx.restore(); // restore transform
+
+    // 9. Alert Bubble (Carrot or Question Mark!)
+    ctx.save();
+    ctx.translate(npc.x, npc.y + hopY);
+    if (npc.isAlerted) {
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+      this.roundRect(ctx, -26, -58, 52, 22, 11);
+      ctx.fill();
+      ctx.strokeStyle = '#FF5722';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#E64A19';
+      ctx.font = 'bold 11px "Fredoka", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('🥕 발견!!', 0, -43);
+    } else if (npc.isSuspicious) {
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      this.roundRect(ctx, -20, -56, 40, 20, 10);
+      ctx.fill();
+      ctx.strokeStyle = '#FFB703';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#F57C00';
+      ctx.font = 'bold 11px "Fredoka", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('❓ 킁킁', 0, -42);
+    } else {
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      this.roundRect(ctx, -32, 24, 64, 18, 9);
+      ctx.fill();
+      ctx.strokeStyle = '#DDA15E';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#5A3E2B';
+      ctx.font = 'bold 10px "Fredoka", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(`🐰 ${npc.name || '버니'}`, 0, 36);
+    }
+    ctx.restore();
   }
 
   roundRect(ctx, x, y, w, h, r) {

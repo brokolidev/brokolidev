@@ -165,12 +165,12 @@ class DumplingGame {
       dizzyAngle: 0
     };
 
-    // Level 1: Beginner Kitchen (3 mysterious eggs, 1 slow chef)
+    // Level 1: Sunlit Meadow Garden (3 mysterious eggs, 1 curious vanilla bunny)
     if (levelIndex === 0) {
       this.obstacles = [
-        { x: 260, y: 140, w: 180, h: 60, type: 'counter' },
-        { x: 500, y: 320, w: 150, h: 70, type: 'cutting_board' },
-        { x: 300, y: 400, w: 50, h: 50, type: 'teacup' }
+        { x: 260, y: 140, w: 180, h: 60, type: 'planter' },
+        { x: 500, y: 320, w: 150, h: 70, type: 'mushroom' },
+        { x: 300, y: 400, w: 50, h: 50, type: 'honey_pot' }
       ];
 
       this.eggs = [
@@ -242,8 +242,10 @@ class DumplingGame {
 
       this.npcs = [
         {
-          id: 'chef1',
-          role: 'chef',
+          id: 'bunny1',
+          role: 'bunny',
+          name: '바닐라 버니',
+          bunnyType: 'vanilla',
           x: 400,
           y: 240,
           facingAngle: 0,
@@ -262,13 +264,13 @@ class DumplingGame {
         }
       ];
     }
-    // Level 2: Two Guards (Chef & Pug)
+    // Level 2: Enchanted Garden Path (Vanilla & Cocoa Bunnies)
     else if (levelIndex === 1) {
       this.obstacles = [
-        { x: 220, y: 120, w: 160, h: 50, type: 'counter' },
-        { x: 440, y: 240, w: 180, h: 50, type: 'cutting_board' },
-        { x: 240, y: 380, w: 180, h: 60, type: 'counter' },
-        { x: 620, y: 440, w: 50, h: 50, type: 'teacup' }
+        { x: 220, y: 120, w: 160, h: 50, type: 'planter' },
+        { x: 440, y: 240, w: 180, h: 50, type: 'mushroom' },
+        { x: 240, y: 380, w: 180, h: 60, type: 'stump' },
+        { x: 620, y: 440, w: 50, h: 50, type: 'honey_pot' }
       ];
 
       this.eggs = [
@@ -361,8 +363,10 @@ class DumplingGame {
 
       this.npcs = [
         {
-          id: 'chef1',
-          role: 'chef',
+          id: 'bunny1',
+          role: 'bunny',
+          name: '바닐라 버니',
+          bunnyType: 'vanilla',
           x: 300,
           y: 200,
           facingAngle: 0,
@@ -381,8 +385,10 @@ class DumplingGame {
           currentWp: 0
         },
         {
-          id: 'dog1',
-          role: 'dog',
+          id: 'bunny2',
+          role: 'bunny',
+          name: '초코 버니',
+          bunnyType: 'cocoa',
           x: 600,
           y: 360,
           facingAngle: Math.PI,
@@ -402,15 +408,15 @@ class DumplingGame {
         }
       ];
     }
-    // Level 3: Kitchen Master Grand Heist (Chef, Dog & Sleepy Panda)
+    // Level 3: Fairytale Secret Meadow (Vanilla, Cocoa & Berry Bunnies)
     else {
       this.obstacles = [
-        { x: 220, y: 100, w: 140, h: 50, type: 'counter' },
-        { x: 440, y: 100, w: 140, h: 50, type: 'cutting_board' },
-        { x: 240, y: 250, w: 120, h: 60, type: 'counter' },
-        { x: 500, y: 250, w: 150, h: 60, type: 'cutting_board' },
-        { x: 340, y: 420, w: 180, h: 55, type: 'counter' },
-        { x: 680, y: 440, w: 45, h: 45, type: 'teacup' }
+        { x: 220, y: 100, w: 140, h: 50, type: 'planter' },
+        { x: 440, y: 100, w: 140, h: 50, type: 'mushroom' },
+        { x: 240, y: 250, w: 120, h: 60, type: 'stump' },
+        { x: 500, y: 250, w: 150, h: 60, type: 'planter' },
+        { x: 340, y: 420, w: 180, h: 55, type: 'mushroom' },
+        { x: 680, y: 440, w: 45, h: 45, type: 'honey_pot' }
       ];
 
       this.eggs = [
@@ -524,8 +530,10 @@ class DumplingGame {
 
       this.npcs = [
         {
-          id: 'chef1',
-          role: 'chef',
+          id: 'bunny1',
+          role: 'bunny',
+          name: '바닐라 버니',
+          bunnyType: 'vanilla',
           x: 320,
           y: 180,
           facingAngle: 0,
@@ -542,8 +550,10 @@ class DumplingGame {
           currentWp: 0
         },
         {
-          id: 'dog1',
-          role: 'dog',
+          id: 'bunny2',
+          role: 'bunny',
+          name: '초코 버니',
+          bunnyType: 'cocoa',
           x: 650,
           y: 360,
           facingAngle: Math.PI,
@@ -561,8 +571,10 @@ class DumplingGame {
           currentWp: 0
         },
         {
-          id: 'panda1',
-          role: 'panda',
+          id: 'bunny3',
+          role: 'bunny',
+          name: '베리 버니',
+          bunnyType: 'berry',
           x: 240,
           y: 360,
           facingAngle: 0,
@@ -601,11 +613,11 @@ class DumplingGame {
     if (guideMsg) {
       const carried = this.player && (this.player.carriedEgg || this.player.carriedDumpling);
       if (carried) {
-        guideMsg.innerText = `🏃 [운반 중!] ${carried.name}을 조심스럽게 안고 있어요! 아지트 둥지로 안전하게 데려오세요!`;
+        guideMsg.innerText = `🏃 [운반 중!] 꼬마 여우 루루가 ${carried.name}을 소중히 품고 있어요! 둥지로 안전하게 돌아오세요!`;
       } else if (eggs.some(e => e.isHatching)) {
-        guideMsg.innerText = `🐣 [부화 진행 중!] 둥지 안의 알에서 아기 슬라임이 나오려고 해요! 톡톡!`;
+        guideMsg.innerText = `🐣 [부화 진행 중!] 둥지 안에서 꼬물꼬물 아기 생물이 깨어나고 있어요! 톡톡!`;
       } else {
-        guideMsg.innerText = `🥚 [알 구출 작전!] 감시자들을 피해 잠든 신비한 알을 둥지로 가져오세요!`;
+        guideMsg.innerText = `🦊 꼬마 여우 루루: 귀여운 토끼 순찰대의 랜턴 빛을 피해 신비한 알을 둥지로 데려오세요!`;
       }
     }
   }
@@ -1040,10 +1052,10 @@ class DumplingGame {
     const w = this.canvas.width;
     const h = this.canvas.height;
 
-    // 1. Kitchen Tile Flooring
+    // 1. Fairytale Meadow Floor (2D grass, clover & cobblestone)
     this.renderer.drawEnvironment(w, h);
 
-    // 2. Obstacles
+    // 2. Garden Obstacles (Planters, Mushrooms, Stumps, Honey Pots)
     this.obstacles.forEach(obs => this.renderer.drawObstacle(obs));
 
     // 3. Home Base (Cozy Golden Nest & Incubator)
@@ -1051,28 +1063,34 @@ class DumplingGame {
     const hatchedCount = eggs.filter(e => e.isHatched).length;
     this.renderer.drawBase(this.base, hatchedCount, eggs.length, this.gameTime);
 
-    // 4. Guard NPC Vision Cones on the ground
+    // 4. Bunny Lantern Warm Vision Cones
     this.npcs.forEach(npc => this.renderer.drawNPCVisionCone(npc));
 
-    // 5. Mysterious Eggs (Field, on Player's Head, or Incubating/Cracking in Nest)
+    // 5. Mysterious Eggs (Field, or Incubating/Cracking in Nest)
     eggs.forEach(egg => {
       this.renderer.drawEgg(egg, this.player, this.gameTime);
     });
 
-    // 5.5. Super Cute Hatched Baby Creatures Hopping & Waddling in the Nest
+    // 6. Super Cute Hatched Baby Creatures Hopping & Waddling in the Nest
     eggs.forEach(egg => {
       if (egg.isHatched && egg.baby) {
         this.renderer.drawBabyCreature(egg, this.gameTime);
       }
     });
 
-    // 6. Dynamic Particles (Steam, Stars, Hearts, Dust, Shell Fragments)
+    // 7. Cute Bunny Guards (Chaser NPCs with Bouncing Ears & Lanterns)
+    this.npcs.forEach(npc => this.renderer.drawBunnyNPC(npc, this.gameTime));
+
+    // 8. Cute 2D Fox Hero (Player with Bushy Tail & Sparkling Eyes)
+    this.renderer.drawFoxPlayer(this.player, this.gameTime);
+
+    // 9. Dynamic Particles (Steam, Stars, Hearts, Dust, Shell Fragments)
     this.renderer.drawParticles();
 
-    // 7. Real-time sprite-gen Wave & Breathe Oscilloscope
+    // 10. Real-time Wave & Breathe Oscilloscope
     this.renderer.drawBreatheMonitor(this.gameTime);
 
-    // 8. Synchronize and Render High-Resolution 2D Animated Sprites from sprite-gen (Player, Roaming Babies, NPCs)
+    // 11. Clean up any stale DOM sprites
     this.renderer.syncDOMSprites(this.player, eggs, this.npcs, this.gameTime);
   }
 }
