@@ -11,7 +11,7 @@
     <title>@yield('title', 'Ted Choi - Software Engineer | Full-Stack & AI-Assisted Developer')</title>
     <meta name="title" content="@yield('title', 'Ted Choi - Software Engineer | Full-Stack & AI-Assisted Developer')">
     <meta name="description" content="@yield('meta_description', 'Ted Choi is a Software Engineer based in Calgary with 10+ years of experience specializing in full-stack web development, PHP/Laravel, Node.js/NestJS, Docker, cloud infrastructure, and AI-first engineering.')">
-    <meta name="keywords" content="@yield('meta_keywords', 'Ted Choi, Software Engineer, Full Stack Developer, Calgary, Alberta, Web Developer, PHP, Laravel, Node.js, NestJS, TypeScript, Docker, Cloud, AWS, GCP, Azure, AI Developer, brokolidev')">
+    <meta name="keywords" content="@yield('meta_keywords', 'Ted Choi, Software Engineer, Full Stack Developer, Calgary, Alberta, PHP, Laravel, Node.js, NestJS, TypeScript, Docker, Cloud, AWS, GCP, Azure, AI Developer, brokolidev')">
     <meta name="author" content="Ted Choi">
     <meta name="robots" content="@yield('meta_robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1')">
     <link rel="canonical" href="@yield('canonical_url', url()->current())" />
