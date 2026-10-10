@@ -123,8 +123,8 @@ class GameRenderer {
     }
   }
 
-  // Draw Safe Base (Bamboo Steamer)
-  drawBase(base, totalCollected, gameTime) {
+  // Draw Safe Base (Cozy Golden Nest & Incubator)
+  drawBase(base, totalHatched, totalEggs, gameTime) {
     const ctx = this.ctx;
     const x = base.x;
     const y = base.y;
@@ -133,49 +133,49 @@ class GameRenderer {
     ctx.save();
     // Drop shadow
     ctx.beginPath();
-    ctx.arc(x, y + 6, r + 4, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+    ctx.arc(x, y + 6, r + 6, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.10)';
     ctx.fill();
 
-    // Bamboo outer ring
+    // Outer Straw Nest Weave Ring
     ctx.beginPath();
-    ctx.arc(x, y, r, 0, Math.PI * 2);
-    ctx.fillStyle = '#E8C798';
+    ctx.arc(x, y, r + 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#D4A373';
     ctx.fill();
-    ctx.strokeStyle = '#C99E64';
+    ctx.strokeStyle = '#B07D48';
     ctx.lineWidth = 8;
     ctx.stroke();
 
-    // Bamboo inner weave
+    // Cozy Cushion Weave inside Nest
     ctx.beginPath();
-    ctx.arc(x, y, r - 6, 0, Math.PI * 2);
-    ctx.fillStyle = '#F4DEB9';
+    ctx.arc(x, y, r - 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#FFF3CD';
     ctx.fill();
 
-    // Weave lattice lines
-    ctx.strokeStyle = 'rgba(180, 135, 80, 0.25)';
-    ctx.lineWidth = 2;
-    for (let i = -r + 15; i < r - 15; i += 12) {
-      const span = Math.sqrt(Math.max(0, (r - 10) ** 2 - i ** 2));
+    // Straw twig lattice lines
+    ctx.strokeStyle = 'rgba(180, 130, 70, 0.35)';
+    ctx.lineWidth = 2.5;
+    for (let i = -r + 12; i < r - 12; i += 11) {
+      const span = Math.sqrt(Math.max(0, (r - 8) ** 2 - i ** 2));
       ctx.beginPath();
       ctx.moveTo(x - span, y + i);
       ctx.lineTo(x + span, y + i);
       ctx.stroke();
     }
 
-    // Glowing rim
+    // Warm golden incubation glow rim
     const pulse = 0.5 + 0.5 * Math.sin(gameTime * 3);
     ctx.beginPath();
-    ctx.arc(x, y, r + 2, 0, Math.PI * 2);
-    ctx.strokeStyle = `rgba(100, 210, 120, ${0.4 + pulse * 0.35})`;
+    ctx.arc(x, y, r + 4, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(255, 179, 0, ${0.45 + pulse * 0.40})`;
     ctx.lineWidth = 4;
     ctx.stroke();
 
-    // Badge
-    ctx.fillStyle = '#2E7D32';
+    // Badge Label
+    ctx.fillStyle = '#6D4C41';
     ctx.font = 'bold 12px "Fredoka", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('🧺 아지트 찜기 (HOME)', x, y + r + 18);
+    ctx.fillText(`🪺 아지트 둥지 (Cozy Nest) · 🐣 ${totalHatched}/${totalEggs}`, x, y + r + 20);
 
     // Steam particles
     if (Math.random() < 0.2) {
@@ -285,33 +285,201 @@ class GameRenderer {
     ctx.restore();
   }
 
-  // Draw Dumpling Aura on the ground
-  drawDumplingAura(d, gameTime) {
+  // Draw Squishy Egg (Field, on Player's Head, or Incubating/Cracking in Nest)
+  drawEgg(egg, player, gameTime) {
     const ctx = this.ctx;
-    const breathe = this.animator.getBreatheDeformation(gameTime + d.timeOffset, 1.4, 0.16);
+
+    // If already hatched, draw cute cracked eggshell pieces in the nest
+    if (egg.isHatched) {
+      ctx.save();
+      ctx.translate(egg.x, egg.y);
+      // Small ground shadow
+      ctx.beginPath();
+      ctx.ellipse(0, 10, 14, 5, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+      ctx.fill();
+
+      // Cute cracked lower shell cup
+      ctx.beginPath();
+      ctx.moveTo(-14, 0);
+      ctx.lineTo(-8, 6);
+      ctx.lineTo(-2, 0);
+      ctx.lineTo(4, 7);
+      ctx.lineTo(10, 1);
+      ctx.lineTo(14, 6);
+      ctx.bezierCurveTo(14, 16, -14, 16, -14, 0);
+      ctx.closePath();
+      ctx.fillStyle = egg.colors ? egg.colors.bottom : '#FFCAD4';
+      ctx.fill();
+      ctx.strokeStyle = egg.colors ? egg.colors.border : '#E05780';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Cute heart sparkle floating
+      if (Math.random() < 0.04) {
+        this.addParticle({
+          x: egg.x + (Math.random() - 0.5) * 16,
+          y: egg.y - 12,
+          vx: (Math.random() - 0.5) * 16,
+          vy: -25 - Math.random() * 20,
+          size: 7,
+          color: '#FF6584',
+          life: 1.0,
+          maxLife: 1.0,
+          type: 'heart'
+        });
+      }
+      ctx.restore();
+      return;
+    }
+
+    // Position: if carried, sits atop player's head!
+    let renderX = egg.x;
+    let renderY = egg.y;
+    if (egg.isCarried && player) {
+      renderX = player.x;
+      renderY = player.y - 38 + Math.sin(gameTime * 14) * 3;
+    }
+
+    const breathe = this.animator.getBreatheDeformation(gameTime + egg.timeOffset, 1.4, 0.16);
+    const springVal = egg.spring ? egg.spring.value : 0;
+    const sx = breathe.sx * (1 + springVal * 0.04);
+    const sy = breathe.sy * (1 - springVal * 0.04);
     const pulse = (breathe.waveVal + 1) * 0.5;
 
     ctx.save();
-    ctx.translate(d.x, d.y);
+    ctx.translate(renderX, renderY);
 
-    // Ground shadow
+    // 1. Ground shadow & breathing aura (only when on ground/nest)
+    if (!egg.isCarried) {
+      ctx.beginPath();
+      ctx.ellipse(0, 16, 18 * sx, 7, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.14)';
+      ctx.fill();
+
+      // Magical glowing ring
+      ctx.beginPath();
+      ctx.arc(0, 4, 24 + pulse * 6, 0, Math.PI * 2);
+      ctx.fillStyle = egg.glowColor || 'rgba(255, 230, 160, 0.18)';
+      ctx.fill();
+    }
+
+    // 2. Wobble rotation (intense when incubating & cracking!)
+    let wobble = Math.sin(gameTime * 8) * 0.05;
+    if (egg.isHatching) {
+      const progress = 1 - Math.max(0, egg.hatchTimer / egg.hatchDuration);
+      wobble = Math.sin(gameTime * 26) * (0.08 + progress * 0.28);
+    } else if (egg.isCarried) {
+      wobble = Math.sin(gameTime * 12) * 0.12;
+    }
+    ctx.rotate(wobble);
+    ctx.scale(sx, sy);
+
+    // 3. Egg Shell Geometry (Cute oval with tapered top)
     ctx.beginPath();
-    ctx.ellipse(0, 16, 20 * breathe.sx, 8, 0, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+    ctx.moveTo(0, -22);
+    ctx.bezierCurveTo(15, -22, 19, -4, 19, 12);
+    ctx.bezierCurveTo(19, 23, -19, 23, -19, 12);
+    ctx.bezierCurveTo(-19, -4, -15, -22, 0, -22);
+    ctx.closePath();
+
+    // Vibrant gradient fill
+    const grad = ctx.createLinearGradient(-10, -22, 12, 22);
+    const theme = egg.colors || { top: '#FF6B6B', bottom: '#C9184A', pattern: '#FFE66D', border: '#A0153E' };
+    grad.addColorStop(0, theme.top);
+    grad.addColorStop(1, theme.bottom);
+    ctx.fillStyle = grad;
     ctx.fill();
 
-    // Breathing wave aura
+    // Shell border
+    ctx.strokeStyle = theme.border;
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+
+    // 4. Pattern Spots inside shell
+    ctx.save();
+    ctx.clip(); // Clip decorative spots inside egg boundary
+
+    ctx.fillStyle = theme.pattern;
     ctx.beginPath();
-    ctx.arc(0, 6, 26 + pulse * 8, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255, 230, 160, ${0.12 + pulse * 0.18})`;
+    ctx.arc(-5, -6, 5, 0, Math.PI * 2);
+    ctx.arc(7, 4, 6, 0, Math.PI * 2);
+    ctx.arc(-8, 12, 4, 0, Math.PI * 2);
+    ctx.arc(6, -14, 3, 0, Math.PI * 2);
     ctx.fill();
 
-    // Name label
-    ctx.fillStyle = '#5D4037';
-    ctx.font = 'bold 11px "Fredoka", sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText(`🥟 ${d.name}`, 0, 32);
+    // Rainbow wave stripe if rainbow type
+    if (egg.type === 'rainbow') {
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(-20, 2);
+      ctx.bezierCurveTo(-8, 8, 8, 8, 20, 2);
+      ctx.stroke();
+    }
 
+    // 5. Glossy 3D Highlight
+    ctx.beginPath();
+    ctx.ellipse(-6, -11, 4, 7, -Math.PI / 6, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
+    ctx.fill();
+
+    ctx.restore();
+
+    // 6. Cracking Lines when incubating in nest!
+    if (egg.isHatching && egg.cracks > 0) {
+      ctx.strokeStyle = '#2B040C';
+      ctx.lineWidth = 2.2;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      // Crack 1
+      ctx.moveTo(-4, -12);
+      ctx.lineTo(-1, -6);
+      ctx.lineTo(-6, -1);
+      ctx.lineTo(-2, 5);
+      if (egg.cracks >= 2) {
+        ctx.lineTo(4, 9);
+        ctx.lineTo(1, 14);
+      }
+      if (egg.cracks >= 3) {
+        ctx.moveTo(3, -9);
+        ctx.lineTo(8, -4);
+        ctx.lineTo(5, 2);
+      }
+      ctx.stroke();
+    }
+
+    ctx.restore(); // restore transform
+
+    // 7. Incubating Countdown Badge or Field Name Label
+    ctx.save();
+    ctx.translate(renderX, renderY);
+    if (egg.isHatching) {
+      const timerStr = Math.max(0, egg.hatchTimer).toFixed(1);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+      this.roundRect(ctx, -38, -46, 76, 22, 11);
+      ctx.fill();
+      ctx.strokeStyle = '#FF8A80';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#D81B60';
+      ctx.font = 'bold 11px "Fredoka", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(`🐣 부화 ${timerStr}s`, 0, -31);
+
+      // Mini incubation progress bar
+      const progress = 1 - Math.max(0, egg.hatchTimer / egg.hatchDuration);
+      ctx.fillStyle = '#E0E0E0';
+      ctx.fillRect(-28, -26, 56, 4);
+      ctx.fillStyle = '#00E676';
+      ctx.fillRect(-28, -26, 56 * progress, 4);
+    } else if (!egg.isCarried) {
+      ctx.fillStyle = '#4A3B32';
+      ctx.font = 'bold 11px "Fredoka", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(`🥚 ${egg.name}`, 0, 32);
+    }
     ctx.restore();
   }
 
@@ -431,47 +599,42 @@ class GameRenderer {
       }
     }
 
-    // 2. Sync Dumplings: attack-slime.gif with unique color themes
-    dumplings.forEach((d, idx) => {
-      const dSprite = this.getOrCreateSprite(`dumpling_${d.id}`, 'sprite-gen/docs/assets/attack-slime.gif');
-      if (dSprite) {
-        const breathe = this.animator.getBreatheDeformation(gameTime + d.timeOffset, 1.4, 0.16);
-        const springVal = d.spring ? d.spring.value : 0;
-        const finalSx = breathe.sx * (1 + springVal * 0.04);
-        const finalSy = breathe.sy * (1 - springVal * 0.04);
+    // 2. Sync Hatched Baby Creatures: attack-slime.gif hopping happily in the nest!
+    eggs.forEach((egg, idx) => {
+      const babySprite = this.getOrCreateSprite(`baby_${egg.id}`, 'sprite-gen/docs/assets/attack-slime.gif');
+      if (babySprite) {
+        if (egg.isHatched && egg.baby) {
+          const baby = egg.baby;
+          const breathe = this.animator.getBreatheDeformation(gameTime + egg.timeOffset, 1.6, 0.14);
+          const hopY = -Math.abs(Math.sin(gameTime * 7 + idx * 1.8)) * 8;
 
-        const w = 54;
-        const h = 50;
-        dSprite.style.width = `${w}px`;
-        dSprite.style.height = `${h}px`;
+          const w = 46;
+          const h = 42;
+          babySprite.style.width = `${w}px`;
+          babySprite.style.height = `${h}px`;
+          babySprite.style.left = `${baby.x - w / 2}px`;
+          babySprite.style.top = `${baby.y - h + 14 + hopY}px`;
 
-        // Color themes
-        if (d.type === 'berry') {
-          dSprite.style.filter = 'hue-rotate(90deg) saturate(1.4) drop-shadow(0 4px 8px rgba(244, 63, 94, 0.4))';
-        } else if (d.type === 'goldie') {
-          dSprite.style.filter = 'hue-rotate(185deg) saturate(1.6) drop-shadow(0 4px 8px rgba(234, 179, 8, 0.45))';
-        } else if (d.type === 'matcha') {
-          dSprite.style.filter = 'hue-rotate(275deg) saturate(1.3) drop-shadow(0 4px 8px rgba(34, 197, 94, 0.4))';
-        } else if (d.type === 'choco') {
-          dSprite.style.filter = 'sepia(1) saturate(2.2) hue-rotate(-30deg) drop-shadow(0 4px 8px rgba(139, 69, 19, 0.4))';
+          // Color themes matching the hatched egg
+          if (egg.type === 'ruby') {
+            babySprite.style.filter = 'hue-rotate(90deg) saturate(1.4) drop-shadow(0 4px 8px rgba(244, 63, 94, 0.45))';
+          } else if (egg.type === 'gold') {
+            babySprite.style.filter = 'hue-rotate(185deg) saturate(1.6) drop-shadow(0 4px 8px rgba(234, 179, 8, 0.5))';
+          } else if (egg.type === 'emerald') {
+            babySprite.style.filter = 'hue-rotate(275deg) saturate(1.3) drop-shadow(0 4px 8px rgba(34, 197, 94, 0.45))';
+          } else if (egg.type === 'rainbow') {
+            babySprite.style.filter = 'hue-rotate(330deg) saturate(1.7) drop-shadow(0 4px 8px rgba(168, 85, 247, 0.45))';
+          } else {
+            babySprite.style.filter = 'drop-shadow(0 4px 8px rgba(56, 189, 248, 0.45))';
+          }
+
+          const flip = Math.cos(baby.wanderAngle) < 0 ? -1 : 1;
+          babySprite.style.transform = `scaleX(${flip}) scale(${breathe.sx * 0.95}, ${breathe.sy * 0.95})`;
+          babySprite.style.display = 'block';
         } else {
-          dSprite.style.filter = 'drop-shadow(0 4px 8px rgba(56, 189, 248, 0.45))';
+          // Hide baby sprite until egg hatches!
+          babySprite.style.display = 'none';
         }
-
-        if (d.isCarried && player) {
-          // Riding on top of player's head!
-          const jiggle = Math.sin(gameTime * 14) * 4;
-          dSprite.style.left = `${player.x - w / 2}px`;
-          dSprite.style.top = `${player.y - h - 42 + jiggle}px`;
-          dSprite.style.transform = `scale(${finalSx * 1.05}, ${finalSy * 1.05}) rotate(${Math.sin(gameTime * 8) * 0.12}rad)`;
-        } else {
-          // Placed in field or in base
-          dSprite.style.left = `${d.x - w / 2}px`;
-          dSprite.style.top = `${d.y - h + 14}px`;
-          dSprite.style.transform = `scale(${finalSx}, ${finalSy})`;
-        }
-
-        dSprite.style.display = 'block';
       }
     });
 

@@ -183,6 +183,54 @@ class SoundEngine {
     });
   }
 
+  // Egg cracking wobble tap sound
+  playCrack() {
+    if (this.isMuted) return;
+    this.init();
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(750 + Math.random() * 250, now);
+    osc.frequency.exponentialRampToValueAtTime(160, now + 0.06);
+
+    gain.gain.setValueAtTime(0.25, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.08);
+  }
+
+  // Magical joyful chime when egg hatches into a baby creature
+  playHatch() {
+    if (this.isMuted) return;
+    this.init();
+    const now = this.ctx.currentTime;
+    const notes = [659.25, 880.0, 1174.66, 1567.98]; // E5, A5, D6, G6
+
+    notes.forEach((freq, idx) => {
+      const t = now + idx * 0.07;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, t);
+
+      gain.gain.setValueAtTime(0.3, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.38);
+    });
+  }
+
   // Cheerful Marimba-style BGM loop
   startBGM() {
     if (this.isMuted || this.bgmPlaying) return;

@@ -159,12 +159,13 @@ class DumplingGame {
       maxSpeed: 175,
       facing: 'right',
       walkDistance: 0,
+      carriedEgg: null,
       carriedDumpling: null,
       isCaught: false,
       dizzyAngle: 0
     };
 
-    // Level 1: Beginner Kitchen (3 dumplings, 1 slow chef)
+    // Level 1: Beginner Kitchen (3 mysterious eggs, 1 slow chef)
     if (levelIndex === 0) {
       this.obstacles = [
         { x: 260, y: 140, w: 180, h: 60, type: 'counter' },
@@ -172,50 +173,72 @@ class DumplingGame {
         { x: 300, y: 400, w: 50, h: 50, type: 'teacup' }
       ];
 
-      this.dumplings = [
+      this.eggs = [
         {
           id: 1,
-          name: 'Xiao-Long',
-          type: 'classic',
+          name: '루비 알',
+          type: 'ruby',
           homeX: 720,
           homeY: 100,
           x: 720,
           y: 100,
           isCarried: false,
           isDelivered: false,
+          isHatching: false,
+          isHatched: false,
+          hatchTimer: 3.5,
+          hatchDuration: 3.5,
+          cracks: 0,
           timeOffset: 0.1,
           spring: new JellySpring(200, 10),
-          colors: { body: '#FFFDF9', shadow: '#E8D2B5', blush: '#FF8A80' }
+          colors: { top: '#FF6B6B', bottom: '#C9184A', pattern: '#FFE66D', border: '#A0153E' },
+          glowColor: 'rgba(255, 77, 109, 0.22)',
+          baby: null
         },
         {
           id: 2,
-          name: 'Berry Bao',
-          type: 'berry',
+          name: '골든 알',
+          type: 'gold',
           homeX: 420,
           homeY: 90,
           x: 420,
           y: 90,
           isCarried: false,
           isDelivered: false,
+          isHatching: false,
+          isHatched: false,
+          hatchTimer: 3.5,
+          hatchDuration: 3.5,
+          cracks: 0,
           timeOffset: 0.5,
           spring: new JellySpring(200, 10),
-          colors: { body: '#FFE4E6', shadow: '#FDA4AF', blush: '#F43F5E' }
+          colors: { top: '#FFE066', bottom: '#F77F00', pattern: '#FFFBEA', border: '#D47A00' },
+          glowColor: 'rgba(255, 215, 0, 0.22)',
+          baby: null
         },
         {
           id: 3,
-          name: 'Goldie',
-          type: 'goldie',
+          name: '에메랄드 알',
+          type: 'emerald',
           homeX: 710,
           homeY: 480,
           x: 710,
           y: 480,
           isCarried: false,
           isDelivered: false,
+          isHatching: false,
+          isHatched: false,
+          hatchTimer: 3.5,
+          hatchDuration: 3.5,
+          cracks: 0,
           timeOffset: 0.9,
           spring: new JellySpring(200, 10),
-          colors: { body: '#FEF08A', shadow: '#EAB308', blush: '#F97316' }
+          colors: { top: '#52B788', bottom: '#1B4332', pattern: '#D8F3DC', border: '#0F2C1F' },
+          glowColor: 'rgba(82, 183, 136, 0.22)',
+          baby: null
         }
       ];
+      this.dumplings = this.eggs;
 
       this.npcs = [
         {
@@ -248,64 +271,93 @@ class DumplingGame {
         { x: 620, y: 440, w: 50, h: 50, type: 'teacup' }
       ];
 
-      this.dumplings = [
+      this.eggs = [
         {
           id: 1,
-          name: 'Xiao-Long',
-          type: 'classic',
+          name: '루비 알',
+          type: 'ruby',
           homeX: 710,
           homeY: 100,
           x: 710,
           y: 100,
           isCarried: false,
           isDelivered: false,
+          isHatching: false,
+          isHatched: false,
+          hatchTimer: 3.5,
+          hatchDuration: 3.5,
+          cracks: 0,
           timeOffset: 0.2,
           spring: new JellySpring(200, 10),
-          colors: { body: '#FFFDF9', shadow: '#E8D2B5', blush: '#FF8A80' }
+          colors: { top: '#FF6B6B', bottom: '#C9184A', pattern: '#FFE66D', border: '#A0153E' },
+          glowColor: 'rgba(255, 77, 109, 0.22)',
+          baby: null
         },
         {
           id: 2,
-          name: 'Berry Bao',
-          type: 'berry',
+          name: '골든 알',
+          type: 'gold',
           homeX: 430,
           homeY: 170,
           x: 430,
           y: 170,
           isCarried: false,
           isDelivered: false,
+          isHatching: false,
+          isHatched: false,
+          hatchTimer: 3.5,
+          hatchDuration: 3.5,
+          cracks: 0,
           timeOffset: 0.6,
           spring: new JellySpring(200, 10),
-          colors: { body: '#FFE4E6', shadow: '#FDA4AF', blush: '#F43F5E' }
+          colors: { top: '#FFE066', bottom: '#F77F00', pattern: '#FFFBEA', border: '#D47A00' },
+          glowColor: 'rgba(255, 215, 0, 0.22)',
+          baby: null
         },
         {
           id: 3,
-          name: 'Goldie',
-          type: 'goldie',
+          name: '에메랄드 알',
+          type: 'emerald',
           homeX: 720,
           homeY: 340,
           x: 720,
           y: 340,
           isCarried: false,
           isDelivered: false,
+          isHatching: false,
+          isHatched: false,
+          hatchTimer: 3.5,
+          hatchDuration: 3.5,
+          cracks: 0,
           timeOffset: 1.0,
           spring: new JellySpring(200, 10),
-          colors: { body: '#FEF08A', shadow: '#EAB308', blush: '#F97316' }
+          colors: { top: '#52B788', bottom: '#1B4332', pattern: '#D8F3DC', border: '#0F2C1F' },
+          glowColor: 'rgba(82, 183, 136, 0.22)',
+          baby: null
         },
         {
           id: 4,
-          name: 'Matcha Mochi',
-          type: 'matcha',
+          name: '무지개 알',
+          type: 'rainbow',
           homeX: 520,
           homeY: 500,
           x: 520,
           y: 500,
           isCarried: false,
           isDelivered: false,
+          isHatching: false,
+          isHatched: false,
+          hatchTimer: 3.5,
+          hatchDuration: 3.5,
+          cracks: 0,
           timeOffset: 1.4,
           spring: new JellySpring(200, 10),
-          colors: { body: '#DCFCE7', shadow: '#4ADE80', blush: '#16A34A' }
+          colors: { top: '#CDB4DB', bottom: '#7B2CBF', pattern: '#E0AAFF', border: '#5A189A' },
+          glowColor: 'rgba(168, 85, 247, 0.22)',
+          baby: null
         }
       ];
+      this.dumplings = this.eggs;
 
       this.npcs = [
         {
@@ -361,78 +413,114 @@ class DumplingGame {
         { x: 680, y: 440, w: 45, h: 45, type: 'teacup' }
       ];
 
-      this.dumplings = [
+      this.eggs = [
         {
           id: 1,
-          name: 'Xiao-Long',
-          type: 'classic',
+          name: '루비 알',
+          type: 'ruby',
           homeX: 390,
           homeY: 70,
           x: 390,
           y: 70,
           isCarried: false,
           isDelivered: false,
+          isHatching: false,
+          isHatched: false,
+          hatchTimer: 3.5,
+          hatchDuration: 3.5,
+          cracks: 0,
           timeOffset: 0.1,
           spring: new JellySpring(200, 10),
-          colors: { body: '#FFFDF9', shadow: '#E8D2B5', blush: '#FF8A80' }
+          colors: { top: '#FF6B6B', bottom: '#C9184A', pattern: '#FFE66D', border: '#A0153E' },
+          glowColor: 'rgba(255, 77, 109, 0.22)',
+          baby: null
         },
         {
           id: 2,
-          name: 'Berry Bao',
-          type: 'berry',
+          name: '골든 알',
+          type: 'gold',
           homeX: 710,
           homeY: 80,
           x: 710,
           y: 80,
           isCarried: false,
           isDelivered: false,
+          isHatching: false,
+          isHatched: false,
+          hatchTimer: 3.5,
+          hatchDuration: 3.5,
+          cracks: 0,
           timeOffset: 0.4,
           spring: new JellySpring(200, 10),
-          colors: { body: '#FFE4E6', shadow: '#FDA4AF', blush: '#F43F5E' }
+          colors: { top: '#FFE066', bottom: '#F77F00', pattern: '#FFFBEA', border: '#D47A00' },
+          glowColor: 'rgba(255, 215, 0, 0.22)',
+          baby: null
         },
         {
           id: 3,
-          name: 'Goldie',
-          type: 'goldie',
+          name: '에메랄드 알',
+          type: 'emerald',
           homeX: 720,
           homeY: 280,
           x: 720,
           y: 280,
           isCarried: false,
           isDelivered: false,
+          isHatching: false,
+          isHatched: false,
+          hatchTimer: 3.5,
+          hatchDuration: 3.5,
+          cracks: 0,
           timeOffset: 0.7,
           spring: new JellySpring(200, 10),
-          colors: { body: '#FEF08A', shadow: '#EAB308', blush: '#F97316' }
+          colors: { top: '#52B788', bottom: '#1B4332', pattern: '#D8F3DC', border: '#0F2C1F' },
+          glowColor: 'rgba(82, 183, 136, 0.22)',
+          baby: null
         },
         {
           id: 4,
-          name: 'Matcha Mochi',
-          type: 'matcha',
+          name: '무지개 알',
+          type: 'rainbow',
           homeX: 620,
           homeY: 480,
           x: 620,
           y: 480,
           isCarried: false,
           isDelivered: false,
+          isHatching: false,
+          isHatched: false,
+          hatchTimer: 3.5,
+          hatchDuration: 3.5,
+          cracks: 0,
           timeOffset: 1.1,
           spring: new JellySpring(200, 10),
-          colors: { body: '#DCFCE7', shadow: '#4ADE80', blush: '#16A34A' }
+          colors: { top: '#CDB4DB', bottom: '#7B2CBF', pattern: '#E0AAFF', border: '#5A189A' },
+          glowColor: 'rgba(168, 85, 247, 0.22)',
+          baby: null
         },
         {
           id: 5,
-          name: 'Choco Bao',
-          type: 'choco',
+          name: '스타 알',
+          type: 'star',
           homeX: 430,
           homeY: 340,
           x: 430,
           y: 340,
           isCarried: false,
           isDelivered: false,
+          isHatching: false,
+          isHatched: false,
+          hatchTimer: 3.5,
+          hatchDuration: 3.5,
+          cracks: 0,
           timeOffset: 1.5,
           spring: new JellySpring(200, 10),
-          colors: { body: '#EDD5BE', shadow: '#8B5A2B', blush: '#D2691E' }
+          colors: { top: '#4CC9F0', bottom: '#3A0CA3', pattern: '#F72585', border: '#1A0066' },
+          glowColor: 'rgba(76, 201, 240, 0.22)',
+          baby: null
         }
       ];
+      this.dumplings = this.eggs;
 
       this.npcs = [
         {
@@ -501,18 +589,23 @@ class DumplingGame {
     const stageTitle = document.getElementById('stageTitle');
     if (stageTitle) stageTitle.innerText = `Level ${this.currentLevel + 1}`;
 
-    const deliveredCount = this.dumplings.filter(d => d.isDelivered).length;
-    const totalCount = this.dumplings.length;
+    const eggs = this.eggs || this.dumplings || [];
+    const hatchedCount = eggs.filter(e => e.isHatched).length;
+    const deliveredCount = eggs.filter(e => e.isDelivered || e.isHatched).length;
+    const totalCount = eggs.length;
 
     const dumplingCounter = document.getElementById('dumplingCounter');
-    if (dumplingCounter) dumplingCounter.innerText = `${deliveredCount} / ${totalCount}`;
+    if (dumplingCounter) dumplingCounter.innerText = `${hatchedCount} / ${totalCount} 부화`;
 
     const guideMsg = document.getElementById('guideMsg');
     if (guideMsg) {
-      if (this.player && this.player.carriedDumpling) {
-        guideMsg.innerText = `🏃 [운반 중!] ${this.player.carriedDumpling.name} 만두가 춤추고 있어요! 찜기로 안전하게 복귀하세요!`;
+      const carried = this.player && (this.player.carriedEgg || this.player.carriedDumpling);
+      if (carried) {
+        guideMsg.innerText = `🏃 [운반 중!] ${carried.name}을 조심스럽게 안고 있어요! 아지트 둥지로 안전하게 데려오세요!`;
+      } else if (eggs.some(e => e.isHatching)) {
+        guideMsg.innerText = `🐣 [부화 진행 중!] 둥지 안의 알에서 아기 슬라임이 나오려고 해요! 톡톡!`;
       } else {
-        guideMsg.innerText = `🥟 [숨바꼭질!] 셰프의 시야를 피해 잠든 스퀴시 만두를 업어오세요!`;
+        guideMsg.innerText = `🥚 [알 구출 작전!] 감시자들을 피해 잠든 신비한 알을 둥지로 가져오세요!`;
       }
     }
   }
@@ -536,9 +629,10 @@ class DumplingGame {
       return;
     }
 
-    // Update Springs for dumplings
-    this.dumplings.forEach(d => {
-      if (d.spring) d.spring.update(dt);
+    // Update Springs for eggs
+    const eggs = this.eggs || this.dumplings || [];
+    eggs.forEach(egg => {
+      if (egg.spring) egg.spring.update(dt);
     });
 
     if (this.state === STATE.CAUGHT) {
@@ -547,7 +641,9 @@ class DumplingGame {
     }
 
     this.handlePlayerMovement(dt);
-    this.handleDumplingInteractions();
+    this.handleEggInteractions();
+    this.handleEggIncubation(dt);
+    this.handleBabyWander(dt);
     this.handleNPCAI(dt);
     this.checkStageClear();
   }
@@ -572,7 +668,8 @@ class DumplingGame {
       else if (dx > 0) p.facing = 'right';
 
       // Carrying slows down slightly
-      const speedModifier = p.carriedDumpling ? 0.85 : 1.0;
+      const isCarrying = p.carriedEgg || p.carriedDumpling;
+      const speedModifier = isCarrying ? 0.85 : 1.0;
       const targetSpeed = p.maxSpeed * speedModifier;
 
       p.speed = targetSpeed;
@@ -622,19 +719,20 @@ class DumplingGame {
     return false;
   }
 
-  handleDumplingInteractions() {
+  handleEggInteractions() {
     const p = this.player;
+    const eggs = this.eggs || this.dumplings || [];
 
-    // 1. Stealing Dumpling (if player is not currently carrying one)
-    if (!p.carriedDumpling) {
-      for (const d of this.dumplings) {
-        if (!d.isDelivered && !d.isCarried) {
-          const dist = Math.hypot(p.x - d.x, p.y - d.y);
+    // 1. Picking up Egg (if player is not currently carrying one)
+    if (!p.carriedEgg && !p.carriedDumpling) {
+      for (const egg of eggs) {
+        if (!egg.isDelivered && !egg.isCarried && !egg.isHatched) {
+          const dist = Math.hypot(p.x - egg.x, p.y - egg.y);
           if (dist < 32) {
-            // Pick up dumpling!
-            p.carriedDumpling = d;
-            d.isCarried = true;
-            if (d.spring) d.spring.impulse(75); // Strong, juicy squish & bounce impulse!
+            p.carriedEgg = egg;
+            p.carriedDumpling = egg;
+            egg.isCarried = true;
+            if (egg.spring) egg.spring.impulse(75);
 
             window.soundEngine.playSquish();
             this.updateHUD();
@@ -642,13 +740,13 @@ class DumplingGame {
             // Joy sparkles
             for (let i = 0; i < 8; i++) {
               this.renderer.addParticle({
-                x: d.x,
-                y: d.y,
+                x: egg.x,
+                y: egg.y,
                 vx: (Math.random() - 0.5) * 90,
                 vy: (Math.random() - 0.5) * 90,
                 size: 6,
                 sizeChange: -4,
-                color: '#FFD700',
+                color: egg.colors ? egg.colors.top : '#FFD700',
                 life: 0.5,
                 maxLife: 0.5,
                 type: 'star'
@@ -660,27 +758,32 @@ class DumplingGame {
       }
     }
 
-    // 2. Delivering Dumpling to Home Base
-    if (p.carriedDumpling) {
+    // 2. Delivering Egg to Nest Base (starts incubation countdown)
+    const carried = p.carriedEgg || p.carriedDumpling;
+    if (carried) {
       const distToBase = Math.hypot(p.x - this.base.x, p.y - this.base.y);
       if (distToBase < this.base.radius) {
-        const d = p.carriedDumpling;
-        d.isCarried = false;
-        d.isDelivered = true;
+        const egg = carried;
+        egg.isCarried = false;
+        egg.isDelivered = true;
+        egg.isHatching = true;
+        egg.hatchTimer = egg.hatchDuration || 3.5;
+        egg.cracks = 0;
+        p.carriedEgg = null;
         p.carriedDumpling = null;
 
-        // Position inside steamer
-        const deliveredSoFar = this.dumplings.filter(item => item.isDelivered).length;
+        // Position inside nest circle
+        const deliveredSoFar = eggs.filter(item => item.isDelivered || item.isHatched).length;
         const angle = (deliveredSoFar * (Math.PI * 2 / 5));
-        d.x = this.base.x + Math.cos(angle) * 22;
-        d.y = this.base.y + Math.sin(angle) * 20;
+        egg.x = this.base.x + Math.cos(angle) * 22;
+        egg.y = this.base.y + Math.sin(angle) * 20;
 
         window.soundEngine.playDeliver();
         this.score += 100;
         this.updateHUD();
 
         // Celebration hearts & stars
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < 14; i++) {
           this.renderer.addParticle({
             x: this.base.x,
             y: this.base.y,
@@ -688,7 +791,7 @@ class DumplingGame {
             vy: -40 - Math.random() * 80,
             size: 8 + Math.random() * 6,
             sizeChange: -3,
-            color: i % 2 === 0 ? '#FF6584' : '#FFD166',
+            color: i % 2 === 0 ? (egg.colors ? egg.colors.top : '#FF6584') : '#FFD166',
             life: 0.8,
             maxLife: 0.8,
             type: i % 2 === 0 ? 'heart' : 'star'
@@ -696,6 +799,129 @@ class DumplingGame {
         }
       }
     }
+  }
+
+  handleEggIncubation(dt) {
+    const eggs = this.eggs || this.dumplings || [];
+
+    eggs.forEach(egg => {
+      if (egg.isDelivered && egg.isHatching && !egg.isHatched) {
+        egg.hatchTimer -= dt;
+        const duration = egg.hatchDuration || 3.5;
+        const progress = 1 - Math.max(0, egg.hatchTimer / duration);
+
+        // Crack progression at 33%, 66%, 88%
+        if (progress >= 0.33 && egg.cracks === 0) {
+          egg.cracks = 1;
+          if (egg.spring) egg.spring.impulse(45);
+          window.soundEngine.playCrack();
+          this.spawnCrackParticles(egg.x, egg.y, egg.colors ? egg.colors.border : '#883344');
+        } else if (progress >= 0.66 && egg.cracks === 1) {
+          egg.cracks = 2;
+          if (egg.spring) egg.spring.impulse(60);
+          window.soundEngine.playCrack();
+          this.spawnCrackParticles(egg.x, egg.y, egg.colors ? egg.colors.border : '#883344');
+        } else if (progress >= 0.88 && egg.cracks === 2) {
+          egg.cracks = 3;
+          if (egg.spring) egg.spring.impulse(80);
+          window.soundEngine.playCrack();
+          this.spawnCrackParticles(egg.x, egg.y, egg.colors ? egg.colors.border : '#883344');
+        }
+
+        // Hatch completed!
+        if (egg.hatchTimer <= 0) {
+          egg.isHatching = false;
+          egg.isHatched = true;
+          egg.hatchTimer = 0;
+          window.soundEngine.playHatch();
+          this.score += 200;
+
+          // Instantiate baby creature to wander happily inside the nest
+          egg.baby = {
+            x: egg.x,
+            y: egg.y,
+            wanderAngle: Math.random() * Math.PI * 2,
+            wanderSpeed: 25 + Math.random() * 20,
+            pauseTimer: 0.3 + Math.random() * 0.8,
+            moveTimer: 1.2 + Math.random() * 1.5
+          };
+
+          this.spawnHatchParticles(egg.x, egg.y, egg.colors);
+          this.updateHUD();
+        }
+      }
+    });
+  }
+
+  spawnCrackParticles(x, y, color) {
+    for (let i = 0; i < 6; i++) {
+      this.renderer.addParticle({
+        x: x + (Math.random() - 0.5) * 12,
+        y: y + (Math.random() - 0.5) * 12,
+        vx: (Math.random() - 0.5) * 60,
+        vy: -20 - Math.random() * 40,
+        size: 3 + Math.random() * 3,
+        sizeChange: -2,
+        color: color || '#A0153E',
+        life: 0.45,
+        maxLife: 0.45
+      });
+    }
+  }
+
+  spawnHatchParticles(x, y, colors) {
+    const topColor = colors ? colors.top : '#FFD700';
+    for (let i = 0; i < 22; i++) {
+      this.renderer.addParticle({
+        x: x,
+        y: y,
+        vx: (Math.random() - 0.5) * 160,
+        vy: -40 - Math.random() * 100,
+        size: 7 + Math.random() * 7,
+        sizeChange: -4,
+        color: i % 3 === 0 ? topColor : (i % 3 === 1 ? '#FFF' : '#FF6584'),
+        life: 0.9,
+        maxLife: 0.9,
+        type: i % 2 === 0 ? 'star' : 'heart'
+      });
+    }
+  }
+
+  handleBabyWander(dt) {
+    const eggs = this.eggs || this.dumplings || [];
+    const maxNestRadius = this.base.radius - 14;
+
+    eggs.forEach(egg => {
+      if (egg.isHatched && egg.baby) {
+        const baby = egg.baby;
+
+        if (baby.pauseTimer > 0) {
+          baby.pauseTimer -= dt;
+          if (baby.pauseTimer <= 0) {
+            baby.wanderAngle = Math.random() * Math.PI * 2;
+            baby.moveTimer = 1.0 + Math.random() * 1.8;
+          }
+        } else {
+          baby.moveTimer -= dt;
+          const nextX = baby.x + Math.cos(baby.wanderAngle) * baby.wanderSpeed * dt;
+          const nextY = baby.y + Math.sin(baby.wanderAngle) * baby.wanderSpeed * dt;
+
+          // Confine inside nest boundary
+          const distFromBase = Math.hypot(nextX - this.base.x, nextY - this.base.y);
+          if (distFromBase <= maxNestRadius) {
+            baby.x = nextX;
+            baby.y = nextY;
+          } else {
+            // Turn softly back toward nest center
+            baby.wanderAngle = Math.atan2(this.base.y - baby.y, this.base.x - baby.x) + (Math.random() - 0.5) * 0.8;
+          }
+
+          if (baby.moveTimer <= 0) {
+            baby.pauseTimer = 0.6 + Math.random() * 1.5;
+          }
+        }
+      }
+    });
   }
 
   handleNPCAI(dt) {
@@ -767,13 +993,14 @@ class DumplingGame {
 
     window.soundEngine.playCaught();
 
-    // If carrying a dumpling, it pops back to its home spot!
-    if (this.player.carriedDumpling) {
-      const d = this.player.carriedDumpling;
-      d.isCarried = false;
-      d.x = d.homeX;
-      d.y = d.homeY;
-      if (d.spring) d.spring.impulse(60);
+    // If carrying an egg, it pops back to its home spot!
+    const carried = this.player.carriedEgg || this.player.carriedDumpling;
+    if (carried) {
+      carried.isCarried = false;
+      carried.x = carried.homeX;
+      carried.y = carried.homeY;
+      if (carried.spring) carried.spring.impulse(60);
+      this.player.carriedEgg = null;
       this.player.carriedDumpling = null;
     }
 
@@ -799,8 +1026,9 @@ class DumplingGame {
   }
 
   checkStageClear() {
-    const allDelivered = this.dumplings.every(d => d.isDelivered);
-    if (allDelivered && this.dumplings.length > 0) {
+    const eggs = this.eggs || this.dumplings || [];
+    const allHatched = eggs.every(e => e.isHatched);
+    if (allHatched && eggs.length > 0) {
       this.state = STATE.STAGE_CLEAR;
       window.soundEngine.playVictory();
       this.updateOverlayUI();
@@ -818,28 +1046,27 @@ class DumplingGame {
     // 2. Obstacles
     this.obstacles.forEach(obs => this.renderer.drawObstacle(obs));
 
-    // 3. Home Base (Bamboo Steamer)
-    const deliveredCount = this.dumplings.filter(d => d.isDelivered).length;
-    this.renderer.drawBase(this.base, deliveredCount, this.gameTime);
+    // 3. Home Base (Cozy Golden Nest & Incubator)
+    const eggs = this.eggs || this.dumplings || [];
+    const hatchedCount = eggs.filter(e => e.isHatched).length;
+    this.renderer.drawBase(this.base, hatchedCount, eggs.length, this.gameTime);
 
     // 4. Guard NPC Vision Cones on the ground
     this.npcs.forEach(npc => this.renderer.drawNPCVisionCone(npc));
 
-    // 5. Dumpling Breathing Auras on the ground
-    this.dumplings.forEach(d => {
-      if (!d.isCarried) {
-        this.renderer.drawDumplingAura(d, this.gameTime);
-      }
+    // 5. Mysterious Eggs (Field, on Player's Head, or Incubating/Cracking in Nest)
+    eggs.forEach(egg => {
+      this.renderer.drawEgg(egg, this.player, this.gameTime);
     });
 
-    // 6. Dynamic Particles (Steam, Stars, Hearts, Dust)
+    // 6. Dynamic Particles (Steam, Stars, Hearts, Dust, Shell Fragments)
     this.renderer.drawParticles();
 
     // 7. Real-time sprite-gen Wave & Breathe Oscilloscope
     this.renderer.drawBreatheMonitor(this.gameTime);
 
-    // 8. Synchronize and Render High-Resolution 2D Animated Sprites from sprite-gen
-    this.renderer.syncDOMSprites(this.player, this.dumplings, this.npcs, this.gameTime);
+    // 8. Synchronize and Render High-Resolution 2D Animated Sprites from sprite-gen (Player, Roaming Babies, NPCs)
+    this.renderer.syncDOMSprites(this.player, eggs, this.npcs, this.gameTime);
   }
 }
 

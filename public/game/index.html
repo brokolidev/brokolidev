@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>🥟 Squishy Dumpling Heist! - Kids Stealth Game</title>
+  <title>🥚 Squishy Egg Hatchery Heist! - Kids Adventure Game</title>
   <script>
     if (window.location.protocol.startsWith('http') && (window.location.pathname === '/game' || window.location.pathname.startsWith('/game/'))) {
       const base = document.createElement('base');
@@ -18,8 +18,8 @@
     <!-- Header HUD -->
     <header class="header-hud">
       <div class="logo-area">
-        <span style="font-size: 28px;">🥟</span>
-        <h1 class="game-title">🥟 스퀴시 만두 대작전!</h1>
+        <span style="font-size: 28px;">🥚</span>
+        <h1 class="game-title">🥚 신비한 알 구출 & 부화 대작전!</h1>
       </div>
       <div class="status-badges">
         <div class="badge" id="stageBadge">
@@ -27,8 +27,8 @@
           <span id="stageTitle">Level 1</span>
         </div>
         <div class="badge" id="counterBadge">
-          <span>🥟</span>
-          <span id="dumplingCounter">0 / 3</span>
+          <span>🐣</span>
+          <span id="dumplingCounter">0 / 3 부화</span>
         </div>
         <div class="badge" style="background: #E8F5E9; border-color: #81C784; color: #1B5E20;">
           <span>✨</span>
@@ -41,7 +41,7 @@
 
     <!-- Guide Instruction & Squish Slider Banner -->
     <div class="guide-banner">
-      <span id="guideMsg">🥟 아지트에서 출발해 잠든 스퀴시 만두를 찜기로 구출해 오세요!</span>
+      <span id="guideMsg">🥚 잠든 신비한 알을 둥지로 구출해오세요! 따뜻하게 품어주면 부화해요!</span>
       <div class="slider-control">
         <label for="squishSlider">🌊 말랑함(Squish):</label>
         <input type="range" id="squishSlider" min="0.5" max="2.6" step="0.1" value="1.4">
@@ -58,15 +58,16 @@
       <!-- Start Game Overlay -->
       <div id="startOverlay" class="overlay">
         <div class="modal-box">
-          <div style="font-size: 54px; animation: bounce 1.2s infinite alternate;">🥟✨</div>
-          <h2 class="modal-title">스퀴시 만두 대작전!</h2>
+          <div style="font-size: 54px; animation: bounce 1.2s infinite alternate;">🥚✨🐣</div>
+          <h2 class="modal-title">알 구출 & 부화 대작전!</h2>
           <p class="modal-desc">
-            꼬마 영웅 <b>바오바오(BaoBao)</b>와 함께 주방에 잠든 말랑말랑 <b>스퀴시 만두</b>를 하나씩 구출해 따뜻한 아지트 찜기로 데려오세요!
+            꼬마 영웅 <b>바오바오(BaoBao)</b>와 함께 잠든 <b>신비한 알</b>들을 머리에 업고 <b>아지트 둥지</b>로 데려오세요! 둥지에 놓아두면 잠시 후 알이 꿈틀거리며 <b>귀여운 아기</b>로 부화하여 둥지를 자유롭게 뛰어놀아요!
           </p>
           <div class="control-tips">
             <b>🕹️ 신나는 조작법:</b><br>
             • 이동: <b>키보드 방향키</b> 또는 <b>W, A, S, D</b> (또는 아래 터치 버튼)<br>
-            • 만두에게 다가가면 머리 위에 업혀요! <b>아지트 찜기</b>로 쏙 데려오기!<br>
+            • 알에게 다가가면 머리 위에 업혀요! <b>아지트 둥지</b>로 쏙 데려오기!<br>
+            • 둥지에서 잠시 기다리면 <b>알이 톡톡 깨지며 귀여운 아기가 탄생</b>해요!<br>
             • 셰프 아저씨의 <b>노란색 탐색 조명</b>을 조심조심 피하세요!
           </div>
           <button id="startBtn" class="primary-btn">모험 시작하기! 🚀 (Start)</button>
@@ -76,10 +77,10 @@
       <!-- Stage Clear Overlay -->
       <div id="stageClearOverlay" class="overlay" style="display: none;">
         <div class="modal-box">
-          <div style="font-size: 54px;">🎉🥟💖</div>
-          <h2 class="modal-title">만두 구출 성공! 🎉</h2>
+          <div style="font-size: 54px;">🎉🐣💖🐥</div>
+          <h2 class="modal-title">알 구출 & 부화 대성공! 🎉</h2>
           <p class="modal-desc">
-            야호! 모든 스퀴시 만두들이 따뜻한 대나무 찜기 아지트에 모여 행복하게 방방 뛰고 있어요!
+            야호! 모든 신비한 알들이 안전하게 둥지에서 부화하여 신나게 뛰어놀고 있어요!
           </p>
           <button id="nextStageBtn" class="primary-btn">다음 스테이지로! ➡️</button>
         </div>
@@ -88,10 +89,10 @@
       <!-- All Clear Overlay -->
       <div id="allClearOverlay" class="overlay" style="display: none;">
         <div class="modal-box">
-          <div style="font-size: 56px;">🏆👑🥟</div>
-          <h2 class="modal-title">최고의 만두 마스터! 👑</h2>
+          <div style="font-size: 56px;">🏆👑🐣🐥</div>
+          <h2 class="modal-title">최고의 둥지 마스터! 👑</h2>
           <p class="modal-desc">
-            대단해요! 모든 주방의 스퀴시 만두들을 하나도 빠짐없이 전부 구출해냈습니다! 최고의 챔피언이에요!
+            대단해요! 모든 스테이지의 신비한 알들을 전부 구출해 건강하고 사랑스러운 아기들로 부화시켰습니다! 최고의 챔피언이에요!
           </p>
           <button id="restartBtn" class="primary-btn">다시 플레이하기 🔄</button>
         </div>
