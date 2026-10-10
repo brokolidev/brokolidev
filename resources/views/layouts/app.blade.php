@@ -177,6 +177,9 @@
                     <a href="https://blog.brokolidev.com" class="px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-all duration-200">
                         <span>Blog</span>
                     </a>
+                    <a href="https://history.brokolidev.com" class="px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-all duration-200">
+                        <span>History</span>
+                    </a>
 
                     <!-- Theme Toggle -->
                     <button type="button" id="theme-toggle" aria-label="Toggle theme" class="group flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:text-zinc-900 hover:shadow-xs dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100 cursor-pointer active:scale-95">
