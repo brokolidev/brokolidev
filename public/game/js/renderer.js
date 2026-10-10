@@ -491,6 +491,259 @@ class GameRenderer {
     ctx.restore();
   }
 
+  // Draw Super Cute Baby Creature (Chick, Dragon, Dino, Fairy, Penguin)
+  drawBabyCreature(egg, gameTime) {
+    const baby = egg.baby;
+    if (!baby) return;
+
+    const ctx = this.ctx;
+    const time = gameTime + (egg.id * 1.3);
+    const breathe = this.animator.getBreatheDeformation(time, 1.6, 0.12);
+
+    // Movement & hop animation
+    const isMoving = baby.pauseTimer <= 0;
+    const hopY = isMoving ? -Math.abs(Math.sin(time * 9)) * 9 : -Math.abs(Math.sin(time * 3)) * 2;
+    const waddleTilt = isMoving ? Math.sin(time * 12) * 0.12 : 0;
+    const facingLeft = Math.cos(baby.wanderAngle) < 0;
+
+    // Blinking eye timer (blinks every ~3.5s for 0.15s)
+    const blinkCycle = (time * 0.5) % 3.5;
+    const isBlinking = blinkCycle < 0.15;
+
+    ctx.save();
+    ctx.translate(baby.x, baby.y + hopY);
+    if (facingLeft) ctx.scale(-1, 1);
+    ctx.rotate(waddleTilt);
+    ctx.scale(breathe.sx, breathe.sy);
+
+    // 1. Soft ground shadow
+    ctx.save();
+    ctx.translate(0, -hopY);
+    ctx.beginPath();
+    const shadowScale = 1 - Math.min(0.5, Math.abs(hopY) / 18);
+    ctx.ellipse(0, 16, 14 * shadowScale, 6 * shadowScale, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+    ctx.fill();
+    ctx.restore();
+
+    // 2. Baby Character Body Theme by Egg Type
+    const type = egg.type || 'gold';
+    let bodyColor = '#FFDE59'; // Chick yellow
+    let bellyColor = '#FFF5B8';
+    let cheekColor = '#FF9AA2';
+    let eyeColor = '#2B1B17';
+    let detailColor = '#FF8C00';
+
+    if (type === 'ruby') {
+      bodyColor = '#FF758F'; // Baby Dragon pink
+      bellyColor = '#FFE3E8';
+      detailColor = '#C9184A';
+    } else if (type === 'emerald') {
+      bodyColor = '#70E000'; // Baby Dino mint green
+      bellyColor = '#D8F3DC';
+      detailColor = '#38B000';
+    } else if (type === 'rainbow') {
+      bodyColor = '#D0BCFF'; // Fairy baby lavender
+      bellyColor = '#F3E8FF';
+      detailColor = '#9747FF';
+    } else if (type === 'star') {
+      bodyColor = '#72EFDD'; // Star penguin teal
+      bellyColor = '#FFFFFF';
+      detailColor = '#0096C7';
+    }
+
+    // 3. Tiny Feet / Waddling Paws
+    const leftFootY = isMoving ? Math.sin(time * 18) * 3 : 0;
+    const rightFootY = isMoving ? -Math.sin(time * 18) * 3 : 0;
+    ctx.fillStyle = type === 'ruby' || type === 'emerald' ? detailColor : '#FF9F1C';
+    ctx.beginPath();
+    ctx.ellipse(-6, 14 + leftFootY, 4, 3, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(6, 14 + rightFootY, 4, 3, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 4. Baby Creature Tail (Dragon or Dino)
+    if (type === 'ruby' || type === 'emerald') {
+      ctx.beginPath();
+      ctx.moveTo(-10, 8);
+      ctx.quadraticCurveTo(-18, 12 + Math.sin(time * 8) * 3, -16, 2);
+      ctx.quadraticCurveTo(-10, 2, -6, 5);
+      ctx.fillStyle = bodyColor;
+      ctx.fill();
+    }
+
+    // 5. Chubby Fluffy Round Body
+    ctx.beginPath();
+    ctx.arc(0, 0, 16, 0, Math.PI * 2);
+    ctx.fillStyle = bodyColor;
+    ctx.fill();
+    ctx.strokeStyle = detailColor;
+    ctx.lineWidth = 1.8;
+    ctx.stroke();
+
+    // 6. Cute Tummy Cushion
+    ctx.beginPath();
+    ctx.ellipse(0, 4, 11, 10, 0, 0, Math.PI * 2);
+    ctx.fillStyle = bellyColor;
+    ctx.fill();
+
+    // 7. Tiny Flapping Baby Wings / Arms
+    const wingAngle = Math.sin(time * 16) * 0.45;
+    ctx.save();
+    ctx.translate(11, 2);
+    ctx.rotate(wingAngle);
+    ctx.beginPath();
+    ctx.ellipse(4, 0, 6, 4, Math.PI / 6, 0, Math.PI * 2);
+    ctx.fillStyle = bodyColor;
+    ctx.fill();
+    ctx.strokeStyle = detailColor;
+    ctx.lineWidth = 1.4;
+    ctx.stroke();
+    ctx.restore();
+
+    ctx.save();
+    ctx.translate(-11, 2);
+    ctx.rotate(-wingAngle);
+    ctx.beginPath();
+    ctx.ellipse(-4, 0, 6, 4, -Math.PI / 6, 0, Math.PI * 2);
+    ctx.fillStyle = bodyColor;
+    ctx.fill();
+    ctx.strokeStyle = detailColor;
+    ctx.lineWidth = 1.4;
+    ctx.stroke();
+    ctx.restore();
+
+    // 8. Baby Eyes: Big, Sparkly Anime Eyes!
+    if (isBlinking) {
+      ctx.strokeStyle = eyeColor;
+      ctx.lineWidth = 2.2;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.arc(-5, -2, 3.5, Math.PI, 0);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(5, -2, 3.5, Math.PI, 0);
+      ctx.stroke();
+    } else {
+      // Big round baby eyes with sparkle highlights
+      ctx.beginPath();
+      ctx.ellipse(-5, -2, 3.5, 4.5, 0, 0, Math.PI * 2);
+      ctx.fillStyle = eyeColor;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(-6, -4, 1.6, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(-4, -1, 0.8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.ellipse(5, -2, 3.5, 4.5, 0, 0, Math.PI * 2);
+      ctx.fillStyle = eyeColor;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(4, -4, 1.6, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(6, -1, 0.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // 9. Rosy Blushing Cheeks
+    ctx.beginPath();
+    ctx.ellipse(-9, 3, 3, 2, 0, 0, Math.PI * 2);
+    ctx.fillStyle = cheekColor;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(9, 3, 3, 2, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 10. Cute Mouth / Beak
+    if (type === 'gold' || type === 'star') {
+      ctx.beginPath();
+      ctx.moveTo(-3, 0);
+      ctx.lineTo(0, 4);
+      ctx.lineTo(3, 0);
+      ctx.closePath();
+      ctx.fillStyle = '#FF6B00';
+      ctx.fill();
+    } else {
+      // Cute smile
+      ctx.strokeStyle = '#2B1B17';
+      ctx.lineWidth = 1.6;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.arc(-2, 3, 2.2, 0, Math.PI);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(2, 3, 2.2, 0, Math.PI);
+      ctx.stroke();
+    }
+
+    // 11. Baby Dragon Horns (for ruby)
+    if (type === 'ruby') {
+      ctx.fillStyle = '#FFE66D';
+      ctx.beginPath();
+      ctx.moveTo(-7, -13);
+      ctx.lineTo(-10, -20);
+      ctx.lineTo(-4, -15);
+      ctx.closePath();
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(7, -13);
+      ctx.lineTo(10, -20);
+      ctx.lineTo(4, -15);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // 12. Adorable Cracked Eggshell Hat (Wearing top shell of its egg!)
+    const hatTilt = Math.sin(time * 6) * 0.08;
+    ctx.save();
+    ctx.translate(0, -12);
+    ctx.rotate(hatTilt);
+
+    ctx.beginPath();
+    ctx.moveTo(-11, 2);
+    ctx.lineTo(-7, -2);
+    ctx.lineTo(-3, 2);
+    ctx.lineTo(1, -2);
+    ctx.lineTo(5, 2);
+    ctx.lineTo(9, -1);
+    ctx.lineTo(11, 2);
+    ctx.bezierCurveTo(12, -14, -12, -14, -11, 2);
+    ctx.closePath();
+
+    const eggColors = egg.colors || { top: '#FFE066', bottom: '#F77F00', border: '#D47A00' };
+    ctx.fillStyle = eggColors.top;
+    ctx.fill();
+    ctx.strokeStyle = eggColors.border;
+    ctx.lineWidth = 1.8;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.ellipse(-3, -7, 2, 4, -Math.PI / 4, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+    ctx.fill();
+
+    ctx.restore();
+
+    ctx.restore(); // restore transform
+
+    // 13. Baby Name Label
+    ctx.save();
+    ctx.translate(baby.x, baby.y + hopY);
+    ctx.fillStyle = '#D81B60';
+    ctx.font = 'bold 10px "Fredoka", sans-serif';
+    ctx.textAlign = 'center';
+    const babyName = type === 'gold' ? '🐣 삐약이' : (type === 'ruby' ? '🐲 루비뇽' : (type === 'emerald' ? '🐢 롱이' : (type === 'rainbow' ? '🦄 포포' : '🐧 핑구')));
+    ctx.fillText(babyName, 0, -26);
+    ctx.restore();
+  }
+
   // Draw real-time sprite-gen wave monitor on canvas
   drawBreatheMonitor(gameTime) {
     const ctx = this.ctx;
@@ -608,46 +861,7 @@ class GameRenderer {
       }
     }
 
-    // 2. Sync Hatched Baby Creatures: attack-slime.gif hopping happily in the nest!
-    eggs.forEach((egg, idx) => {
-      const babySprite = this.getOrCreateSprite(`baby_${egg.id}`, 'sprite-gen/docs/assets/attack-slime.gif');
-      if (babySprite) {
-        if (egg.isHatched && egg.baby) {
-          const baby = egg.baby;
-          const breathe = this.animator.getBreatheDeformation(gameTime + egg.timeOffset, 1.6, 0.14);
-          const hopY = -Math.abs(Math.sin(gameTime * 7 + idx * 1.8)) * 8;
-
-          const w = 46;
-          const h = 42;
-          babySprite.style.width = `${w}px`;
-          babySprite.style.height = `${h}px`;
-          babySprite.style.left = `${baby.x - w / 2}px`;
-          babySprite.style.top = `${baby.y - h + 14 + hopY}px`;
-
-          // Color themes matching the hatched egg
-          if (egg.type === 'ruby') {
-            babySprite.style.filter = 'hue-rotate(90deg) saturate(1.4) drop-shadow(0 4px 8px rgba(244, 63, 94, 0.45))';
-          } else if (egg.type === 'gold') {
-            babySprite.style.filter = 'hue-rotate(185deg) saturate(1.6) drop-shadow(0 4px 8px rgba(234, 179, 8, 0.5))';
-          } else if (egg.type === 'emerald') {
-            babySprite.style.filter = 'hue-rotate(275deg) saturate(1.3) drop-shadow(0 4px 8px rgba(34, 197, 94, 0.45))';
-          } else if (egg.type === 'rainbow') {
-            babySprite.style.filter = 'hue-rotate(330deg) saturate(1.7) drop-shadow(0 4px 8px rgba(168, 85, 247, 0.45))';
-          } else {
-            babySprite.style.filter = 'drop-shadow(0 4px 8px rgba(56, 189, 248, 0.45))';
-          }
-
-          const flip = Math.cos(baby.wanderAngle) < 0 ? -1 : 1;
-          babySprite.style.transform = `scaleX(${flip}) scale(${breathe.sx * 0.95}, ${breathe.sy * 0.95})`;
-          babySprite.style.display = 'block';
-        } else {
-          // Hide baby sprite until egg hatches!
-          babySprite.style.display = 'none';
-        }
-      }
-    });
-
-    // 3. Sync Patrolling Guard NPCs: attack-paladin.gif & attack-claudecy-samurai.gif
+    // 2. Sync Patrolling Guard NPCs: attack-paladin.gif & attack-claudecy-samurai.gif
     npcs.forEach((npc, idx) => {
       const src = npc.role === 'dog' ? 'sprite-gen/docs/assets/attack-claudecy-samurai.gif' : 'sprite-gen/docs/assets/attack-paladin.gif';
       const nSprite = this.getOrCreateSprite(`npc_${npc.id}`, src);

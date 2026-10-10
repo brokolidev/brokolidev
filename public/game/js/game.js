@@ -1059,6 +1059,13 @@ class DumplingGame {
       this.renderer.drawEgg(egg, this.player, this.gameTime);
     });
 
+    // 5.5. Super Cute Hatched Baby Creatures Hopping & Waddling in the Nest
+    eggs.forEach(egg => {
+      if (egg.isHatched && egg.baby) {
+        this.renderer.drawBabyCreature(egg, this.gameTime);
+      }
+    });
+
     // 6. Dynamic Particles (Steam, Stars, Hearts, Dust, Shell Fragments)
     this.renderer.drawParticles();
 
