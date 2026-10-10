@@ -375,16 +375,16 @@ class GameRenderer {
     ctx.rotate(wobble);
     ctx.scale(sx, sy);
 
-    // 3. Egg Shell Geometry (Cute oval with tapered top)
+    // 3. Egg Shell Geometry (Cute, plump egg with tapered top and wide bottom)
     ctx.beginPath();
-    ctx.moveTo(0, -22);
-    ctx.bezierCurveTo(15, -22, 19, -4, 19, 12);
-    ctx.bezierCurveTo(19, 23, -19, 23, -19, 12);
-    ctx.bezierCurveTo(-19, -4, -15, -22, 0, -22);
+    ctx.moveTo(0, -28);
+    ctx.bezierCurveTo(19, -28, 24, -6, 24, 16);
+    ctx.bezierCurveTo(24, 30, -24, 30, -24, 16);
+    ctx.bezierCurveTo(-24, -6, -19, -28, 0, -28);
     ctx.closePath();
 
     // Vibrant gradient fill
-    const grad = ctx.createLinearGradient(-10, -22, 12, 22);
+    const grad = ctx.createLinearGradient(-12, -28, 14, 30);
     const theme = egg.colors || { top: '#FF6B6B', bottom: '#C9184A', pattern: '#FFE66D', border: '#A0153E' };
     grad.addColorStop(0, theme.top);
     grad.addColorStop(1, theme.bottom);
@@ -393,35 +393,35 @@ class GameRenderer {
 
     // Shell border
     ctx.strokeStyle = theme.border;
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2.8;
     ctx.stroke();
 
-    // 4. Pattern Spots inside shell
+    // 4. Pattern Spots & Dinosaur/Fantasy Egg Ornaments
     ctx.save();
     ctx.clip(); // Clip decorative spots inside egg boundary
 
     ctx.fillStyle = theme.pattern;
     ctx.beginPath();
-    ctx.arc(-5, -6, 5, 0, Math.PI * 2);
-    ctx.arc(7, 4, 6, 0, Math.PI * 2);
-    ctx.arc(-8, 12, 4, 0, Math.PI * 2);
-    ctx.arc(6, -14, 3, 0, Math.PI * 2);
+    ctx.arc(-7, -8, 6, 0, Math.PI * 2);
+    ctx.arc(8, 4, 7, 0, Math.PI * 2);
+    ctx.arc(-9, 15, 5, 0, Math.PI * 2);
+    ctx.arc(7, -18, 4, 0, Math.PI * 2);
     ctx.fill();
 
     // Rainbow wave stripe if rainbow type
     if (egg.type === 'rainbow') {
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
-      ctx.lineWidth = 4;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+      ctx.lineWidth = 5;
       ctx.beginPath();
-      ctx.moveTo(-20, 2);
-      ctx.bezierCurveTo(-8, 8, 8, 8, 20, 2);
+      ctx.moveTo(-24, 2);
+      ctx.bezierCurveTo(-10, 10, 10, 10, 24, 2);
       ctx.stroke();
     }
 
     // 5. Glossy 3D Highlight
     ctx.beginPath();
-    ctx.ellipse(-6, -11, 4, 7, -Math.PI / 6, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
+    ctx.ellipse(-7, -14, 5, 9, -Math.PI / 6, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
     ctx.fill();
 
     ctx.restore();
@@ -429,22 +429,22 @@ class GameRenderer {
     // 6. Cracking Lines when incubating in nest!
     if (egg.isHatching && egg.cracks > 0) {
       ctx.strokeStyle = '#2B040C';
-      ctx.lineWidth = 2.2;
+      ctx.lineWidth = 2.4;
       ctx.lineCap = 'round';
       ctx.beginPath();
       // Crack 1
-      ctx.moveTo(-4, -12);
-      ctx.lineTo(-1, -6);
-      ctx.lineTo(-6, -1);
-      ctx.lineTo(-2, 5);
+      ctx.moveTo(-5, -16);
+      ctx.lineTo(-1, -8);
+      ctx.lineTo(-7, -2);
+      ctx.lineTo(-2, 6);
       if (egg.cracks >= 2) {
-        ctx.lineTo(4, 9);
-        ctx.lineTo(1, 14);
+        ctx.lineTo(5, 11);
+        ctx.lineTo(1, 18);
       }
       if (egg.cracks >= 3) {
-        ctx.moveTo(3, -9);
-        ctx.lineTo(8, -4);
-        ctx.lineTo(5, 2);
+        ctx.moveTo(4, -12);
+        ctx.lineTo(10, -5);
+        ctx.lineTo(6, 3);
       }
       ctx.stroke();
     }
@@ -457,28 +457,36 @@ class GameRenderer {
     if (egg.isHatching) {
       const timerStr = Math.max(0, egg.hatchTimer).toFixed(1);
       ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-      this.roundRect(ctx, -38, -46, 76, 22, 11);
+      this.roundRect(ctx, -42, -52, 84, 24, 12);
       ctx.fill();
       ctx.strokeStyle = '#FF8A80';
       ctx.lineWidth = 2;
       ctx.stroke();
 
       ctx.fillStyle = '#D81B60';
-      ctx.font = 'bold 11px "Fredoka", sans-serif';
+      ctx.font = 'bold 12px "Fredoka", sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(`🐣 부화 ${timerStr}s`, 0, -31);
+      ctx.fillText(`🐣 부화 ${timerStr}s`, 0, -36);
 
       // Mini incubation progress bar
       const progress = 1 - Math.max(0, egg.hatchTimer / egg.hatchDuration);
       ctx.fillStyle = '#E0E0E0';
-      ctx.fillRect(-28, -26, 56, 4);
+      ctx.fillRect(-32, -30, 64, 4);
       ctx.fillStyle = '#00E676';
-      ctx.fillRect(-28, -26, 56 * progress, 4);
+      ctx.fillRect(-32, -30, 64 * progress, 4);
     } else if (!egg.isCarried) {
+      // Readable rounded badge
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+      this.roundRect(ctx, -40, 36, 80, 22, 11);
+      ctx.fill();
+      ctx.strokeStyle = '#E2B880';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
       ctx.fillStyle = '#4A3B32';
       ctx.font = 'bold 11px "Fredoka", sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(`🥚 ${egg.name}`, 0, 32);
+      ctx.fillText(`🥚 ${egg.name}`, 0, 51);
     }
     ctx.restore();
   }
@@ -564,8 +572,9 @@ class GameRenderer {
   /**
    * Synchronizes 2D animated sprites from aldegad/sprite-gen with game entity states.
    */
-  syncDOMSprites(player, dumplings, npcs, gameTime) {
+  syncDOMSprites(player, eggsList, npcs, gameTime) {
     if (!this.spriteLayer) return;
+    const eggs = eggsList || [];
 
     // Automatically synchronize scale with canvas responsive display size
     if (this.canvas.clientWidth > 0 && this.canvas.width > 0) {
