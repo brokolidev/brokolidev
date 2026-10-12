@@ -31,6 +31,10 @@ Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+Route::get('/utils', function () {
+    return view('utils.index');
+})->name('utils.index');
+
 /**
  * Articles
  */
@@ -62,6 +66,13 @@ Route::get('/sitemap.xml', function () {
     $xml .= '<loc>' . htmlspecialchars($baseUrl . '/') . '</loc>';
     $xml .= '<changefreq>weekly</changefreq>';
     $xml .= '<priority>1.0</priority>';
+    $xml .= '</url>';
+
+    // Developer Utilities
+    $xml .= '<url>';
+    $xml .= '<loc>' . htmlspecialchars($baseUrl . '/utils') . '</loc>';
+    $xml .= '<changefreq>weekly</changefreq>';
+    $xml .= '<priority>0.9</priority>';
     $xml .= '</url>';
 
     // Articles Index
