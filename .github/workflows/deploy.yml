@@ -39,8 +39,8 @@ jobs:
         run: |
           mkdir -p dist
           rm -f public/hot
-          # Render static index.html using Blade
-          php -r "putenv('ASSET_URL=/'); require 'vendor/autoload.php'; \$app = require_once 'bootstrap/app.php'; \$kernel = \$app->make(Illuminate\Contracts\Console\Kernel::class); \$kernel->bootstrap(); file_put_contents('dist/index.html', view('welcome')->render());"
+          # Render static pages using Blade
+          php scripts/export-ssg.php
           # Copy static assets to dist directory
           cp -r public/build dist/
           cp -r public/img dist/
