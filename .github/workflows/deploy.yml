@@ -55,4 +55,4 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           bunx wrangler pages project create brokolidev --production-branch=main || true
-          bunx wrangler pages deploy dist --project-name=brokolidev --commit-dirty=true
+          bunx wrangler pages deploy dist --project-name=brokolidev --branch=main --commit-dirty=true

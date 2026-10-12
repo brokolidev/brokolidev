@@ -8,6 +8,26 @@
 @section('og_title', 'Free Online Developer Tools ⚡ - 100% Client-Side Private')
 @section('og_description', 'Fast, privacy-first developer utilities running 100% inside your browser. No server uploads, zero logs, pure speed.')
 
+@section('json_ld')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'WebApplication',
+    'name' => 'DevUtils - Free Online Developer Tools',
+    'url' => 'https://brokolidev.com/utils',
+    'applicationCategory' => 'DeveloperApplication',
+    'operatingSystem' => 'All',
+    'browserRequirements' => 'Requires JavaScript. Requires HTML5.',
+    'offers' => [
+        '@type' => 'Offer',
+        'price' => '0',
+        'priceCurrency' => 'USD',
+    ],
+    'description' => 'Fast, 100% private developer utilities running completely inside your browser. JSON Formatter, Base64 Encoder/Decoder, Cron Parser, Code Diff, JWT Debugger, URL Parser.',
+], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) !!}
+</script>
+@endsection
+
 @section('contents')
 <div class="sm:px-8 mt-6 sm:mt-10 pb-20">
     <div class="mx-auto max-w-7xl lg:px-8">
@@ -373,24 +393,6 @@
     </div>
 </div>
 
-<!-- Structured Data for Tools -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "DevUtils - Free Online Developer Tools",
-  "url": "https://brokolidev.com/utils",
-  "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "All",
-  "browserRequirements": "Requires JavaScript. Requires HTML5.",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "description": "Fast, 100% private developer utilities running completely inside your browser. JSON Formatter, Base64 Encoder/Decoder, Cron Parser, Code Diff, JWT Debugger, URL Parser."
-}
-</script>
 
 <!-- Embedded Client-Side Script Engine -->
 <script>

@@ -33,9 +33,11 @@ $pages = [
     ],
 ];
 
+config(['app.url' => 'https://brokolidev.com']);
+
 foreach ($pages as $page) {
     // Bind mock request for route matching (e.g. request()->is('utils*')) and canonical URLs
-    $request = \Illuminate\Http\Request::create($page['url'], 'GET');
+    $request = \Illuminate\Http\Request::create('https://brokolidev.com' . $page['url'], 'GET');
     $app->instance('request', $request);
     \Illuminate\Support\Facades\Request::swap($request);
 
