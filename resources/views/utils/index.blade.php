@@ -35,38 +35,13 @@
     <div class="mx-auto max-w-5xl">
 
         <!-- Header / Hero Section -->
-        <div class="pb-8 border-b border-zinc-200 dark:border-zinc-800">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 font-heading">
-                            Developer Utilities <span class="text-amber-500">⚡</span>
-                        </h1>
-                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-700/50">
-                            <span class="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse"></span>
-                            Free & Open
-                        </span>
-                    </div>
-                    <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 max-w-2xl leading-relaxed">
-                        High-performance browser utilities engineered for developers, QA, and analysts.
-                    </p>
-                </div>
-
-                <!-- Trust Badges -->
-                <div class="flex flex-wrap items-center gap-2">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 shadow-2xs">
-                        <i class="fas fa-shield-halved text-emerald-500 text-xs"></i>
-                        <span>100% Client-Side Safe</span>
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 shadow-2xs">
-                        <i class="fas fa-bolt text-amber-500 text-xs"></i>
-                        <span>Zero Server Uploads</span>
-                    </span>
-                </div>
-            </div>
+        <div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 font-heading">
+                Developer Utilities <span class="text-amber-500">⚡</span>
+            </h1>
 
             <!-- Category Tab Bar (Catalyst Style Navigation) -->
-            <div class="mt-6 flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar border-b border-zinc-100 dark:border-zinc-800/80" id="toolTabBar">
+            <div class="mt-6 flex items-center gap-1.5 overflow-x-auto pb-3 no-scrollbar border-b border-zinc-200 dark:border-zinc-800" id="toolTabBar">
                 <a href="#json" onclick="switchTool('json'); return false;" id="tab-json" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-zinc-800 text-teal-700 dark:text-teal-300 shadow-xs border border-zinc-200 dark:border-zinc-700 flex items-center gap-2 shrink-0 transition-all duration-200">
                     <i class="fas fa-code"></i>
                     <span>JSON Formatter</span>
