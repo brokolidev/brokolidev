@@ -163,7 +163,7 @@
     <!-- Header / Navbar -->
     <header class="relative z-50">
         <div class="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 pt-6">
-            <div class="mx-auto max-w-2xl lg:max-w-4xl flex items-center justify-between">
+            <div class="mx-auto @yield('content_container_class', 'max-w-2xl lg:max-w-4xl') flex items-center justify-between">
                 <!-- Brand / Logo -->
                 <a href="/" class="group flex items-center text-zinc-900 dark:text-zinc-100 font-bold text-base tracking-tight transition-opacity duration-200 hover:opacity-80">
                     <span>brokoli<span class="text-teal-600 dark:text-teal-400 font-semibold">.dev</span></span>
@@ -196,10 +196,8 @@
 
     <main class="flex-auto">
         @section('contents')
-        <div class="sm:px-8 mt-6 sm:mt-10 pb-16">
-            <div class="mx-auto max-w-7xl lg:px-8">
-                <div class="relative px-4 sm:px-8 lg:px-12">
-                    <div class="mx-auto max-w-2xl lg:max-w-4xl">
+        <div class="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 mt-6 sm:mt-10 pb-16">
+            <div class="mx-auto max-w-2xl lg:max-w-4xl">
                         <!-- Profile Header -->
                         <div id="about" class="animate-fade-in-up [animation-delay:100ms] flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 pb-12 border-b border-zinc-200 dark:border-zinc-800">
                             <div>
@@ -372,8 +370,6 @@
                         </div>
 
                     </div>
-                </div>
-            </div>
         </div>
         @show
     </main>
@@ -381,7 +377,7 @@
     <!-- Footer -->
     <footer class="mt-auto border-t border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 py-8 backdrop-blur-sm">
         <div class="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12">
-            <div class="mx-auto max-w-2xl lg:max-w-4xl flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="mx-auto @yield('content_container_class', 'max-w-2xl lg:max-w-4xl') flex flex-col sm:flex-row items-center justify-between gap-4">
                 <p class="text-xs text-zinc-500 dark:text-zinc-400 text-center sm:text-left">
                     Connect on any platform — I typically respond within 1–2 business days.
                 </p>

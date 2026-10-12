@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('content_container_class', 'max-w-5xl')
+
 @section('title', 'Free Online Developer Tools ⚡ | JSON, Base64, Cron, Diff, JWT, URL')
 @section('meta_description', 'Fast, 100% private developer utilities running completely in your browser. JSON Formatter, Base64 Encoder/Decoder, Cron Parser, Code Diff, JWT Debugger, and URL Parser.')
 @section('meta_keywords', 'json formatter, json validator, base64 decode, base64 encode, cron expression generator, crontab explainer, text diff checker, code compare, jwt debugger, jwt decode, url parser, developer tools, free online tools, brokolidev')
@@ -29,70 +31,68 @@
 @endsection
 
 @section('contents')
-<div class="sm:px-8 mt-6 sm:mt-10 pb-20">
-    <div class="mx-auto max-w-7xl lg:px-8">
-        <div class="relative px-4 sm:px-8 lg:px-12">
-            <div class="mx-auto max-w-5xl">
+<div class="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 mt-6 sm:mt-10 pb-20">
+    <div class="mx-auto max-w-5xl">
 
-                <!-- Header / Hero Section -->
-                <div class="pb-8 border-b border-zinc-200 dark:border-zinc-800">
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 font-heading">
-                                    Developer Utilities <span class="text-amber-500">⚡</span>
-                                </h1>
-                                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-700/50">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse"></span>
-                                    Free & Open
-                                </span>
-                            </div>
-                            <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 max-w-2xl leading-relaxed">
-                                High-performance browser utilities engineered for developers, QA, and analysts.
-                            </p>
-                        </div>
-
-                        <!-- Trust Badges -->
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 shadow-2xs">
-                                <i class="fas fa-shield-halved text-emerald-500 text-xs"></i>
-                                <span>100% Client-Side Safe</span>
-                            </span>
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 shadow-2xs">
-                                <i class="fas fa-bolt text-amber-500 text-xs"></i>
-                                <span>Zero Server Uploads</span>
-                            </span>
-                        </div>
+        <!-- Header / Hero Section -->
+        <div class="pb-8 border-b border-zinc-200 dark:border-zinc-800">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 font-heading">
+                            Developer Utilities <span class="text-amber-500">⚡</span>
+                        </h1>
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-700/50">
+                            <span class="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse"></span>
+                            Free & Open
+                        </span>
                     </div>
-
-                    <!-- Category Tab Bar (Catalyst Style Navigation) -->
-                    <div class="mt-6 flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar border-b border-zinc-100 dark:border-zinc-800/80" id="toolTabBar">
-                        <button onclick="switchTool('json')" id="tab-json" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-zinc-800 text-teal-700 dark:text-teal-300 shadow-xs border border-zinc-200 dark:border-zinc-700 flex items-center gap-2 shrink-0 transition-all duration-200">
-                            <i class="fas fa-code"></i>
-                            <span>JSON Formatter</span>
-                        </button>
-                        <button onclick="switchTool('base64')" id="tab-base64" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
-                            <i class="fas fa-font"></i>
-                            <span>Base64</span>
-                        </button>
-                        <button onclick="switchTool('cron')" id="tab-cron" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
-                            <i class="fas fa-clock"></i>
-                            <span>Cron Explainer</span>
-                        </button>
-                        <button onclick="switchTool('diff')" id="tab-diff" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
-                            <i class="fas fa-columns"></i>
-                            <span>Diff Checker</span>
-                        </button>
-                        <button onclick="switchTool('jwt')" id="tab-jwt" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
-                            <i class="fas fa-key"></i>
-                            <span>JWT Debugger</span>
-                        </button>
-                        <button onclick="switchTool('url')" id="tab-url" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
-                            <i class="fas fa-link"></i>
-                            <span>URL & Query Parser</span>
-                        </button>
-                    </div>
+                    <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 max-w-2xl leading-relaxed">
+                        High-performance browser utilities engineered for developers, QA, and analysts.
+                    </p>
                 </div>
+
+                <!-- Trust Badges -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 shadow-2xs">
+                        <i class="fas fa-shield-halved text-emerald-500 text-xs"></i>
+                        <span>100% Client-Side Safe</span>
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 shadow-2xs">
+                        <i class="fas fa-bolt text-amber-500 text-xs"></i>
+                        <span>Zero Server Uploads</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Category Tab Bar (Catalyst Style Navigation) -->
+            <div class="mt-6 flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar border-b border-zinc-100 dark:border-zinc-800/80" id="toolTabBar">
+                <a href="#json" onclick="switchTool('json'); return false;" id="tab-json" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-zinc-800 text-teal-700 dark:text-teal-300 shadow-xs border border-zinc-200 dark:border-zinc-700 flex items-center gap-2 shrink-0 transition-all duration-200">
+                    <i class="fas fa-code"></i>
+                    <span>JSON Formatter</span>
+                </a>
+                <a href="#base64" onclick="switchTool('base64'); return false;" id="tab-base64" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
+                    <i class="fas fa-font"></i>
+                    <span>Base64</span>
+                </a>
+                <a href="#cron" onclick="switchTool('cron'); return false;" id="tab-cron" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
+                    <i class="fas fa-clock"></i>
+                    <span>Cron Explainer</span>
+                </a>
+                <a href="#diff" onclick="switchTool('diff'); return false;" id="tab-diff" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
+                    <i class="fas fa-columns"></i>
+                    <span>Diff Checker</span>
+                </a>
+                <a href="#jwt" onclick="switchTool('jwt'); return false;" id="tab-jwt" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
+                    <i class="fas fa-key"></i>
+                    <span>JWT Debugger</span>
+                </a>
+                <a href="#url" onclick="switchTool('url'); return false;" id="tab-url" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
+                    <i class="fas fa-link"></i>
+                    <span>URL & Query Parser</span>
+                </a>
+            </div>
+        </div>
 
                 <!-- TOOL 1: JSON Formatter & Minifier -->
                 <div id="panel-json" class="tool-panel py-6 space-y-4">
@@ -388,16 +388,19 @@
                     </div>
                 </div>
 
-            </div>
-        </div>
     </div>
 </div>
 
-
 <!-- Embedded Client-Side Script Engine -->
 <script>
-    // Tab Switching Logic
-    function switchTool(toolId) {
+    const VALID_TOOLS = ['json', 'base64', 'cron', 'diff', 'jwt', 'url'];
+
+    // Tab Switching Logic with Hash state update
+    function switchTool(toolId, updateHash = true) {
+        if (!VALID_TOOLS.includes(toolId)) {
+            toolId = 'json';
+        }
+
         document.querySelectorAll('.tool-panel').forEach(panel => panel.classList.add('hidden'));
         document.querySelectorAll('.tool-tab').forEach(tab => {
             tab.className = "tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200";
@@ -409,6 +412,10 @@
         if (activePanel) activePanel.classList.remove('hidden');
         if (activeTab) {
             activeTab.className = "tool-tab px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-zinc-800 text-teal-700 dark:text-teal-300 shadow-xs border border-zinc-200 dark:border-zinc-700 flex items-center gap-2 shrink-0 transition-all duration-200";
+        }
+
+        if (updateHash && window.location.hash !== '#' + toolId) {
+            history.replaceState(null, '', '#' + toolId);
         }
     }
 
@@ -839,9 +846,21 @@
         }[tag] || tag));
     }
 
-    // Run on initial load
+    function getToolFromHash() {
+        const hash = (window.location.hash || '').replace('#', '').toLowerCase();
+        return VALID_TOOLS.includes(hash) ? hash : 'json';
+    }
+
+    // Run on initial load and handle browser back/forward navigation
     document.addEventListener('DOMContentLoaded', () => {
+        const initialTool = getToolFromHash();
+        switchTool(initialTool, false);
         parseCronLive();
+    });
+
+    window.addEventListener('hashchange', () => {
+        const tool = getToolFromHash();
+        switchTool(tool, false);
     });
 </script>
 @endsection
