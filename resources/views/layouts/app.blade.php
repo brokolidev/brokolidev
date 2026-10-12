@@ -171,9 +171,6 @@
 
                 <!-- Navigation Links & Theme Toggle -->
                 <nav class="flex items-center gap-1.5 sm:gap-2">
-                    <a href="/" class="px-3 py-1.5 rounded-lg text-xs {{ request()->is('/') ? 'font-semibold text-teal-700 bg-teal-50 border border-teal-200/80 dark:bg-teal-950/40 dark:text-teal-300 dark:border-teal-500/30 shadow-2xs' : 'font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/80' }} transition-all duration-200">
-                        <span>Profile</span>
-                    </a>
                     <a href="/utils" class="px-3 py-1.5 rounded-lg text-xs {{ request()->is('utils*') ? 'font-semibold text-teal-700 bg-teal-50 border border-teal-200/80 dark:bg-teal-950/40 dark:text-teal-300 dark:border-teal-500/30 shadow-2xs' : 'font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/80' }} transition-all duration-200">
                         <span class="inline-flex items-center gap-1"><span>Utils</span><span class="text-amber-500 text-[10px]">⚡</span></span>
                     </a>

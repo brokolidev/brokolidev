@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('content_container_class', 'max-w-5xl')
-
 @section('title', 'Free Online Developer Tools ⚡ | JSON, Base64, Cron, Diff, JWT, URL')
 @section('meta_description', 'Fast, 100% private developer utilities running completely in your browser. JSON Formatter, Base64 Encoder/Decoder, Cron Parser, Code Diff, JWT Debugger, and URL Parser.')
 @section('meta_keywords', 'json formatter, json validator, base64 decode, base64 encode, cron expression generator, crontab explainer, text diff checker, code compare, jwt debugger, jwt decode, url parser, developer tools, free online tools, brokolidev')
@@ -32,7 +30,7 @@
 
 @section('contents')
 <div class="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 mt-6 sm:mt-10 pb-20">
-    <div class="mx-auto max-w-5xl">
+    <div class="mx-auto max-w-2xl lg:max-w-4xl">
 
         <!-- Header / Hero Section -->
         <div>
