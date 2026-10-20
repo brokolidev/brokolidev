@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Free Online Developer Tools ⚡ | JSON, Base64, Cron, Diff, JWT, URL')
-@section('meta_description', 'Fast, 100% private developer utilities running completely in your browser. JSON Formatter, Base64 Encoder/Decoder, Cron Parser, Code Diff, JWT Debugger, and URL Parser.')
-@section('meta_keywords', 'json formatter, json validator, base64 decode, base64 encode, cron expression generator, crontab explainer, text diff checker, code compare, jwt debugger, jwt decode, url parser, developer tools, free online tools, brokolidev')
+@section('title', 'Free Online Developer Tools ⚡ | JSON, Base64, Cron, Diff, JWT, URL, What Is My IP')
+@section('meta_description', 'Fast, 100% private developer utilities running completely in your browser. JSON Formatter, Base64 Encoder/Decoder, Cron Parser, Code Diff, JWT Debugger, URL Parser, and What Is My IP.')
+@section('meta_keywords', 'what is my ip, my public ip, ip address lookup, json formatter, json validator, base64 decode, base64 encode, cron expression generator, crontab explainer, text diff checker, code compare, jwt debugger, jwt decode, url parser, developer tools, free online tools, brokolidev')
 @section('canonical_url', 'https://brokolidev.com/utils')
 
 @section('og_title', 'Free Online Developer Tools ⚡ - 100% Client-Side Private')
-@section('og_description', 'Fast, privacy-first developer utilities running 100% inside your browser. No server uploads, zero logs, pure speed.')
+@section('og_description', 'Fast, privacy-first developer utilities running 100% inside your browser. JSON, Base64, Cron, Diff, JWT, URL Parser, and Public IP Lookup.')
 
 @section('json_ld')
 <script type="application/ld+json">
@@ -23,7 +23,7 @@
         'price' => '0',
         'priceCurrency' => 'USD',
     ],
-    'description' => 'Fast, 100% private developer utilities running completely inside your browser. JSON Formatter, Base64 Encoder/Decoder, Cron Parser, Code Diff, JWT Debugger, URL Parser.',
+    'description' => 'Fast, 100% private developer utilities running completely inside your browser. JSON Formatter, Base64 Encoder/Decoder, Cron Parser, Code Diff, JWT Debugger, URL Parser, and What Is My IP.',
 ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) !!}
 </script>
 @endsection
@@ -63,6 +63,10 @@
                 <a href="#url" onclick="switchTool('url'); return false;" id="tab-url" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
                     <i class="fas fa-link"></i>
                     <span>URL & Query Parser</span>
+                </a>
+                <a href="#ip" onclick="switchTool('ip'); return false;" id="tab-ip" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
+                    <i class="fas fa-globe"></i>
+                    <span>What Is My IP</span>
                 </a>
             </div>
         </div>
@@ -361,12 +365,139 @@
                     </div>
                 </div>
 
+                <!-- TOOL 7: What Is My IP (Public IP & Network Telemetry) -->
+                <div id="panel-ip" class="tool-panel py-6 space-y-4 hidden">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div>
+                            <h2 class="text-lg font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+                                <span>What Is My IP Address</span>
+                            </h2>
+                            <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Instantly inspect your public IPv4/IPv6 address, ISP, ASN, geolocation, and edge connection telemetry.</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="fetchPublicIpInfo(true)" id="ip-refresh-btn" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition inline-flex items-center gap-1.5 cursor-pointer">
+                                <i class="fas fa-rotate" id="ip-refresh-icon"></i>
+                                <span>Refresh</span>
+                            </button>
+                            <button onclick="copyDetectedIp()" id="ip-copy-main-btn" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 hover:bg-teal-100 border border-teal-200/80 dark:border-teal-800/60 transition inline-flex items-center gap-1.5 cursor-pointer">
+                                <i class="far fa-copy"></i>
+                                <span id="ip-copy-main-label">Copy IP</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Hero Public IP Display Card -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-teal-500/30 shadow-2xs space-y-4">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <span id="ip-status-badge" class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 dark:bg-teal-950/60 px-3 py-1 text-xs font-semibold text-teal-700 dark:text-teal-300 border border-teal-200/80 dark:border-teal-800/60">
+                                <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
+                                <span id="ip-status-text">Detecting Public IP...</span>
+                            </span>
+                            <span id="ip-version-badge" class="text-xs px-2.5 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 font-mono font-semibold text-zinc-600 dark:text-zinc-400">
+                                IPv4 / IPv6
+                            </span>
+                        </div>
+
+                        <div class="py-2 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
+                            <div id="ip-primary-display" onclick="copyDetectedIp()" title="Click to copy Public IP"
+                                class="font-mono text-2xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 break-all cursor-pointer hover:text-teal-600 dark:hover:text-teal-400 transition">
+                                Detecting...
+                            </div>
+                            <span id="ip-latency-badge" class="font-mono text-xs text-zinc-400 dark:text-zinc-500 shrink-0"></span>
+                        </div>
+
+                        <!-- IPv4 & IPv6 Dedicated Row -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs">
+                            <div class="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 flex items-center justify-between gap-2">
+                                <div class="min-w-0">
+                                    <div class="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">Public IPv4</div>
+                                    <div id="ip-v4-value" class="font-mono font-bold text-zinc-800 dark:text-zinc-200 mt-0.5 truncate">Detecting...</div>
+                                </div>
+                                <button onclick="copyIpField('ip-v4-value')" class="text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 px-2 py-1 shrink-0" title="Copy IPv4">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 flex items-center justify-between gap-2">
+                                <div class="min-w-0">
+                                    <div class="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">Public IPv6</div>
+                                    <div id="ip-v6-value" class="font-mono font-bold text-zinc-800 dark:text-zinc-200 mt-0.5 truncate">Checking...</div>
+                                </div>
+                                <button onclick="copyIpField('ip-v6-value')" class="text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400 px-2 py-1 shrink-0" title="Copy IPv6">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Network, ISP & Geolocation Breakdown Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+                        <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xs">
+                            <div class="text-[10px] text-zinc-400 font-semibold uppercase tracking-wider">ISP / Organization</div>
+                            <div id="ip-isp" class="font-mono font-bold text-zinc-800 dark:text-zinc-200 mt-1 break-words">-</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xs">
+                            <div class="text-[10px] text-zinc-400 font-semibold uppercase tracking-wider">ASN / Autonomous System</div>
+                            <div id="ip-asn" class="font-mono font-bold text-zinc-800 dark:text-zinc-200 mt-1 break-words">-</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xs">
+                            <div class="text-[10px] text-zinc-400 font-semibold uppercase tracking-wider">Location (City / Region / Country)</div>
+                            <div id="ip-location" class="font-mono font-bold text-zinc-800 dark:text-zinc-200 mt-1 break-words">-</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xs">
+                            <div class="text-[10px] text-zinc-400 font-semibold uppercase tracking-wider">Timezone & UTC Offset</div>
+                            <div id="ip-timezone" class="font-mono font-bold text-zinc-800 dark:text-zinc-200 mt-1 break-words">-</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xs">
+                            <div class="text-[10px] text-zinc-400 font-semibold uppercase tracking-wider">Coordinates & Postal</div>
+                            <div id="ip-coords" class="font-mono font-bold text-zinc-800 dark:text-zinc-200 mt-1 break-words">-</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xs">
+                            <div class="text-[10px] text-zinc-400 font-semibold uppercase tracking-wider">Edge Datacenter & TLS</div>
+                            <div id="ip-edge" class="font-mono font-bold text-zinc-800 dark:text-zinc-200 mt-1 break-words">-</div>
+                        </div>
+                    </div>
+
+                    <!-- Client Browser Context & Raw JSON Payload -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xs space-y-2.5 text-xs">
+                            <div class="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-2">
+                                <span class="font-semibold text-zinc-500 uppercase tracking-wider">Client Environment</span>
+                                <span id="ip-local-tz" class="font-mono text-teal-600 dark:text-teal-400"></span>
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-zinc-400 font-semibold uppercase">User-Agent</div>
+                                <div id="ip-user-agent" class="font-mono text-zinc-700 dark:text-zinc-300 mt-0.5 break-all leading-relaxed">-</div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 pt-1">
+                                <div>
+                                    <div class="text-[10px] text-zinc-400 font-semibold uppercase">Browser Language</div>
+                                    <div id="ip-browser-lang" class="font-mono font-semibold text-zinc-800 dark:text-zinc-200 mt-0.5">-</div>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] text-zinc-400 font-semibold uppercase">Viewport / Screen</div>
+                                    <div id="ip-screen-res" class="font-mono font-semibold text-zinc-800 dark:text-zinc-200 mt-0.5">-</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xs space-y-2">
+                            <div class="flex items-center justify-between text-xs border-b border-zinc-100 dark:border-zinc-800 pb-2">
+                                <span class="font-semibold text-zinc-500 uppercase tracking-wider">JSON Telemetry Payload</span>
+                                <button onclick="copyIpRawJson()" class="text-teal-600 dark:text-teal-400 hover:underline flex items-center gap-1">
+                                    <i class="far fa-copy text-xs"></i> Copy JSON
+                                </button>
+                            </div>
+                            <pre id="ip-raw-json" class="font-mono text-xs text-zinc-800 dark:text-zinc-200 overflow-x-auto max-h-40 p-2.5 bg-zinc-50 dark:bg-zinc-950 rounded-lg">{}</pre>
+                        </div>
+                    </div>
+                </div>
+
     </div>
 </div>
 
 <!-- Embedded Client-Side Script Engine -->
 <script>
-    const VALID_TOOLS = ['json', 'base64', 'cron', 'diff', 'jwt', 'url'];
+    const VALID_TOOLS = ['json', 'base64', 'cron', 'diff', 'jwt', 'url', 'ip'];
 
     // Tab Switching Logic with Hash state update
     function switchTool(toolId, updateHash = true) {
@@ -389,6 +520,10 @@
 
         if (updateHash && window.location.hash !== '#' + toolId) {
             history.replaceState(null, '', '#' + toolId);
+        }
+
+        if (toolId === 'ip') {
+            fetchPublicIpInfo(false);
         }
     }
 
@@ -798,6 +933,234 @@
     function copyQueryAsJSON() {
         navigator.clipboard.writeText(JSON.stringify(parsedParamsObj, null, 2));
         alert('Copied parameters as formatted JSON!');
+    }
+
+    // 7. What Is My IP (Public IP & Network Telemetry)
+    let ipInfoLoaded = false;
+    let currentDetectedIp = '';
+    let latestIpTelemetry = {};
+
+    async function fetchWithTimeout(url, timeoutMs = 4500) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeoutMs);
+        try {
+            const response = await fetch(url, { signal: controller.signal, cache: 'no-store' });
+            clearTimeout(timer);
+            return response;
+        } catch (err) {
+            clearTimeout(timer);
+            throw err;
+        }
+    }
+
+    function parseCloudflareTrace(text) {
+        const out = {};
+        (text || '').split('\n').forEach(line => {
+            const idx = line.indexOf('=');
+            if (idx > 0) {
+                out[line.slice(0, idx).trim()] = line.slice(idx + 1).trim();
+            }
+        });
+        return out;
+    }
+
+    async function fetchPublicIpInfo(forceRefresh = false) {
+        if (ipInfoLoaded && !forceRefresh) return;
+
+        const statusBadge = document.getElementById('ip-status-badge');
+        const statusText = document.getElementById('ip-status-text');
+        const versionBadge = document.getElementById('ip-version-badge');
+        const primaryEl = document.getElementById('ip-primary-display');
+        const latencyEl = document.getElementById('ip-latency-badge');
+        const v4El = document.getElementById('ip-v4-value');
+        const v6El = document.getElementById('ip-v6-value');
+        const ispEl = document.getElementById('ip-isp');
+        const asnEl = document.getElementById('ip-asn');
+        const locEl = document.getElementById('ip-location');
+        const tzEl = document.getElementById('ip-timezone');
+        const coordsEl = document.getElementById('ip-coords');
+        const edgeEl = document.getElementById('ip-edge');
+        const rawJsonEl = document.getElementById('ip-raw-json');
+        const refreshIcon = document.getElementById('ip-refresh-icon');
+
+        // Populate immediate browser environment context
+        document.getElementById('ip-user-agent').innerText = navigator.userAgent || '-';
+        document.getElementById('ip-browser-lang').innerText = (navigator.languages && navigator.languages.join(', ')) || navigator.language || '-';
+        document.getElementById('ip-screen-res').innerText = `${window.innerWidth}×${window.innerHeight} (Screen: ${window.screen.width}×${window.screen.height})`;
+        try {
+            document.getElementById('ip-local-tz').innerText = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        } catch (e) {}
+
+        if (refreshIcon) refreshIcon.classList.add('fa-spin');
+        statusText.innerText = 'Detecting Public IP...';
+        primaryEl.innerText = 'Detecting...';
+        v4El.innerText = 'Detecting...';
+        v6El.innerText = 'Checking...';
+
+        const startTime = performance.now();
+        let ipv4 = '';
+        let ipv6 = '';
+        let traceData = {};
+        let geoData = {};
+
+        // 1) Resolve IPv4, IPv6/Universal, and Cloudflare Edge Trace in parallel
+        const tasks = [
+            fetchWithTimeout('https://api.ipify.org?format=json', 4000)
+                .then(r => r.ok ? r.json() : null)
+                .then(d => { if (d && d.ip) ipv4 = d.ip; })
+                .catch(() => {}),
+            fetchWithTimeout('https://api64.ipify.org?format=json', 4000)
+                .then(r => r.ok ? r.json() : null)
+                .then(d => {
+                    if (d && d.ip) {
+                        if (d.ip.includes(':')) ipv6 = d.ip;
+                        else if (!ipv4) ipv4 = d.ip;
+                    }
+                })
+                .catch(() => {}),
+            fetchWithTimeout('/cdn-cgi/trace', 3000)
+                .then(r => r.ok ? r.text() : Promise.reject())
+                .catch(() => fetchWithTimeout('https://1.1.1.1/cdn-cgi/trace', 3500).then(r => r.ok ? r.text() : ''))
+                .then(txt => {
+                    traceData = parseCloudflareTrace(txt);
+                    if (traceData.ip) {
+                        if (traceData.ip.includes(':') && !ipv6) ipv6 = traceData.ip;
+                        if (!traceData.ip.includes(':') && !ipv4) ipv4 = traceData.ip;
+                    }
+                })
+                .catch(() => {}),
+            fetchWithTimeout('https://ipwho.is/', 4500)
+                .then(r => r.ok ? r.json() : Promise.reject())
+                .then(d => {
+                    if (d && d.success !== false && d.ip) {
+                        geoData = d;
+                    } else {
+                        throw new Error('Fallback to ipapi');
+                    }
+                })
+                .catch(() =>
+                    fetchWithTimeout('https://ipapi.co/json/', 4500)
+                        .then(r => r.ok ? r.json() : null)
+                        .then(d => { if (d && d.ip) geoData = d; })
+                        .catch(() => {})
+                )
+        ];
+
+        await Promise.allSettled(tasks);
+
+        const elapsedMs = Math.round(performance.now() - startTime);
+        if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+
+        const primaryIp = ipv4 || ipv6 || geoData.ip || traceData.ip || '';
+        currentDetectedIp = primaryIp;
+
+        if (!primaryIp) {
+            statusBadge.className = "inline-flex items-center gap-1.5 rounded-full bg-rose-50 dark:bg-rose-950/60 px-3 py-1 text-xs font-semibold text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800";
+            statusText.innerText = "Unable to reach IP endpoint (Check Ad-Blocker / Network)";
+            primaryEl.innerText = "Unavailable";
+            v4El.innerText = "Unavailable";
+            v6El.innerText = "Unavailable";
+            return;
+        }
+
+        ipInfoLoaded = true;
+        const isV6Primary = primaryIp.includes(':');
+        statusBadge.className = "inline-flex items-center gap-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/60";
+        statusText.innerText = "Public IP Active";
+        versionBadge.innerText = isV6Primary ? 'Primary: IPv6' : 'Primary: IPv4';
+        primaryEl.innerText = primaryIp;
+        latencyEl.innerText = `Resolved in ${elapsedMs} ms`;
+
+        v4El.innerText = ipv4 || (!isV6Primary ? primaryIp : 'Not detected (IPv6 only)');
+        v6El.innerText = ipv6 || (isV6Primary ? primaryIp : 'Not detected (IPv4 connection)');
+
+        // Extract ISP & ASN
+        const conn = geoData.connection || {};
+        const ispName = conn.isp || conn.org || geoData.org || geoData.isp || '-';
+        const asnNum = conn.asn ? `AS${conn.asn}` : (geoData.asn || '-');
+        const domainName = conn.domain ? ` (${conn.domain})` : '';
+
+        ispEl.innerText = ispName + domainName;
+        asnEl.innerText = asnNum;
+
+        // Extract Location
+        const flagEmoji = (geoData.flag && geoData.flag.emoji) ? `${geoData.flag.emoji} ` : '';
+        const locParts = [geoData.city, geoData.region || geoData.region_code, geoData.country || geoData.country_name || traceData.loc].filter(Boolean);
+        locEl.innerText = locParts.length ? `${flagEmoji}${locParts.join(', ')}` : '-';
+
+        // Extract Timezone
+        const tzObj = geoData.timezone || {};
+        if (typeof tzObj === 'object' && tzObj.id) {
+            tzEl.innerText = `${tzObj.id} (UTC ${tzObj.utc || ''})`;
+        } else if (typeof geoData.timezone === 'string') {
+            tzEl.innerText = `${geoData.timezone}${geoData.utc_offset ? ' (' + geoData.utc_offset + ')' : ''}`;
+        } else {
+            tzEl.innerText = Intl.DateTimeFormat().resolvedOptions().timeZone || '-';
+        }
+
+        // Extract Coordinates & Postal
+        const lat = geoData.latitude;
+        const lon = geoData.longitude;
+        const postal = geoData.postal ? ` · Postal: ${geoData.postal}` : '';
+        coordsEl.innerText = (lat !== undefined && lon !== undefined) ? `${lat}, ${lon}${postal}` : '-';
+
+        // Extract Edge / TLS Info
+        const edgeParts = [];
+        if (traceData.colo) edgeParts.push(`CF Edge: ${traceData.colo}`);
+        if (traceData.http) edgeParts.push(traceData.http.toUpperCase());
+        if (traceData.tls) edgeParts.push(traceData.tls);
+        if (traceData.warp && traceData.warp !== 'off') edgeParts.push(`WARP: ${traceData.warp}`);
+        edgeEl.innerText = edgeParts.length ? edgeParts.join(' · ') : 'Direct / Standard HTTPS';
+
+        latestIpTelemetry = {
+            public_ip: primaryIp,
+            ipv4: ipv4 || null,
+            ipv6: ipv6 || null,
+            isp: ispName !== '-' ? ispName : null,
+            asn: asnNum !== '-' ? asnNum : null,
+            location: {
+                city: geoData.city || null,
+                region: geoData.region || null,
+                country: geoData.country || geoData.country_name || traceData.loc || null,
+                country_code: geoData.country_code || traceData.loc || null,
+                postal: geoData.postal || null,
+                latitude: lat ?? null,
+                longitude: lon ?? null,
+            },
+            timezone: (typeof tzObj === 'object' ? tzObj.id : geoData.timezone) || null,
+            edge: {
+                datacenter: traceData.colo || null,
+                protocol: traceData.http || null,
+                tls: traceData.tls || null,
+            },
+            resolved_ms: elapsedMs
+        };
+
+        rawJsonEl.innerText = JSON.stringify(latestIpTelemetry, null, 2);
+    }
+
+    function copyDetectedIp() {
+        if (!currentDetectedIp) return;
+        navigator.clipboard.writeText(currentDetectedIp);
+        const labelEl = document.getElementById('ip-copy-main-label');
+        if (labelEl) {
+            const prev = labelEl.innerText;
+            labelEl.innerText = 'Copied!';
+            setTimeout(() => { labelEl.innerText = prev; }, 1500);
+        }
+    }
+
+    function copyIpField(elementId) {
+        const val = (document.getElementById(elementId)?.innerText || '').trim();
+        if (!val || val.startsWith('Detecting') || val.startsWith('Checking') || val.startsWith('Not detected') || val === 'Unavailable') return;
+        navigator.clipboard.writeText(val);
+        alert(`Copied: ${val}`);
+    }
+
+    function copyIpRawJson() {
+        if (!latestIpTelemetry || !latestIpTelemetry.public_ip) return;
+        navigator.clipboard.writeText(JSON.stringify(latestIpTelemetry, null, 2));
+        alert('Copied IP telemetry JSON!');
     }
 
     // Helper functions
