@@ -38,35 +38,35 @@
                 Developer Utilities <span class="text-amber-500">⚡</span>
             </h1>
 
-            <!-- Category Tab Bar (Catalyst Style Navigation) -->
-            <div class="mt-6 flex items-center gap-1.5 overflow-x-auto pb-3 no-scrollbar border-b border-zinc-200 dark:border-zinc-800" id="toolTabBar">
-                <a href="#json" onclick="switchTool('json'); return false;" id="tab-json" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-zinc-800 text-teal-700 dark:text-teal-300 shadow-xs border border-zinc-200 dark:border-zinc-700 flex items-center gap-2 shrink-0 transition-all duration-200">
-                    <i class="fas fa-code"></i>
-                    <span>JSON Formatter</span>
+            <!-- Category Tab Bar (Catalyst 2-Row Grid Navigation - Zero Horizontal Scroll) -->
+            <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2 pb-5 border-b border-zinc-200 dark:border-zinc-800" id="toolTabBar">
+                <a href="#json" onclick="switchTool('json'); return false;" id="tab-json" class="tool-tab px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-teal-50/90 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-500/40 dark:border-teal-500/40 shadow-xs flex items-center gap-2.5 transition-all duration-200">
+                    <i class="fas fa-code w-4 text-center text-teal-600 dark:text-teal-400"></i>
+                    <span class="truncate">JSON Formatter</span>
                 </a>
-                <a href="#base64" onclick="switchTool('base64'); return false;" id="tab-base64" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
-                    <i class="fas fa-font"></i>
-                    <span>Base64</span>
+                <a href="#base64" onclick="switchTool('base64'); return false;" id="tab-base64" class="tool-tab px-3.5 py-2.5 rounded-xl text-xs font-medium bg-white/80 dark:bg-zinc-900/80 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800 hover:border-teal-500/40 dark:hover:border-teal-500/40 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800/90 flex items-center gap-2.5 transition-all duration-200">
+                    <i class="fas fa-font w-4 text-center opacity-75"></i>
+                    <span class="truncate">Base64</span>
                 </a>
-                <a href="#cron" onclick="switchTool('cron'); return false;" id="tab-cron" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
-                    <i class="fas fa-clock"></i>
-                    <span>Cron Explainer</span>
+                <a href="#cron" onclick="switchTool('cron'); return false;" id="tab-cron" class="tool-tab px-3.5 py-2.5 rounded-xl text-xs font-medium bg-white/80 dark:bg-zinc-900/80 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800 hover:border-teal-500/40 dark:hover:border-teal-500/40 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800/90 flex items-center gap-2.5 transition-all duration-200">
+                    <i class="fas fa-clock w-4 text-center opacity-75"></i>
+                    <span class="truncate">Cron Explainer</span>
                 </a>
-                <a href="#diff" onclick="switchTool('diff'); return false;" id="tab-diff" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
-                    <i class="fas fa-columns"></i>
-                    <span>Diff Checker</span>
+                <a href="#diff" onclick="switchTool('diff'); return false;" id="tab-diff" class="tool-tab px-3.5 py-2.5 rounded-xl text-xs font-medium bg-white/80 dark:bg-zinc-900/80 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800 hover:border-teal-500/40 dark:hover:border-teal-500/40 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800/90 flex items-center gap-2.5 transition-all duration-200">
+                    <i class="fas fa-columns w-4 text-center opacity-75"></i>
+                    <span class="truncate">Diff Checker</span>
                 </a>
-                <a href="#jwt" onclick="switchTool('jwt'); return false;" id="tab-jwt" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
-                    <i class="fas fa-key"></i>
-                    <span>JWT Debugger</span>
+                <a href="#jwt" onclick="switchTool('jwt'); return false;" id="tab-jwt" class="tool-tab px-3.5 py-2.5 rounded-xl text-xs font-medium bg-white/80 dark:bg-zinc-900/80 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800 hover:border-teal-500/40 dark:hover:border-teal-500/40 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800/90 flex items-center gap-2.5 transition-all duration-200">
+                    <i class="fas fa-key w-4 text-center opacity-75"></i>
+                    <span class="truncate">JWT Debugger</span>
                 </a>
-                <a href="#url" onclick="switchTool('url'); return false;" id="tab-url" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
-                    <i class="fas fa-link"></i>
-                    <span>URL & Query Parser</span>
+                <a href="#url" onclick="switchTool('url'); return false;" id="tab-url" class="tool-tab px-3.5 py-2.5 rounded-xl text-xs font-medium bg-white/80 dark:bg-zinc-900/80 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800 hover:border-teal-500/40 dark:hover:border-teal-500/40 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800/90 flex items-center gap-2.5 transition-all duration-200">
+                    <i class="fas fa-link w-4 text-center opacity-75"></i>
+                    <span class="truncate">URL & Query Parser</span>
                 </a>
-                <a href="#ip" onclick="switchTool('ip'); return false;" id="tab-ip" class="tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200">
-                    <i class="fas fa-globe"></i>
-                    <span>What Is My IP</span>
+                <a href="#ip" onclick="switchTool('ip'); return false;" id="tab-ip" class="tool-tab px-3.5 py-2.5 rounded-xl text-xs font-medium bg-white/80 dark:bg-zinc-900/80 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800 hover:border-teal-500/40 dark:hover:border-teal-500/40 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800/90 flex items-center gap-2.5 transition-all duration-200">
+                    <i class="fas fa-globe w-4 text-center opacity-75"></i>
+                    <span class="truncate">What Is My IP</span>
                 </a>
             </div>
         </div>
@@ -507,7 +507,11 @@
 
         document.querySelectorAll('.tool-panel').forEach(panel => panel.classList.add('hidden'));
         document.querySelectorAll('.tool-tab').forEach(tab => {
-            tab.className = "tool-tab px-3.5 py-2 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 flex items-center gap-2 shrink-0 transition-all duration-200";
+            tab.className = "tool-tab px-3.5 py-2.5 rounded-xl text-xs font-medium bg-white/80 dark:bg-zinc-900/80 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800 hover:border-teal-500/40 dark:hover:border-teal-500/40 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800/90 flex items-center gap-2.5 transition-all duration-200";
+            const icon = tab.querySelector('i');
+            if (icon) {
+                icon.className = icon.className.replace(/text-teal-\S+|dark:text-teal-\S+/g, '').trim() + ' opacity-75';
+            }
         });
 
         const activePanel = document.getElementById('panel-' + toolId);
@@ -515,7 +519,11 @@
 
         if (activePanel) activePanel.classList.remove('hidden');
         if (activeTab) {
-            activeTab.className = "tool-tab px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-zinc-800 text-teal-700 dark:text-teal-300 shadow-xs border border-zinc-200 dark:border-zinc-700 flex items-center gap-2 shrink-0 transition-all duration-200";
+            activeTab.className = "tool-tab px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-teal-50/90 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-500/40 dark:border-teal-500/40 shadow-xs flex items-center gap-2.5 transition-all duration-200";
+            const activeIcon = activeTab.querySelector('i');
+            if (activeIcon) {
+                activeIcon.className = activeIcon.className.replace('opacity-75', '').trim() + ' text-teal-600 dark:text-teal-400';
+            }
         }
 
         if (updateHash && window.location.hash !== '#' + toolId) {
